@@ -88,8 +88,8 @@ struct NFTItemCardView: View {
             .padding(10)
             .background(.ultraThinMaterial)
             .cornerRadius(16)
-            .frame(width: 160)
-            .padding(.bottom, 10)
+            .frame(width: 210)
+            .padding(.bottom, 20)
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
         .frame(width: 160, height: 210)
