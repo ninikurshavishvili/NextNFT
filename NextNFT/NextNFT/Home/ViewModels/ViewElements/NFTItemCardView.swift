@@ -94,7 +94,7 @@ struct NFTItemCardView: View {
 
         }
         .frame(width: 160, height: 210)
-        
+        .padding()
 
     }
 }
