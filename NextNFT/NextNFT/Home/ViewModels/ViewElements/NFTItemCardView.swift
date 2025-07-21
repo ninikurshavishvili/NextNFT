@@ -14,7 +14,6 @@ struct NFTItemCardView: View {
                 Image("image")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 160, height: 210)
                     .cornerRadius(16)
                     .padding()
             
@@ -86,9 +85,15 @@ struct NFTItemCardView: View {
                     }
                 }
             }
-            .padding(6)
-            .background(Color.primary.opacity(0.4))
+            .padding(10)
+            .background(.ultraThinMaterial)
+            .cornerRadius(16)
+            .frame(width: 160)
+            .padding(.bottom, 10)
+            .frame(maxHeight: .infinity, alignment: .bottom)
         }
+        .frame(width: 160, height: 210)
+
     }
 }
 
