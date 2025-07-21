@@ -61,20 +61,25 @@ struct NFTItemCardView: View {
                             
                             
                         }
+                        .padding(2)
                     }
-                    .padding()
-                    
+
                     VStack {
-                        Text("price")
+                        Text("Price")
                             .font(.system(size: 12))
                             .foregroundStyle(.gray)
                             .fontDesign(.rounded)
                         
-                        Text("0.324 ETH")
-                            .font(.system(size: 10))
-                            .fontWeight(.bold)
-                            .fontDesign(.rounded)
-                            .foregroundStyle(.white)
+                        HStack {
+                            Text("Now")
+                                .font(.system(size: 10))
+                                .fontWeight(.bold)
+                                .fontDesign(.rounded)
+                                .foregroundStyle(.white)
+                        }
+                        .padding(2)
+                        
+                        
                     }
                 }
             }
