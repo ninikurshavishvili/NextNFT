@@ -17,7 +17,7 @@ struct NFTItemCardView: View {
                     .frame(width: 160, height: 210)
                     .cornerRadius(16)
                     .padding()
-            VStack{
+            
                 Button(action: {
                     //fqf
                 }) {
@@ -29,19 +29,34 @@ struct NFTItemCardView: View {
                     
                 }
                 .padding(6)
-            }
-            .padding()
+                .padding()
 
-            VStack {
+            VStack(alignment: .leading, spacing: 4) {
                 Text("Pudgy Penguin #1232")
-                    .font(.subheadline)
+                    .font(.system(size: 14))
                     .fontWeight(.bold)
                     .fontDesign(.rounded)
                     .foregroundStyle(.white)
                 
                 VStack {
-                    HStack {
-                        
+                    VStack {
+                        Text("Minting")
+                            .font(.system(size: 12))
+                            .foregroundStyle(.gray)
+                            .fontDesign(.rounded)
+
+                        HStack {
+                            Image(systemName: "inset.filled.circle")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                                .foregroundStyle(.green)
+                            
+                            Text("07.07.2025")
+                                .font(.system(size: 10))
+                                .fontWeight(.bold)
+                                .fontDesign(.rounded)
+                                .foregroundStyle(.white)
+                        }
                     }
                 }
             }
