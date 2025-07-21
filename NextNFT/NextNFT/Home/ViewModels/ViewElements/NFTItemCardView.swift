@@ -81,7 +81,7 @@ struct NFTItemCardView: View {
                                 .fontDesign(.rounded)
                                 .foregroundStyle(.white)
                         }
-                        
+                        //sdkjvbakd
                         
                     }
                 }
