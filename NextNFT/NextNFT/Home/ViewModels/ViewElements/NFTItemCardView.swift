@@ -38,7 +38,7 @@ struct NFTItemCardView: View {
                     .fontDesign(.rounded)
                     .foregroundStyle(.white)
                 
-                HStack(alignment: .firstTextBaseline) {
+                HStack(alignment: .firstTextBaseline, spacing: 20) {
                     VStack {
                         VStack {
                             Text("Minting")
@@ -61,23 +61,26 @@ struct NFTItemCardView: View {
                             
                             
                         }
-                        .padding(2)
                     }
 
                     VStack {
-                        Text("Price")
+                        Text("Minting")
                             .font(.system(size: 12))
                             .foregroundStyle(.gray)
                             .fontDesign(.rounded)
                         
                         HStack {
+                            Image(systemName: "inset.filled.circle")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                                .foregroundStyle(.green)
+                            
                             Text("Now")
                                 .font(.system(size: 10))
                                 .fontWeight(.bold)
                                 .fontDesign(.rounded)
                                 .foregroundStyle(.white)
                         }
-                        .padding(2)
                         
                         
                     }
