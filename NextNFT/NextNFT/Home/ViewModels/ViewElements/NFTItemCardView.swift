@@ -86,8 +86,8 @@ struct NFTItemCardView: View {
                     }
                 }
             }
+            .padding(6)
             .background(Color.primary.opacity(0.4))
-            .padding()
 
         }
     }
