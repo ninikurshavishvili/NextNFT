@@ -63,18 +63,18 @@ struct NFTItemCardView: View {
                     }
 
                     VStack {
-                        Text("Minting")
+                        Text("Price")
                             .font(.system(size: 12))
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.white)
                             .fontDesign(.rounded)
                         
                         HStack {
-                            Image(systemName: "inset.filled.circle")
+                            Image(systemName: "")
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .foregroundStyle(.green)
                             
-                            Text("Now")
+                            Text("0.332 ETH")
                                 .font(.system(size: 10))
                                 .fontWeight(.bold)
                                 .fontDesign(.rounded)
