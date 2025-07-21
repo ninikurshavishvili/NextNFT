@@ -38,25 +38,43 @@ struct NFTItemCardView: View {
                     .fontDesign(.rounded)
                     .foregroundStyle(.white)
                 
-                VStack {
+                HStack(alignment: .firstTextBaseline) {
                     VStack {
-                        Text("Minting")
+                        VStack {
+                            Text("Minting")
+                                .font(.system(size: 12))
+                                .foregroundStyle(.gray)
+                                .fontDesign(.rounded)
+                            
+                            HStack {
+                                Image(systemName: "inset.filled.circle")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .foregroundStyle(.green)
+                                
+                                Text("Now")
+                                    .font(.system(size: 10))
+                                    .fontWeight(.bold)
+                                    .fontDesign(.rounded)
+                                    .foregroundStyle(.white)
+                            }
+                            
+                            
+                        }
+                    }
+                    .padding()
+                    
+                    VStack {
+                        Text("price")
                             .font(.system(size: 12))
                             .foregroundStyle(.gray)
                             .fontDesign(.rounded)
-
-                        HStack {
-                            Image(systemName: "inset.filled.circle")
-                                .resizable()
-                                .frame(width: 12, height: 12)
-                                .foregroundStyle(.green)
-                            
-                            Text("07.07.2025")
-                                .font(.system(size: 10))
-                                .fontWeight(.bold)
-                                .fontDesign(.rounded)
-                                .foregroundStyle(.white)
-                        }
+                        
+                        Text("0.324 ETH")
+                            .font(.system(size: 10))
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                            .foregroundStyle(.white)
                     }
                 }
             }
