@@ -14,7 +14,7 @@ struct NFTItemListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             // Title
-            HStack(alignment: .top, spacing: 140) {
+            HStack(alignment: .center, spacing: 130) {
                 Text(title)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -33,6 +33,7 @@ struct NFTItemListView: View {
                 HStack(spacing: 16) {
                     ForEach(0..<10) { index in
                         NFTItemCardView()
+                            .padding()
                     }
                 }
                 .padding(.horizontal)
@@ -45,5 +46,4 @@ struct NFTItemListView: View {
 
 #Preview {
     NFTItemListView()
-        .preferredColorScheme(.dark)
 }
