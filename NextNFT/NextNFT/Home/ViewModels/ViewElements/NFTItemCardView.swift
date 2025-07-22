@@ -87,9 +87,9 @@ struct NFTItemCardView: View {
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(.ultraThinMaterial.opacity(0.9))
+                        .fill(.ultraThinMaterial.opacity(0.7))
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(Color.black.opacity(0.4))
+                        .fill(Color.black.opacity(0.7))
                 }
             )
             .overlay(
