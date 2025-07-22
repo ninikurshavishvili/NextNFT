@@ -42,7 +42,7 @@ struct NFTItemCardView: View {
                         VStack {
                             Text("Minting")
                                 .font(.system(size: 12))
-                                .foregroundStyle(.gray)
+                                .foregroundStyle(AppColors.lightGrey)
                                 .fontDesign(.rounded)
                             
                             HStack {
@@ -57,15 +57,13 @@ struct NFTItemCardView: View {
                                     .fontDesign(.rounded)
                                     .foregroundStyle(.white)
                             }
-                            
-                            
                         }
                     }
 
                     VStack {
                         Text("Price")
                             .font(.system(size: 12))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(AppColors.lightGrey)
                             .fontDesign(.rounded)
                         
                         HStack {
@@ -86,15 +84,27 @@ struct NFTItemCardView: View {
                 }
             }
             .padding(10)
-            .background(Color.primary.opacity(0.4))
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.black.opacity(0.4))
+                }
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+            )
             .cornerRadius(12)
             .frame(width: 210)
             .padding(.bottom, 20)
             .frame(maxHeight: .infinity, alignment: .bottom)
 
+
+
         }
         .frame(width: 160, height: 210)
-        .padding()
 
     }
 }
