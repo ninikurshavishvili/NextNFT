@@ -14,7 +14,6 @@ struct NFTItemCardView: View {
                 Image("image")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 160, height: 210)
                     .cornerRadius(16)
                     .padding()
             
@@ -43,7 +42,7 @@ struct NFTItemCardView: View {
                         VStack {
                             Text("Minting")
                                 .font(.system(size: 12))
-                                .foregroundStyle(.gray)
+                                .foregroundStyle(AppColors.lightGrey)
                                 .fontDesign(.rounded)
                             
                             HStack {
@@ -58,24 +57,22 @@ struct NFTItemCardView: View {
                                     .fontDesign(.rounded)
                                     .foregroundStyle(.white)
                             }
-                            
-                            
                         }
                     }
 
                     VStack {
-                        Text("Minting")
+                        Text("Price")
                             .font(.system(size: 12))
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(AppColors.lightGrey)
                             .fontDesign(.rounded)
                         
                         HStack {
-                            Image(systemName: "inset.filled.circle")
+                            Image(systemName: "")
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .foregroundStyle(.green)
                             
-                            Text("Now")
+                            Text("0.332 ETH")
                                 .font(.system(size: 10))
                                 .fontWeight(.bold)
                                 .fontDesign(.rounded)
@@ -86,10 +83,29 @@ struct NFTItemCardView: View {
                     }
                 }
             }
-            .padding(6)
-            .background(Color.primary.opacity(0.4))
-//why am i doing always this mistake123
+            .padding(10)
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(.ultraThinMaterial.opacity(0.7))
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.black.opacity(0.7))
+                }
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+            )
+            .cornerRadius(12)
+            .frame(width: 210)
+            .padding(.bottom, 20)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+
+
+
         }
+        .frame(width: 160, height: 210)
+
     }
 }
 
