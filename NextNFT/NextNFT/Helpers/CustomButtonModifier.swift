@@ -25,4 +25,3 @@ extension View {
         self.modifier(HomePageButtonStyle())
     }
 }
-//wtf
