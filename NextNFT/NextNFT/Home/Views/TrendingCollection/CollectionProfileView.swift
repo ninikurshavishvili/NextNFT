@@ -11,6 +11,8 @@ struct CollectionProfileView : View {
     var body: some View {
         HStack {
             Text ("profile")
+            
+            Text("Stupid ass nigga")
         }
     }
 }
