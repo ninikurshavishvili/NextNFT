@@ -54,6 +54,5 @@ struct CollectionCardView: View {
 
 #Preview {
     CollectionCardView()
-        .preferredColorScheme(.dark)
 }
 
