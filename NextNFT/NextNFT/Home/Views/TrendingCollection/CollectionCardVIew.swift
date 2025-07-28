@@ -49,6 +49,7 @@ struct CollectionCardView: View {
             }
         }
         .frame(width: 108, height: 108)
+        .padding()
     }
 }
 

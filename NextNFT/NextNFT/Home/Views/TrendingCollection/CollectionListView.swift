@@ -10,12 +10,13 @@ import SwiftUI
 struct CollectionListView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
+            HStack() {
                 ForEach(0..<10) { index in
                     CollectionCardView()
                 }
             }
         }
+        .padding(.vertical, 2)
         .background(Color.black)
     }
 }
