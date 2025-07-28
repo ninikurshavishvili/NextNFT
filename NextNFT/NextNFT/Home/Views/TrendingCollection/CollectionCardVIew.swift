@@ -35,7 +35,7 @@ struct CollectionCardView: View {
                 Spacer()
                 HStack {
                     Text("Place a bid")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.system(size: 10, weight: .bold))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
@@ -49,11 +49,11 @@ struct CollectionCardView: View {
             }
         }
         .frame(width: 108, height: 108)
+        .padding()
     }
 }
 
 #Preview {
     CollectionCardView()
-        .preferredColorScheme(.dark)
 }
 
