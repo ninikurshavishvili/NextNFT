@@ -28,11 +28,11 @@ struct CollectionContainerView: View {
                 CollectionInfoView()
                 
                 CollectionInfoView()
-                    .padding()
             }
             .padding()
             
-            
+            CollectionListView()
+                .padding()
         }
     }
 }
