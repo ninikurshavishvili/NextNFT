@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: here goes full container UI
 struct CollectionContainerView: View {
     var body: some View {
         
