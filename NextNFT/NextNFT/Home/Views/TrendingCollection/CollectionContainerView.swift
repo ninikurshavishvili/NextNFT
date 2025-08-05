@@ -20,6 +20,7 @@ struct CollectionContainerView: View {
                     .font(.system(size: 16, weight: .medium))
                     .padding()
                     .background(AppColors.lightGrey.opacity(0.3))
+                    .cornerRadius(12)
             }
             .padding()
         }
