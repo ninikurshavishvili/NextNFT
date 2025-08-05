@@ -9,7 +9,7 @@ import SwiftUI
 //TODO: here goes full container UI
 struct CollectionContainerView: View {
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 CollectionProfileView()
                 
@@ -23,6 +23,16 @@ struct CollectionContainerView: View {
                     .cornerRadius(12)
             }
             .padding()
+            
+            HStack(alignment: .firstTextBaseline, spacing: 80) {
+                CollectionInfoView()
+                
+                CollectionInfoView()
+                    .padding()
+            }
+            .padding()
+            
+            
         }
     }
 }
