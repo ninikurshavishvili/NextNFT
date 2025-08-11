@@ -55,7 +55,6 @@ struct HomeHeaderView: View {
         }
         .padding(.horizontal)
         .padding(.top, 8)
-        .background(Color.black.ignoresSafeArea())
     }
 }
 
@@ -64,4 +63,6 @@ struct HomeHeaderView: View {
 
 #Preview {
     HomeHeaderView()
+        .background(Color.black.ignoresSafeArea())
+
 }
