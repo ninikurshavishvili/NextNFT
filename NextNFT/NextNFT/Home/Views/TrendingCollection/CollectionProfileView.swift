@@ -25,7 +25,6 @@ struct CollectionProfileView : View {
         }
     }
 }
-//haaa
 
 #Preview {
     CollectionProfileView()
