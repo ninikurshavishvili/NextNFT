@@ -17,7 +17,6 @@ struct CollectionListView: View {
             }
         }
         .padding(.vertical, 2)
-        .background(Color.black)
     }
 }
 
