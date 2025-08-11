@@ -7,8 +7,23 @@
 
 import SwiftUI
 
-struct HomeHeaderView {
+struct HomeHeaderView: View {
     var body: some View {
-        Text("Header for HOmepage")
+        
+        Text("Next")
+            .foregroundStyle(.darkBackground)
+            .font(.system(.title2, design: .serif, weight: .bold))
+
+        +
+        Text("NFT")
+            .foregroundStyle(.mainPurple)
+            .font(.system(.title2, design: .serif, weight: .bold))
+
     }
+
+}
+
+
+#Preview {
+    HomeHeaderView()
 }
