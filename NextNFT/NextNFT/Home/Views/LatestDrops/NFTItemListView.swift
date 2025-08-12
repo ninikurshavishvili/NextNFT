@@ -40,7 +40,6 @@ struct NFTItemListView: View {
             }
         }
         .padding(.vertical)
-        .background(Color.black.edgesIgnoringSafeArea(.all))
     }
 }
 
