@@ -14,6 +14,7 @@ struct HomeView: View {
             ScrollView {
                 HomeHeaderView()
                 
+                NFTItemListView()
                 
             }
         }
