@@ -84,7 +84,7 @@ struct TrendingView: View {
                     .fontWeight(.medium)
                 
                 HStack {
-                    TextField("Min", text: .constant(""))
+                    TextField("", text: .constant(""), prompt: Text("Min").foregroundStyle(.gray))
                         .multilineTextAlignment(.center)
                         .frame(width: 70, height: 44)
                         .background(Color.black.opacity(0.3))
@@ -93,7 +93,7 @@ struct TrendingView: View {
                     Text("—")
                         .foregroundStyle(.white)
                     
-                    TextField("Max", text: .constant(""))
+                    TextField("", text: .constant(""), prompt: Text("Max").foregroundStyle(.gray))
                         .multilineTextAlignment(.center)
                         .frame(width: 70, height: 44)
                         .background(Color.black.opacity(0.3))
@@ -103,6 +103,7 @@ struct TrendingView: View {
                         .foregroundStyle(.white)
                         .padding(.leading, 5)
                 }
+
             }
         }
         .padding()
