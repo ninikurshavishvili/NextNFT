@@ -9,6 +9,18 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text("Hello, World!")
+        
+        VStack {
+            ScrollView {
+                HomeHeaderView()
+                
+                
+            }
+        }
+        .background(AppColors.darkBackground)
     }
+}
+
+#Preview {
+    HomeView()
 }
