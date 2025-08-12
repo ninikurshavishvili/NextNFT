@@ -16,6 +16,8 @@ struct HomeView: View {
                 
                 NFTItemListView()
                 
+                
+                
             }
         }
         .background(AppColors.darkBackground)
