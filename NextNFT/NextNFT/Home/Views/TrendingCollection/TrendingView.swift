@@ -51,13 +51,15 @@ struct TrendingView: View {
                             Image(systemName: icons[index])
                                 .font(.system(size: 20))
                                 .foregroundStyle(index == selectedIconIndex ? .white : .gray)
-                                .frame(width: 44, height: 44)
+                                .frame(width: 40, height: 40)
                                 .background(index == selectedIconIndex ? Color.black.opacity(0.7) : Color.clear)
                                 .cornerRadius(12)
                         }
                     }
                 }
+                .padding(4)
             }
+
             
             // Days Scroll
             ScrollView(.horizontal, showsIndicators: false) {
