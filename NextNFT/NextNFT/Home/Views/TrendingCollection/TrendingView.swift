@@ -52,8 +52,8 @@ struct TrendingView: View {
                                 .font(.system(size: 20))
                                 .foregroundStyle(index == selectedIconIndex ? .white : .gray)
                                 .frame(width: 44, height: 44)
-                                .background(index == selectedIconIndex ? Color.black.opacity(0.7) : Color.black.opacity(0.3))
-                                .clipShape(Circle())
+                                .background(index == selectedIconIndex ? Color.black.opacity(0.7) : Color.clear)
+                                .cornerRadius(12)
                         }
                     }
                 }
