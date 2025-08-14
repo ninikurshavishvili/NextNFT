@@ -16,6 +16,7 @@ struct HomeView: View {
                 
                 NFTItemListView()
                 
+                TrendingView()
                 
                 
             }

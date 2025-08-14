@@ -25,7 +25,7 @@ struct TrendingView: View {
                 .foregroundStyle(.white)
             
             // Tabs
-            HStack {
+            HStack(alignment: .firstTextBaseline) {
                 ForEach(tabs, id: \.self) { tab in
                     VStack {
                         Text(tab)
