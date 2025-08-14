@@ -50,15 +50,21 @@ struct TrendingView: View {
                         } label: {
                             Image(systemName: icons[index])
                                 .font(.system(size: 20))
-                                .foregroundStyle(index == selectedIconIndex ? .white : .gray)
+                                .foregroundStyle(index == selectedIconIndex ? .white : AppColors.lightGrey)
                                 .frame(width: 40, height: 40)
-                                .background(index == selectedIconIndex ? Color.black.opacity(0.7) : Color.clear)
+                                .background(
+                                    index == selectedIconIndex ?
+                                        Color.black.opacity(0.7) : Color.clear
+                                )
                                 .cornerRadius(12)
                         }
                     }
                 }
                 .padding(4)
+                .background(AppColors.lightGrey.opacity(0.3))
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             }
+
 
             
             // Days Scroll
@@ -109,10 +115,10 @@ struct TrendingView: View {
             }
         }
         .padding()
-        .background(AppColors.darkBackground)
     }
 }
 
 #Preview {
     TrendingView()
+        .background(AppColors.darkBackground)
 }
