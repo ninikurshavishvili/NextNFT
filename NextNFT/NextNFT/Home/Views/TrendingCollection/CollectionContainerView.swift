@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: here goes full container UI
+
 struct CollectionContainerView: View {
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,20 +22,30 @@ struct CollectionContainerView: View {
                     .background(AppColors.lightGrey.opacity(0.3))
                     .cornerRadius(12)
             }
-            .padding()
+            .padding(.horizontal)
+            .padding(.top)
             
             HStack(alignment: .firstTextBaseline, spacing: 80) {
                 CollectionInfoView()
-                
                 CollectionInfoView()
             }
-            .padding()
+            .padding(.horizontal)
             
             CollectionListView()
                 .padding()
         }
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(AppColors.darkBackground)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
+        )
+        .padding(.horizontal)
     }
 }
+
 
 
 
