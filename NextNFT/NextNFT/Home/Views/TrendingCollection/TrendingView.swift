@@ -19,12 +19,10 @@ struct TrendingView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             
-            // Title
             Text("Trending")
                 .font(.system(.title, design: .serif, weight: .bold))
                 .foregroundStyle(.white)
             
-            // Tabs
             HStack(alignment: .firstTextBaseline) {
                 ForEach(tabs, id: \.self) { tab in
                     VStack {
@@ -41,7 +39,6 @@ struct TrendingView: View {
                 }
             }
             
-            // Icons Scroll
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
                     ForEach(icons.indices, id: \.self) { index in
@@ -77,12 +74,15 @@ struct TrendingView: View {
                             Text(day)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.white)
-                                .frame(width: 50, height: 44)
-                                .background(selectedDay == day ? Color.black.opacity(0.7) : Color.black.opacity(0.3))
+                                .frame(width: 58, height: 40)
+                                .background(selectedDay == day ? Color.black.opacity(0.7) : Color.clear)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
                     }
                 }
+                .padding(4)
+                .background(AppColors.lightGrey.opacity(0.3))
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             }
             
             // Floor Price
