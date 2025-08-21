@@ -64,7 +64,6 @@ struct CustomTabBarView: View {
     }
 }
 
-// MARK: - Main Tab View
 struct MainTabView: View {
     @State private var selectedTab: TabbedItems = .home
     
@@ -86,12 +85,16 @@ struct MainTabView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(AppColors.darkBackground.ignoresSafeArea())
+            .background(AppColors.darkBackground)
+            .ignoresSafeArea() // 👈 makes content fill all edges
             
             CustomTabBarView(selectedTab: $selectedTab)
+                .frame(maxWidth: .infinity) // 👈 ensures full width
         }
+        .ignoresSafeArea(edges: .bottom) // 👈 removes bottom safe area gap
     }
 }
+
 
 #Preview {
     MainTabView()
