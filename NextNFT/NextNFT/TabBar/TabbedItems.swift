@@ -60,33 +60,40 @@ struct CustomTabBarView: View {
         }
         .background(AppColors.darkGrey)
         .cornerRadius(20, corners: [.topLeft, .topRight])
-        .padding(.horizontal, 2)
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 
+// MARK: - Main Tab View
 struct MainTabView: View {
     @State private var selectedTab: TabbedItems = .home
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            switch selectedTab {
-            case .home:
-                HomeView()
-            case .search:
-                HomeView()
-            case .drops:
-                HomeView()
-            case .profile:
-                HomeView()
-
+            Group {
+                switch selectedTab {
+                case .home:
+                    HomeView()
+                case .search:
+                    Text("Search Page")
+                        .foregroundColor(.white)
+                case .drops:
+                    Text("Drops Page")
+                        .foregroundColor(.white)
+                case .profile:
+                    Text("Profile Page")
+                        .foregroundColor(.white)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(AppColors.darkBackground.ignoresSafeArea())
             
             CustomTabBarView(selectedTab: $selectedTab)
         }
-        .background(Color.black.ignoresSafeArea())
     }
 }
 
 #Preview {
     MainTabView()
 }
+
