@@ -45,7 +45,7 @@ struct CustomTabBarView: View {
                 } label: {
                     VStack(spacing: 6) {
                         Image(systemName: item.icon)
-                            .font(.system(size: 20, weight: .medium))
+                            .font(.system(size: 22, weight: .medium))
                             .foregroundColor(selectedTab == item ? .mainPurple : .white)
                         
                         Text(item.title)
@@ -58,8 +58,9 @@ struct CustomTabBarView: View {
                 Spacer()
             }
         }
+        .padding(.bottom)
+        .frame(height: 80)
         .background(AppColors.darkGrey)
-        .cornerRadius(20, corners: [.topLeft, .topRight])
         .ignoresSafeArea(edges: .bottom)
     }
 }
