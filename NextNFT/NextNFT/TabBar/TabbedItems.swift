@@ -59,8 +59,8 @@ struct CustomTabBarView: View {
             }
         }
         .background(AppColors.darkGrey)
-        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .padding(.horizontal)
+        .cornerRadius(20, corners: [.topLeft, .topRight])
+        .padding(.horizontal, 2)
     }
 }
 
