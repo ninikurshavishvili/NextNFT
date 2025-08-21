@@ -46,11 +46,11 @@ struct CustomTabBarView: View {
                     VStack(spacing: 6) {
                         Image(systemName: item.icon)
                             .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(selectedTab == item ? .white : .gray)
+                            .foregroundColor(selectedTab == item ? .mainPurple : .white)
                         
                         Text(item.title)
                             .font(.caption)
-                            .foregroundColor(selectedTab == item ? .white : .gray)
+                            .foregroundColor(selectedTab == item ? .mainPurple : .white)
                     }
                     .padding(.vertical, 10)
                 }
@@ -58,10 +58,9 @@ struct CustomTabBarView: View {
                 Spacer()
             }
         }
-        .background(Color.black.opacity(0.8))
+        .background(AppColors.darkGrey)
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .padding(.horizontal, 16)
-        .padding(.bottom, 8)
+        .padding(.horizontal)
     }
 }
 
