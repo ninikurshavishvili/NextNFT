@@ -87,12 +87,12 @@ struct MainTabView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(AppColors.darkBackground)
-            .ignoresSafeArea() // 👈 makes content fill all edges
+            .ignoresSafeArea()
             
             CustomTabBarView(selectedTab: $selectedTab)
-                .frame(maxWidth: .infinity) // 👈 ensures full width
+                .frame(maxWidth: .infinity)
         }
-        .ignoresSafeArea(edges: .bottom) // 👈 removes bottom safe area gap
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 
