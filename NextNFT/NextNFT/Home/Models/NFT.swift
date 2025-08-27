@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Foundation
+import FirebaseDatabase
 
 struct NFT: Identifiable, Codable {
     var id: Int
@@ -26,3 +26,27 @@ struct NFT: Identifiable, Codable {
     var volumeChange: String?
 }
 
+
+extension NFT {
+    init?(snapshot: DataSnapshot) {
+        guard let value = snapshot.value as? [String: Any] else {
+            return nil
+        }
+        
+        self.id = value["ID"] as? Int ?? 0
+        self.collectionName = value["CollectionName"] as? String ?? ""
+        self.creator = value["Creator"] as? String ?? ""
+        self.description = value["Description"] as? String ?? ""
+        self.floorChange = value["FloorChange"] as? Double
+        self.floorPrice = value["FloorPrice"] as? String ?? ""
+        self.imageURL = value["ImageURL"] as? String ?? ""
+        self.items = value["Items"] as? Int ?? 0
+        self.likes = value["Likes"] as? Int ?? 0
+        self.nftName = value["NFTName"] as? String ?? ""
+        self.owner = value["Owner"] as? String ?? ""
+        self.owners = value["Owners"] as? Int ?? 0
+        self.price = value["Price"] as? String ?? ""
+        self.volume = value["Volume"] as? Double
+        self.volumeChange = value["VolumeChange"] as? String
+    }
+}
