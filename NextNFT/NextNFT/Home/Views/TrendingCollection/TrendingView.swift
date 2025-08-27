@@ -13,7 +13,7 @@ struct TrendingView: View {
     @State private var selectedDay = "1D"
     
     let tabs = ["Collections", "Marketplaces"]
-    let icons = ["square.stack.3d.up", "ethereum.sign", "dollarsign.circle", "leaf.fill", "flame.fill", "bitcoinsign.circle", "dollarsign.circle", "bitcoinsign.circle.fill"]
+    let icons = ["square.stack.3d.up", "dollarsign.circle", "leaf.fill", "flame.fill", "bitcoinsign.circle", "dollarsign.circle", "bitcoinsign.circle.fill"]
     let days = ["1H", "4H", "1D", "7D", "30D"]
     
     var body: some View {

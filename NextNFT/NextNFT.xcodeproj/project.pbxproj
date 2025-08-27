@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		149D5ECE2E5CBBCE00F1730F /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ECD2E5CBBCE00F1730F /* FirebaseAI */; };
+		149D5ED02E5CBBCE00F1730F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ECF2E5CBBCE00F1730F /* FirebaseAnalytics */; };
+		149D5ED22E5CBBCE00F1730F /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED12E5CBBCE00F1730F /* FirebaseAnalyticsCore */; };
+		149D5ED42E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED32E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport */; };
+		149D5ED62E5CBBCE00F1730F /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED52E5CBBCE00F1730F /* FirebaseAppCheck */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1488C12F2E24063F005FD00C /* NextNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +31,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149D5ED42E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport in Frameworks */,
+				149D5ED02E5CBBCE00F1730F /* FirebaseAnalytics in Frameworks */,
+				149D5ED22E5CBBCE00F1730F /* FirebaseAnalyticsCore in Frameworks */,
+				149D5ED62E5CBBCE00F1730F /* FirebaseAppCheck in Frameworks */,
+				149D5ECE2E5CBBCE00F1730F /* FirebaseAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +78,11 @@
 			);
 			name = NextNFT;
 			packageProductDependencies = (
+				149D5ECD2E5CBBCE00F1730F /* FirebaseAI */,
+				149D5ECF2E5CBBCE00F1730F /* FirebaseAnalytics */,
+				149D5ED12E5CBBCE00F1730F /* FirebaseAnalyticsCore */,
+				149D5ED32E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport */,
+				149D5ED52E5CBBCE00F1730F /* FirebaseAppCheck */,
 			);
 			productName = NextNFT;
 			productReference = 1488C12F2E24063F005FD00C /* NextNFT.app */;
@@ -94,6 +112,9 @@
 			);
 			mainGroup = 1488C1262E24063F005FD00C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1488C1302E24063F005FD00C /* Products */;
 			projectDirPath = "";
@@ -324,6 +345,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		149D5ECD2E5CBBCE00F1730F /* FirebaseAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAI;
+		};
+		149D5ECF2E5CBBCE00F1730F /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		149D5ED12E5CBBCE00F1730F /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		149D5ED32E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsIdentitySupport;
+		};
+		149D5ED52E5CBBCE00F1730F /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1488C1272E24063F005FD00C /* Project object */;
 }
