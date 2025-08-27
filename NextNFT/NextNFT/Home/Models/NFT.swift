@@ -8,7 +8,7 @@
 import Foundation
 import Foundation
 
-struct NFTCollection: Identifiable, Codable {
+struct NFT: Identifiable, Codable {
     var id: Int
     var collectionName: String
     var creator: String
@@ -23,6 +23,6 @@ struct NFTCollection: Identifiable, Codable {
     var owners: Int
     var price: String
     var volume: Double?
-    var volumeChange: String? // might be error/null, anu keeping it String
+    var volumeChange: String?
 }
 
