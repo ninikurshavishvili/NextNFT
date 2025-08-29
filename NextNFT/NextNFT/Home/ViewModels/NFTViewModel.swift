@@ -7,7 +7,7 @@
 
 import Foundation
 import FirebaseDatabase
-
+import FirebaseCore
 
 class NFTViewModel: ObservableObject {
     
