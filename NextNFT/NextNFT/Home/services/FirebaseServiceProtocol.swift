@@ -19,8 +19,10 @@ final class NFTFirebaseService: NFTFirebaseServiceProtocol {
     func fetchNFTs(completion: @escaping (Result<[NFT], Error>) -> Void) {
         ref.child("1zNCJlE1bXTEVwU1Xqte8uS3S_J2Lf2R1vZwKkm2f-ts/Sheet1")
             .observeSingleEvent(of: .value) { snapshot in
+                
+                print("📦 Snapshot value:", snapshot.value ?? "nil")
+                
                 guard let value = snapshot.value as? [String: Any] else {
-                    print("⚠️ No NFT data found")
                     completion(.success([]))
                     return
                 }
@@ -28,11 +30,14 @@ final class NFTFirebaseService: NFTFirebaseServiceProtocol {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                     let decoded = try JSONDecoder().decode([String: NFT].self, from: jsonData)
-                    completion(.success(Array(decoded.values)))
+                    
+                    let nftArray = Array(decoded.values).sorted { $0.id < $1.id }
+                    completion(.success(nftArray))
+                    
                 } catch {
-                    print("❌ Failed to decode NFTs:", error)
                     completion(.failure(error))
                 }
             }
     }
+
 }
