@@ -12,6 +12,9 @@
 		149D5ED22E5CBBCE00F1730F /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED12E5CBBCE00F1730F /* FirebaseAnalyticsCore */; };
 		149D5ED42E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED32E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport */; };
 		149D5ED62E5CBBCE00F1730F /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED52E5CBBCE00F1730F /* FirebaseAppCheck */; };
+		14BA7DE42E610055009B013D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 14BA7DE32E610055009B013D /* FirebaseCore */; };
+		14C0FCBE2E61E97000F0CBE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 14C0FCBD2E61E97000F0CBE7 /* FirebaseDatabase */; };
+		14C0FCC12E61EDA800F0CBE7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 14C0FCC02E61EDA800F0CBE7 /* Algorithms */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +37,10 @@
 				149D5ED42E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				149D5ED02E5CBBCE00F1730F /* FirebaseAnalytics in Frameworks */,
 				149D5ED22E5CBBCE00F1730F /* FirebaseAnalyticsCore in Frameworks */,
+				14BA7DE42E610055009B013D /* FirebaseCore in Frameworks */,
+				14C0FCC12E61EDA800F0CBE7 /* Algorithms in Frameworks */,
 				149D5ED62E5CBBCE00F1730F /* FirebaseAppCheck in Frameworks */,
+				14C0FCBE2E61E97000F0CBE7 /* FirebaseDatabase in Frameworks */,
 				149D5ECE2E5CBBCE00F1730F /* FirebaseAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				1488C1312E24063F005FD00C /* NextNFT */,
+				149D5EDA2E5F357300F1730F /* Frameworks */,
 				1488C1302E24063F005FD00C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +63,13 @@
 				1488C12F2E24063F005FD00C /* NextNFT.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		149D5EDA2E5F357300F1730F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +97,9 @@
 				149D5ED12E5CBBCE00F1730F /* FirebaseAnalyticsCore */,
 				149D5ED32E5CBBCE00F1730F /* FirebaseAnalyticsIdentitySupport */,
 				149D5ED52E5CBBCE00F1730F /* FirebaseAppCheck */,
+				14BA7DE32E610055009B013D /* FirebaseCore */,
+				14C0FCBD2E61E97000F0CBE7 /* FirebaseDatabase */,
+				14C0FCC02E61EDA800F0CBE7 /* Algorithms */,
 			);
 			productName = NextNFT;
 			productReference = 1488C12F2E24063F005FD00C /* NextNFT.app */;
@@ -114,6 +131,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				14C0FCBF2E61EDA800F0CBE7 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1488C1302E24063F005FD00C /* Products */;
@@ -355,6 +373,14 @@
 				minimumVersion = 12.1.0;
 			};
 		};
+		14C0FCBF2E61EDA800F0CBE7 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -382,6 +408,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		14BA7DE32E610055009B013D /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		14C0FCBD2E61E97000F0CBE7 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 149D5ECC2E5CA97400F1730F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		14C0FCC02E61EDA800F0CBE7 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 14C0FCBF2E61EDA800F0CBE7 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
