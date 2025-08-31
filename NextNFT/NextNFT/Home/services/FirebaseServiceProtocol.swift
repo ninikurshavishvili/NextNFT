@@ -20,14 +20,17 @@ final class NFTFirebaseService: NFTFirebaseServiceProtocol {
         ref.child("1zNCJlE1bXTEVwU1Xqte8uS3S_J2Lf2R1vZwKkm2f-ts/Sheet1")
             .observeSingleEvent(of: .value) { snapshot in
                 guard let value = snapshot.value as? [String: Any] else {
+                    print("⚠️ No NFT data found")
                     completion(.success([]))
                     return
                 }
+                
                 do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: value)
+                    let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                     let decoded = try JSONDecoder().decode([String: NFT].self, from: jsonData)
-                    completion(.success(decoded.map { $0.value }))
+                    completion(.success(Array(decoded.values)))
                 } catch {
+                    print("❌ Failed to decode NFTs:", error)
                     completion(.failure(error))
                 }
             }

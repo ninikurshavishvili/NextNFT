@@ -12,3 +12,4 @@ import FirebaseCore
 class NFTViewModel: ObservableObject {
     
 }
+
