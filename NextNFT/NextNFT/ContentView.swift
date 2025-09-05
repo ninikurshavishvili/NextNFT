@@ -15,16 +15,21 @@ struct ContentView: View {
             Text("NFTs: \(viewModel.nfts.count)")
                 .padding()
             
-            List(viewModel.nfts) { nft in
-                VStack(alignment: .leading) {
-                    Text(nft.nftName)
-                        .font(.headline)
-                    Text("Creator: \(nft.creator)")
-                        .font(.subheadline)
-                    Text("Price: \(nft.price)")
-                        .font(.footnote)
+            NavigationView {
+                List(viewModel.nfts) { nft in
+                    VStack(alignment: .leading) {
+                        Text(nft.collectionName ?? "collection Name")
+                            .font(.headline)
+                            .foregroundStyle(.red)
+                        Text("Creator: \(String(describing: nft.creator))")
+                            .font(.subheadline)
+                        Text("Price: \(String(describing: nft.price))")
+                            .font(.footnote)
+                    }
                 }
+                .navigationTitle("NFTs")
             }
+
         }
         .onAppear {
             viewModel.fetchNFTs()
