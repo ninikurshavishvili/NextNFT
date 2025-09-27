@@ -13,7 +13,7 @@ enum AppColors {
     static let darkGrey = Color("darkGrey")
     static let mainPurple = Color("mainPurple")
 
-    static let testColor = Color("testColor")
+//    static let testColor = Color("testColor")
 
 }
 
