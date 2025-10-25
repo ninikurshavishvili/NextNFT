@@ -8,34 +8,38 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = NFTViewModel()
+    @StateObject private var viewModel = CollectionsViewModel()
     
     var body: some View {
-        VStack {
-            Text("NFTs: \(viewModel.nfts.count)")
-                .padding()
-            
-            NavigationView {
-                List(viewModel.nfts) { nft in
-                    VStack(alignment: .leading) {
-                        Text(nft.collectionName ?? "collection Name")
-                            .font(.headline)
-                            .foregroundStyle(.red)
-                        Text("Creator: \(String(describing: nft.creator))")
-                            .font(.subheadline)
-                        Text("Price: \(String(describing: nft.price))")
-                            .font(.footnote)
+        NavigationView {
+            VStack {
+                if viewModel.collections.isEmpty {
+                    ProgressView("Loading Collections...")
+                        .padding()
+                } else {
+                    List(viewModel.collections) { collection in
+                        VStack(alignment: .leading) {
+                            Text(collection.name)
+                                .font(.headline)
+                            Text(collection.description ?? "No description")
+                                .font(.subheadline)
+                                .lineLimit(2)
+                            Text("Category: \(collection.category ?? "N/A")")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.vertical, 5)
                     }
                 }
-                .navigationTitle("NFTs")
             }
-
-        }
-        .onAppear {
-            viewModel.fetchNFTs()
+            .navigationTitle("Collections")
+            .onAppear {
+                viewModel.fetchCollections()
+            }
         }
     }
 }
+
 
 
 #Preview {

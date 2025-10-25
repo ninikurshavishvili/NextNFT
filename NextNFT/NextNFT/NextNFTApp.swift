@@ -22,14 +22,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct NextNFTApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject private var nFTViewModel = NFTViewModel()
+    @StateObject private var collectionViewModel = CollectionsViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(nFTViewModel)   // inject VM if ContentView needs it
+                .environmentObject(collectionViewModel)   // inject VM if ContentView needs it
                 .onAppear {
-                    nFTViewModel.fetchNFTs()       // ✅ call on the instance
+                           // ✅ call on the instance
                 }
         }
     }

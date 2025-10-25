@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
-//TestComments
+
     private let apiKey = "bcdf9b152b5c46308e0baa9f3711520f"
 
     func getCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
