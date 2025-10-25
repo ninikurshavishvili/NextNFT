@@ -54,13 +54,13 @@ struct CustomTabBarView: View {
                             .font(.caption2)
                             .foregroundColor(selectedTab == item ? .mainPurple : .white.opacity(0.8))
                     }
-                    .padding(.top)
+                    .padding(.top, 20)
                 }
                 Spacer()
             }
         }
-        .padding(.bottom, 10)
-        .frame(height: 60)
+        .padding(.bottom, 20)
+        .frame(height: 62)
         .background(
             
             // Use RoundedRectangle so the shape is clipped and we can apply material.
@@ -104,7 +104,6 @@ struct MainTabView: View {
             CustomTabBarView(selectedTab: $selectedTab)
                 .frame(maxWidth: .infinity)
         }
-        .ignoresSafeArea(edges: .bottom)
     }
 }
 
