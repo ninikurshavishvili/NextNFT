@@ -10,8 +10,8 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
-
-    private let apiKey = "bcdf9b152b5c46308e0baa9f3711520f" 
+//TestComments
+    private let apiKey = "bcdf9b152b5c46308e0baa9f3711520f"
 
     func getCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
         let urlString = "https://api.opensea.io/api/v2/collections?limit=10"
