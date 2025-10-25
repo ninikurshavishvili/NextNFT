@@ -18,6 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+@available(iOS 26.0, *)
 @main
 struct NextNFTApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

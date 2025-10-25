@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct ContentView: View {
     @StateObject private var viewModel = CollectionsViewModel()
     
@@ -21,5 +22,9 @@ struct ContentView: View {
 
 
 #Preview {
-    ContentView()
+    if #available(iOS 26.0, *) {
+        ContentView()
+    } else {
+        // Fallback on earlier versions
+    }
 }

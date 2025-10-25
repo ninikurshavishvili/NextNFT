@@ -32,6 +32,9 @@ enum TabbedItems: Int, CaseIterable {
     }
 }
 
+import SwiftUI
+
+@available(iOS 26.0, *)
 struct CustomTabBarView: View {
     @Binding var selectedTab: TabbedItems
     
@@ -39,32 +42,41 @@ struct CustomTabBarView: View {
         HStack {
             ForEach(TabbedItems.allCases, id: \.self) { item in
                 Spacer()
-                
                 Button {
                     selectedTab = item
                 } label: {
                     VStack(spacing: 6) {
                         Image(systemName: item.icon)
                             .font(.system(size: 22, weight: .medium))
-                            .foregroundColor(selectedTab == item ? .mainPurple : .white)
+                            .foregroundColor(selectedTab == item ? .mainPurple : .white.opacity(0.8))
                         
                         Text(item.title)
-                            .font(.caption)
-                            .foregroundColor(selectedTab == item ? .mainPurple : .white)
+                            .font(.caption2)
+                            .foregroundColor(selectedTab == item ? .mainPurple : .white.opacity(0.8))
                     }
-                    .padding(.vertical, 10)
+                    .padding(.top)
                 }
-                
                 Spacer()
             }
         }
-        .padding(.bottom)
-        .frame(height: 80)
-        .background(AppColors.darkGrey)
+        .padding(.bottom, 10)
+        .frame(height: 60)
+        .background(
+            
+            // Use RoundedRectangle so the shape is clipped and we can apply material.
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(.clear)
+                
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 30))
+        )
+        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
         .ignoresSafeArea(edges: .bottom)
     }
 }
 
+
+@available(iOS 26.0, *)
 struct MainTabView: View {
     @State private var selectedTab: TabbedItems = .home
     
@@ -98,6 +110,10 @@ struct MainTabView: View {
 
 
 #Preview {
-    MainTabView()
+    if #available(iOS 26.0, *) {
+        MainTabView()
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
