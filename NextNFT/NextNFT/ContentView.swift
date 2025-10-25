@@ -12,8 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            HomeView(viewModel: viewModel)
-                .navigationBarHidden(true)
+            MainTabView()
         }
     }
 }
