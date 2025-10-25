@@ -31,13 +31,17 @@ struct CollectionContainerView: View {
             .padding(.top)
             
             HStack(alignment: .firstTextBaseline, spacing: 80) {
-                CollectionInfoView(title: "Category", value: collection.category ?? "N/A")
+                CollectionInfoView(title: "Category", value: collection.category ?? "ART")
+                CollectionInfoView(title: "Price", value: collection.id)
                 
             }
+            .padding()
             .padding(.horizontal)
             
-            // if CollectionListView accepts collection, pass it in
-                .padding()
+            //COLLECTION LIST VIEW HERE
+                CollectionListView()
+                .padding(.horizontal)
+                .padding(.bottom)
         }
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -60,7 +64,7 @@ struct CollectionContainerView: View {
         imageURL: "https://example.com/image.png",
         bannerImageURL: "https://example.com/banner.png",
         owner: "0x123456789",
-        category: "Art",
+        category: "n",
         openseaURL: "https://opensea.io/collection/azuki",
         totalSupply: 10000,
         createdDate: "2025-10-25"
@@ -69,4 +73,5 @@ struct CollectionContainerView: View {
     CollectionContainerView(collection: sampleCollection)
         .background(AppColors.darkBackground)
 }
+
 

@@ -73,7 +73,7 @@ struct MainTabView: View {
             Group {
                 switch selectedTab {
                 case .home:
-                    HomeView()
+                    HomeView(viewModel: CollectionsViewModel())
                 case .search:
                     Text("Search Page")
                         .foregroundColor(.white)

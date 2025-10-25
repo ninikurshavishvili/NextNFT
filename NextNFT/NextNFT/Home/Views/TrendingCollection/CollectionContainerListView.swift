@@ -34,7 +34,7 @@ struct CollectionContainerListView: View {
                 .cornerRadius(12)
             }
         }
-        .padding(.horizontal)
+
     }
 }
 

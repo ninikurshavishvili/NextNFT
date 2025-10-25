@@ -29,7 +29,7 @@ struct NextNFTApp: App {
             ContentView()
                 .environmentObject(collectionViewModel)   // inject VM if ContentView needs it
                 .onAppear {
-                           // ✅ call on the instance
+                    print(collectionViewModel.collections)
                 }
         }
     }

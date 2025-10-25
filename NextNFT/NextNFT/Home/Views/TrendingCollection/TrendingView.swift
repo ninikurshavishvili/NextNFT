@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TrendingView: View {
-    @StateObject private var viewModel = CollectionsViewModel()
-    
+    let collections: [CollectionModel]
+
     @State private var selectedTab = "Collections"
     @State private var selectedIconIndex = 3
     @State private var selectedDay = "1D"
@@ -21,34 +21,29 @@ struct TrendingView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                // — Your original trending UI —
                 Text("Trending")
                     .font(.system(.title, design: .serif, weight: .bold))
                     .foregroundStyle(.white)
+                    .padding(.leading)
 
-                // Tabs + Icons + Days... (unchanged)
-                // 👇 Add your fetched data below
-                if viewModel.isLoading {
-                    ProgressView("Loading Collections...")
-                        .foregroundStyle(.white)
-                } else if let error = viewModel.errorMessage {
-                    Text("Error: \(error)")
-                        .foregroundStyle(.red)
+                // Tabs + icons + days remain unchanged...
+                
+                // ✅ Show collections that HomeView passed in
+                if collections.isEmpty {
+                    Text("No collections yet")
+                        .foregroundStyle(.gray)
+                        .padding()
                 } else {
-                    // ✅ Pass the fetched collections to your CollectionContainerListView
-                    CollectionContainerListView(collections: viewModel.collections)
+                    CollectionContainerListView(collections: collections)
                 }
             }
-            .padding()
-            .onAppear {
-                viewModel.fetchCollections()
-            }
+
         }
     }
 }
 
-
 #Preview {
-    TrendingView()
-        .background(AppColors.darkBackground)
+    TrendingView(collections: [])
+        .background(Color.black)
 }
+
