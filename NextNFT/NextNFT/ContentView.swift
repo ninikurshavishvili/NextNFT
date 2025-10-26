@@ -7,37 +7,24 @@
 
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct ContentView: View {
-    @StateObject private var viewModel = NFTViewModel()
+    @StateObject private var viewModel = CollectionsViewModel()
     
     var body: some View {
-        VStack {
-            Text("NFTs: \(viewModel.nfts.count)")
-                .padding()
-            
-            NavigationView {
-                List(viewModel.nfts) { nft in
-                    VStack(alignment: .leading) {
-                        Text(nft.collectionName ?? "collection Name")
-                            .font(.headline)
-                            .foregroundStyle(.red)
-                        Text("Creator: \(String(describing: nft.creator))")
-                            .font(.subheadline)
-                        Text("Price: \(String(describing: nft.price))")
-                            .font(.footnote)
-                    }
-                }
-                .navigationTitle("NFTs")
-            }
-
-        }
-        .onAppear {
-            viewModel.fetchNFTs()
+        NavigationView {
+            MainTabView()
         }
     }
 }
 
 
+
+
 #Preview {
-    ContentView()
+    if #available(iOS 26.0, *) {
+        ContentView()
+    } else {
+        // Fallback on earlier versions
+    }
 }

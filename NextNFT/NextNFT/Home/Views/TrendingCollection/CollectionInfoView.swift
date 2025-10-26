@@ -7,31 +7,27 @@
 
 import SwiftUI
 
+
 struct CollectionInfoView: View {
+    let title: String
+    let value: String
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Day")
+            Text(title)
                 .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(.lightGrey)
+                .foregroundStyle(AppColors.lightGrey)
             
             HStack {
-                Text("126.2")
+                Text(value)
                     .font(.system(size: 20, weight: .medium))
                     .foregroundStyle(.white)
-                Text("ETH")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.lightGrey)
             }
-            Text("+71.2%")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(.green)
-            
         }
     }
 }
 
-
 #Preview {
-    CollectionInfoView()
+    CollectionInfoView(title: "Category", value: "Art")
         .background(Color.black)
 }

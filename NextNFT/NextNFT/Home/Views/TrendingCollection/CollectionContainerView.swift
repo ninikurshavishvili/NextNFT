@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct CollectionContainerView: View {
+    let collection: CollectionModel
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                CollectionProfileView()
+                CollectionProfileView(
+                    imageURL: collection.imageURL,
+                    name: collection.name
+                )
                 
                 Spacer()
                 
@@ -26,13 +31,17 @@ struct CollectionContainerView: View {
             .padding(.top)
             
             HStack(alignment: .firstTextBaseline, spacing: 80) {
-                CollectionInfoView()
-                CollectionInfoView()
+                CollectionInfoView(title: "Category", value: collection.category ?? "ART")
+                CollectionInfoView(title: "Price", value: collection.id)
+                
             }
+            .padding()
             .padding(.horizontal)
             
-            CollectionListView()
-                .padding()
+            //COLLECTION LIST VIEW HERE
+                CollectionListView(collectionSlug: collection.collection)
+                .padding(.horizontal)
+                .padding(.bottom)
         }
         .background(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -46,10 +55,23 @@ struct CollectionContainerView: View {
     }
 }
 
-
-
-
 #Preview {
-    CollectionContainerView()
+    // ✅ Provide mock data for preview
+    let sampleCollection = CollectionModel(
+        collection: "azuki",
+        name: "Azuki",
+        description: "A collection of 10,000 avatars for the metaverse.",
+        imageURL: "https://example.com/image.png",
+        bannerImageURL: "https://example.com/banner.png",
+        owner: "0x123456789",
+        category: "n",
+        openseaURL: "https://opensea.io/collection/azuki",
+        totalSupply: 10000,
+        createdDate: "2025-10-25"
+    )
+    
+    CollectionContainerView(collection: sampleCollection)
         .background(AppColors.darkBackground)
 }
+
+
