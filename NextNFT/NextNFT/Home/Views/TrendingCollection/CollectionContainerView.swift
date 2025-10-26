@@ -39,7 +39,7 @@ struct CollectionContainerView: View {
             .padding(.horizontal)
             
             //COLLECTION LIST VIEW HERE
-                CollectionListView()
+                CollectionListView(collectionSlug: collection.collection)
                 .padding(.horizontal)
                 .padding(.bottom)
         }

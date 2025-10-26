@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CollectionListView: View {
     @StateObject private var viewModel = NFTViewModel()
-    var collectionSlug: String = "doodles-official"
+    var collectionSlug: String
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -22,11 +22,14 @@ struct CollectionListView: View {
         }
         .padding(.vertical, 2)
         .onAppear {
-            viewModel.fetchNFTs(for: collectionSlug)
+            // Fetch NFTs only once for this specific collection
+            if viewModel.nfts.isEmpty {
+                viewModel.fetchNFTs(for: collectionSlug)
+            }
         }
     }
 }
 
 #Preview {
-    CollectionListView()
+    CollectionListView(collectionSlug: "azuki")
 }

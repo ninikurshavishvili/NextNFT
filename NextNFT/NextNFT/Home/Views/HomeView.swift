@@ -31,7 +31,9 @@ struct HomeView: View {
         }
         .background(AppColors.darkBackground)
         .onAppear {
-            viewModel.fetchCollections()
+            if viewModel.collections.isEmpty {
+                    viewModel.fetchCollections()
+                }
         }
     }
 }
