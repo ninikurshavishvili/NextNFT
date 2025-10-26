@@ -8,15 +8,22 @@
 import SwiftUI
 
 struct CollectionListView: View {
+    @StateObject private var viewModel = NFTViewModel()
+    var collectionSlug: String = "doodles-official"
+
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack() {
-                ForEach(0..<10) { index in
-                    CollectionCardView()
+            HStack {
+                ForEach(viewModel.nfts, id: \.identifier) { nft in
+                    CollectionCardView(nft: nft)
                 }
             }
+            .padding(.horizontal)
         }
         .padding(.vertical, 2)
+        .onAppear {
+            viewModel.fetchNFTs(for: collectionSlug)
+        }
     }
 }
 

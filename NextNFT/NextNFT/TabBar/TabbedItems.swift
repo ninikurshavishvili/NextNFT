@@ -45,7 +45,7 @@ struct CustomTabBarView: View {
                 Button {
                     selectedTab = item
                 } label: {
-                    VStack(spacing: 6) {
+                    VStack(spacing: 2) {
                         Image(systemName: item.icon)
                             .font(.system(size: 22, weight: .medium))
                             .foregroundColor(selectedTab == item ? .mainPurple : .white.opacity(0.8))
@@ -99,11 +99,12 @@ struct MainTabView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(AppColors.darkBackground)
-            .ignoresSafeArea()
             
             CustomTabBarView(selectedTab: $selectedTab)
-                .frame(maxWidth: .infinity)
+                .frame(width: 360, height: 65)
+                .padding(.bottom, 10)
         }
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 
