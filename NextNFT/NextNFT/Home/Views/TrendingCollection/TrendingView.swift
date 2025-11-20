@@ -21,29 +21,130 @@ struct TrendingView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
+                
+                // MARK: - Title
                 Text("Trending")
                     .font(.system(.title, design: .serif, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(.leading)
-
-                // Tabs + icons + days remain unchanged...
                 
-                // ✅ Show collections that HomeView passed in
+                // MARK: - Tabs
+                HStack(alignment: .firstTextBaseline) {
+                    ForEach(tabs, id: \.self) { tab in
+                        VStack {
+                            Text(tab)
+                                .foregroundStyle(selectedTab == tab ? .white : .gray)
+                                .fontWeight(.medium)
+                            
+                            Rectangle()
+                                .frame(height: 2)
+                                .foregroundStyle(selectedTab == tab ? .white : .clear)
+                        }
+                        .onTapGesture {
+                            selectedTab = tab
+                        }
+                    }
+                }
+                .padding(.horizontal)
+                
+                
+                // MARK: - Icons Scroll
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(icons.indices, id: \.self) { index in
+                            Button {
+                                selectedIconIndex = index
+                            } label: {
+                                Image(systemName: icons[index])
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(index == selectedIconIndex ? .white : AppColors.lightGrey)
+                                    .frame(width: 40, height: 40)
+                                    .background(
+                                        index == selectedIconIndex ? Color.black.opacity(0.7) : Color.clear
+                                    )
+                                    .cornerRadius(12)
+                            }
+                        }
+                    }
+                    .padding(4)
+                    .background(AppColors.lightGrey.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .padding(.horizontal)
+                }
+                
+                
+                // MARK: - Days Scroll
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(days, id: \.self) { day in
+                            Button {
+                                selectedDay = day
+                            } label: {
+                                Text(day)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
+                                    .frame(width: 58, height: 40)
+                                    .background(
+                                        selectedDay == day ? Color.black.opacity(0.7) : Color.clear
+                                    )
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
+                        }
+                    }
+                    .padding(4)
+                    .background(AppColors.lightGrey.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .padding(.horizontal)
+                }
+                
+                
+                // MARK: - Floor Price
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Floor price")
+                        .foregroundStyle(.white)
+                        .fontWeight(.medium)
+                    
+                    HStack {
+                        TextField("", text: .constant(""), prompt: Text("Min").foregroundStyle(.gray))
+                            .multilineTextAlignment(.center)
+                            .frame(width: 70, height: 44)
+                            .background(Color.black.opacity(0.3))
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                        
+                        Text("—")
+                            .foregroundStyle(.white)
+                        
+                        TextField("", text: .constant(""), prompt: Text("Max").foregroundStyle(.gray))
+                            .multilineTextAlignment(.center)
+                            .frame(width: 70, height: 44)
+                            .background(Color.black.opacity(0.3))
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                        
+                        Text("ETH")
+                            .foregroundStyle(.white)
+                            .padding(.leading, 5)
+                    }
+                }
+                .padding(.horizontal)
+                
+                
+                // MARK: - Dynamic Collections List From ViewModel
                 if collections.isEmpty {
                     Text("No collections yet")
                         .foregroundStyle(.gray)
                         .padding()
                 } else {
                     CollectionContainerListView(collections: collections)
+                        .padding(.top)
                 }
             }
-
         }
     }
 }
 
 #Preview {
     TrendingView(collections: [])
-        .background(Color.black)
+        .background(AppColors.darkBackground)
 }
+
 
