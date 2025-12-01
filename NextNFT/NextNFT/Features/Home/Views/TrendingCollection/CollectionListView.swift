@@ -21,14 +21,14 @@ struct CollectionListView: View {
             .padding(.horizontal)
         }
         .padding(.vertical, 2)
-        .onAppear {
-            // Fetch NFTs only once for this specific collection
+        .task {
             if viewModel.nfts.isEmpty {
-                viewModel.fetchNFTs(for: collectionSlug)
+                await viewModel.fetchNFTs(for: collectionSlug)
             }
         }
     }
 }
+
 
 #Preview {
     CollectionListView(collectionSlug: "azuki")
