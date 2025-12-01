@@ -56,10 +56,10 @@ class NetworkManager {
         }
     }
 
-    // MARK: - NFTs
     func getNFTs(for slug: String, completion: @escaping (Result<[NFTModel], Error>) -> Void) {
-        // Updated URL format
-        guard let url = URL(string: "https://api.opensea.io/api/v2/chain/ethereum/collection/\(slug)/nfts?limit=10") else {
+        guard let url = URL(string:
+            "https://api.opensea.io/api/v2/collection/\(slug)/nfts?limit=10"
+        ) else {
             completion(.failure(NetworkError.invalidURL))
             return
         }
@@ -76,6 +76,7 @@ class NetworkManager {
             }
         }
     }
+
 }
 
 private extension NetworkManager {

@@ -9,49 +9,71 @@ import SwiftUI
 
 struct CollectionCardView: View {
     let nft: NFTModel
-    
+
     var body: some View {
-        VStack {
-            // Use nft.imageURL which is the correct property from your model
-            if let imageUrlString = nft.imageURL,
-               let url = URL(string: imageUrlString) {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .empty:
+        ZStack(alignment: .topTrailing) {
+            // ✅ Dynamic image from API using AsyncImage
+            AsyncImage(url: URL(string: nft.imageURL ?? "")) { phase in
+                switch phase {
+                case .empty:
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.gray.opacity(0.2))
                         ProgressView()
-                            .frame(width: 100, height: 100)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    case .failure:
-                        Image(systemName: "photo")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(.gray)
-                    @unknown default:
-                        EmptyView()
                     }
-                }
-                .frame(width: 100, height: 100)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-            } else {
-                // Fallback if no image URL
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 100, height: 100)
-                    .overlay(
+                    .frame(width: 120, height: 120)
+
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 120, height: 120)
+                        .clipped()
+                        .cornerRadius(16)
+
+                case .failure:
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.gray.opacity(0.3))
                         Image(systemName: "photo")
-                            .foregroundColor(.white)
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .font(.system(size: 30))
+                            .foregroundColor(.white.opacity(0.7))
+                    }
+                    .frame(width: 120, height: 120)
+
+                @unknown default:
+                    EmptyView()
+                }
             }
-            
-            Text(nft.name ?? "Unnamed NFT")
-                .font(.caption)
-                .lineLimit(1)
-                .foregroundColor(.white)
+
+            // Plus button
+            Button(action: {}) {
+                Image(systemName: "plus")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(.white)
+                    .frame(width: 28, height: 28)
+                    .background(.ultraThinMaterial)
+                    .clipShape(Circle())
+            }
+            .padding(8)
+
+            // “Place a bid” text
+            VStack {
+                Spacer()
+                HStack {
+                    Text("Place a bid")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(Capsule().fill(.ultraThinMaterial))
+                    Spacer()
+                }
+                .padding(8)
+            }
         }
+        .frame(width: 120, height: 120)
+        .padding()
     }
 }
 
