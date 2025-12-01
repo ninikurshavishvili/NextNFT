@@ -30,3 +30,13 @@ class NFTViewModel: ObservableObject {
         }
     }
 }
+
+extension String {
+    func convertIPFStoHTTP() -> String {
+        if self.hasPrefix("ipfs://") {
+            let ipfsHash = self.replacingOccurrences(of: "ipfs://", with: "")
+            return "https://ipfs.io/ipfs/\(ipfsHash)"
+        }
+        return self
+    }
+}

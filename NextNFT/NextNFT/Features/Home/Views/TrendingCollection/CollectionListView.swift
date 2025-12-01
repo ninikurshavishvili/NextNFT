@@ -23,7 +23,7 @@ struct CollectionListView: View {
         .padding(.vertical, 2)
         .task {
             if viewModel.nfts.isEmpty {
-                await viewModel.fetchNFTs(for: collectionSlug)
+                 viewModel.fetchNFTs(for: collectionSlug)
             }
         }
     }
