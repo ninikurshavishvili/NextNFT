@@ -37,18 +37,28 @@ class NetworkManager {
     
     // MARK: - Collections
     func getCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
-        // Updated URL format for OpenSea API
-        guard let url = URL(string: "https://api.opensea.io/api/v2/collections?limit=10") else {
+        // Add filtering for popular collections - use known collection slugs
+        // Or use the chain parameter to get Ethereum mainnet collections (which are more likely to have images)
+        
+        // Option A: Fetch Ethereum collections (more likely to have images)
+        guard let url = URL(string: "https://api.opensea.io/api/v2/collections?chain=ethereum&limit=10") else {
             completion(.failure(NetworkError.invalidURL))
             return
         }
-
+        
+        // Option B: Fetch specific popular collections
+        // guard let url = URL(string: "https://api.opensea.io/api/v2/collections?limit=10&chain=ethereum") else {
+        
         print("Fetching collections from: \(url.absoluteString)")
         
         performRequest(url: url) { (result: Result<CollectionsResponse, Error>) in
             switch result {
             case .success(let response):
-                completion(.success(response.collections))
+                // Filter out collections without images
+                let collectionsWithImages = response.collections.filter {
+                    $0.imageURL != nil && !$0.imageURL!.isEmpty
+                }
+                completion(.success(collectionsWithImages))
             case .failure(let error):
                 print("Collections fetch error: \(error.localizedDescription)")
                 completion(.failure(error))
@@ -142,14 +152,34 @@ private extension NetworkManager {
 
             do {
                 let decoder = JSONDecoder()
-                // Configure decoder if needed
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                // REMOVE THIS LINE - Your CodingKeys already handle snake_case conversion
+                // decoder.keyDecodingStrategy = .convertFromSnakeCase
                 
                 let decoded = try decoder.decode(T.self, from: data)
                 completion(.success(decoded))
             } catch {
                 print("Decoding error: \(error)")
                 print("Error details: \(error.localizedDescription)")
+                
+                // Print more detailed error info
+                if let decodingError = error as? DecodingError {
+                    switch decodingError {
+                    case .keyNotFound(let key, let context):
+                        print("Failed to decode key: \(key.stringValue)")
+                        print("Coding path: \(context.codingPath)")
+                    case .typeMismatch(let type, let context):
+                        print("Type mismatch for: \(type)")
+                        print("Coding path: \(context.codingPath)")
+                    case .valueNotFound(let type, let context):
+                        print("Value not found for: \(type)")
+                        print("Coding path: \(context.codingPath)")
+                    case .dataCorrupted(let context):
+                        print("Data corrupted: \(context)")
+                    @unknown default:
+                        print("Unknown decoding error")
+                    }
+                }
+                
                 completion(.failure(NetworkError.decodingFailed))
             }
 

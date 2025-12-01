@@ -47,3 +47,4 @@ struct NFTResponse: Codable {
     let nfts: [NFTModel]
     let next: String?
 }
+

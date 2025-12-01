@@ -12,38 +12,32 @@ struct CollectionCardView: View {
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            // ✅ Dynamic image from API using AsyncImage
-            AsyncImage(url: URL(string: nft.imageURL ?? "")) { phase in
-                switch phase {
-                case .empty:
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.gray.opacity(0.2))
-                        ProgressView()
+            // Check if imageURL exists and is not empty/null
+            if let imageURLString = nft.imageURL,
+               !imageURLString.isEmpty,
+               let url = URL(string: imageURLString) {
+                
+                // ✅ Image exists - show it
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .empty:
+                        loadingView
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 120, height: 120)
+                            .clipped()
+                            .cornerRadius(16)
+                    case .failure:
+                        placeholderView
+                    @unknown default:
+                        placeholderView
                     }
-                    .frame(width: 120, height: 120)
-
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 120, height: 120)
-                        .clipped()
-                        .cornerRadius(16)
-
-                case .failure:
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.gray.opacity(0.3))
-                        Image(systemName: "photo")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white.opacity(0.7))
-                    }
-                    .frame(width: 120, height: 120)
-
-                @unknown default:
-                    EmptyView()
                 }
+            } else {
+                // ❌ No image - show placeholder
+                placeholderView
             }
 
             // Plus button
@@ -57,7 +51,7 @@ struct CollectionCardView: View {
             }
             .padding(8)
 
-            // “Place a bid” text
+            // "Place a bid" text
             VStack {
                 Spacer()
                 HStack {
@@ -74,6 +68,31 @@ struct CollectionCardView: View {
         }
         .frame(width: 120, height: 120)
         .padding()
+    }
+    
+    var loadingView: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.gray.opacity(0.2))
+            ProgressView()
+        }
+        .frame(width: 120, height: 120)
+    }
+    
+    var placeholderView: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.gray.opacity(0.3))
+            VStack {
+                Image(systemName: "photo")
+                    .font(.system(size: 30))
+                    .foregroundColor(.white.opacity(0.7))
+                Text("No Image")
+                    .font(.system(size: 10))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+        }
+        .frame(width: 120, height: 120)
     }
 }
 
