@@ -12,16 +12,17 @@ class NFTViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
 
-    func fetchNFTs(for collectionSlug: String) {
+    func fetchNFTs(for slug: String) {
         isLoading = true
         errorMessage = nil
         
-        NetworkManager.shared.getNFTs(for: collectionSlug) { [weak self] result in
+        NetworkManager.shared.getNFTs(for: slug) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
+
                 switch result {
-                case .success(let nfts):
-                    self?.nfts = nfts
+                case .success(let nftList):
+                    self?.nfts = nftList
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                 }
@@ -29,4 +30,5 @@ class NFTViewModel: ObservableObject {
         }
     }
 }
+
 

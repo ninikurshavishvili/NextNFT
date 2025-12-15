@@ -32,8 +32,8 @@ struct CollectionProfileView: View {
     }
 }
 
-//
-//#Preview {
-//    CollectionProfileView(imageURL: Image, name: na)
-//        .background(Color.black)
-//}
+
+#Preview {
+    CollectionProfileView(imageURL: "Image", name: "na")
+        .background(Color.black)
+}
