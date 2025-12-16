@@ -8,7 +8,7 @@
 import Foundation
 
 class CollectionsViewModel: ObservableObject {
-    @Published var collections: [CollectionModel] = []
+    @Published var collections: [NFTCollection] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 

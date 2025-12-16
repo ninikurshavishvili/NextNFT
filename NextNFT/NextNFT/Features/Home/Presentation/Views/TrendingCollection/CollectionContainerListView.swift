@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct CollectionContainerListView: View {
-    let collections: [CollectionModel]
+    let collections: [NFTCollection]
     
     var body: some View {
         VStack(spacing: 20) {

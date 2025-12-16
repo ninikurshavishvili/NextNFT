@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CollectionCardView: View {
-    let nft: NFTModel
+    let nft: NFT
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
