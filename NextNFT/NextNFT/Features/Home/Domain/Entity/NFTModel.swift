@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NFTModel: Codable, Identifiable {
+struct NFT: Codable, Identifiable {
     var id: String { identifier }
     
     let identifier: String
@@ -44,7 +44,7 @@ struct NFTModel: Codable, Identifiable {
 }
 
 struct NFTResponse: Codable {
-    let nfts: [NFTModel]
+    let nfts: [NFT]
     let next: String?
 }
 

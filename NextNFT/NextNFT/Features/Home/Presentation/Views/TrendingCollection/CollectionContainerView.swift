@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CollectionContainerView: View {
-    let collection: CollectionModel
+    let collection: NFTCollection
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -57,7 +57,7 @@ struct CollectionContainerView: View {
 
 #Preview {
     // ✅ Provide mock data for preview
-    let sampleCollection = CollectionModel(
+    let sampleCollection = NFTCollection(
         collection: "azuki",
         name: "Azuki",
         description: "A collection of 10,000 avatars for the metaverse.",

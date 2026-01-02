@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CollectionModel: Codable, Identifiable {
+struct NFTCollection: Codable, Identifiable {
     var id: String { collection }
 
     let collection: String
@@ -38,6 +38,6 @@ struct CollectionModel: Codable, Identifiable {
 struct CollectionsResponse: Codable {
     // NOTE: confirm with the OpenSea response wrapper — if the top-level key is "collections" use this.
     // If the API returns an array directly, change to `typealias CollectionsResponse = [CollectionModel]`
-    let collections: [CollectionModel]
+    let collections: [NFTCollection]
 }
 

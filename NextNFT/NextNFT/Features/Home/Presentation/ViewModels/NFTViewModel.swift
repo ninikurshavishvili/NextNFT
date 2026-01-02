@@ -8,7 +8,7 @@
 import Foundation
 
 class NFTViewModel: ObservableObject {
-    @Published var nfts: [NFTModel] = []
+    @Published var nfts: [NFT] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 

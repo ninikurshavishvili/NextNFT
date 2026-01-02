@@ -36,7 +36,7 @@ class NetworkManager {
     private let apiKey = "bcdf9b152b5c46308e0baa9f3711520f"
     
     // MARK: - Collections
-    func getCollections(completion: @escaping (Result<[CollectionModel], Error>) -> Void) {
+    func getCollections(completion: @escaping (Result<[NFTCollection], Error>) -> Void) {
         // Add filtering for popular collections - use known collection slugs
         // Or use the chain parameter to get Ethereum mainnet collections (which are more likely to have images)
         
@@ -66,7 +66,7 @@ class NetworkManager {
         }
     }
 
-    func getNFTs(for slug: String, completion: @escaping (Result<[NFTModel], Error>) -> Void) {
+    func getNFTs(for slug: String, completion: @escaping (Result<[NFT], Error>) -> Void) {
         guard let url = URL(string:
             "https://api.opensea.io/api/v2/collection/\(slug)/nfts?limit=10"
         ) else {
