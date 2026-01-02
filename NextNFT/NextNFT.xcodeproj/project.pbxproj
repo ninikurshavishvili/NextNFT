@@ -21,33 +21,9 @@
 		1488C12F2E24063F005FD00C /* NextNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		14470D032EF0691200638CEB /* Exceptions for "NextNFT" folder in "NextNFT" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Features/Home/Data/Repository/HomeRepositoryProtocol.swift,
-			);
-			target = 1488C12E2E24063F005FD00C /* NextNFT */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		14470D042EF0691200638CEB /* Exceptions for "NextNFT" folder in "Copy Bundle Resources" phase from "NextNFT" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 1488C12D2E24063F005FD00C /* Resources */;
-			membershipExceptions = (
-				Features/Home/Data/Repository/HomeRepositoryProtocol.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1488C1312E24063F005FD00C /* NextNFT */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				14470D032EF0691200638CEB /* Exceptions for "NextNFT" folder in "NextNFT" target */,
-				14470D042EF0691200638CEB /* Exceptions for "NextNFT" folder in "Copy Bundle Resources" phase from "NextNFT" target */,
-			);
 			path = NextNFT;
 			sourceTree = "<group>";
 		};
