@@ -15,9 +15,9 @@ protocol HomeRepositoryProtocol {
 
 final class HomeRepository: HomeRepositoryProtocol {
 
-    private let dataSource: OpenSeaDataSourceProtocol
+    private let dataSource: HomeRemoteDataSourceProtocol
 
-    init(dataSource: OpenSeaDataSourceProtocol = OpenSeaRemoteDataSource()) {
+    init(dataSource: HomeRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
         self.dataSource = dataSource
     }
 

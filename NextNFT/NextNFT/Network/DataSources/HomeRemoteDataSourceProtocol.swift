@@ -6,12 +6,12 @@
 //
 
 
-protocol OpenSeaDataSourceProtocol {
+protocol HomeRemoteDataSourceProtocol {
     func fetchCollections(chain: String, limit: Int) async throws -> [CollectionDTO]
     func fetchNFTs(collectionSlug: String, limit: Int) async throws -> [NFTDTO]
 }
 
-extension OpenSeaDataSourceProtocol {
+extension HomeRemoteDataSourceProtocol {
     func fetchCollections(chain: String = "ethereum", limit: Int = 10) async throws -> [CollectionDTO] {
         try await fetchCollections(chain: chain, limit: limit)
     }
@@ -21,7 +21,7 @@ extension OpenSeaDataSourceProtocol {
     }
 }
 // Network/DataSources/OpenSeaRemoteDataSource.swift
-class OpenSeaRemoteDataSource: OpenSeaDataSourceProtocol {
+class OpenSeaRemoteDataSource: HomeRemoteDataSourceProtocol {
     private let networkService: NetworkServiceProtocol
     
     init(networkService: NetworkServiceProtocol = NetworkService.shared) {
