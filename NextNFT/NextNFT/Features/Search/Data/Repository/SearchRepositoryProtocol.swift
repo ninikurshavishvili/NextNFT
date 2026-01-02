@@ -10,3 +10,4 @@ protocol SearchRepositoryProtocol {
     func searchNFTs(query: String) async throws -> [NFT]
 }
 
+

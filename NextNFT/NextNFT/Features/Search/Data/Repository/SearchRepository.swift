@@ -7,9 +7,9 @@
 
 final class SearchRepository: SearchRepositoryProtocol {
 
-    private let dataSource: HomeRemoteDataSourceProtocol
+    private let dataSource: SearchRemoteDataSourceProtocol
 
-    init(dataSource: HomeRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
+    init(dataSource: SearchRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
         self.dataSource = dataSource
     }
 

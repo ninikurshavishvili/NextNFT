@@ -21,7 +21,7 @@ extension HomeRemoteDataSourceProtocol {
     }
 }
 // Network/DataSources/OpenSeaRemoteDataSource.swift
-class OpenSeaRemoteDataSource: HomeRemoteDataSourceProtocol {
+class OpenSeaRemoteDataSource: HomeRemoteDataSourceProtocol, SearchRemoteDataSourceProtocol {
     private let networkService: NetworkServiceProtocol
     
     init(networkService: NetworkServiceProtocol = NetworkService.shared) {
