@@ -6,24 +6,24 @@
 //
 
 // Features/Home/Domain/Repositories/HomeRepositoryProtocol.swift
-protocol HomeRepositoryProtocol {
-    func getCollections() async throws -> [CollectionModel]
-    func getNFTs(for collectionSlug: String) async throws -> [NFTModel]
-}
+// Update your repository protocol to return [NFTCollection]
+// Features/Home/Domain/Repositories/HomeRepositoryProtocol.swift
 
-// Features/Home/Data/Repositories/HomeRepository.swift
-class HomeRepository: HomeRepositoryProtocol {
-    private let dataSource: OpenSeaDataSourceProtocol
-    
-    init(dataSource: OpenSeaDataSourceProtocol = OpenSeaRemoteDataSource()) {
-        self.dataSource = dataSource
-    }
-    
-    func getCollections() async throws -> [CollectionModel] {
-        return try await dataSource.fetchCollections()
-    }
-    
-    func getNFTs(for collectionSlug: String) async throws -> [NFTModel] {
-        return try await dataSource.fetchNFTs(collectionSlug: collectionSlug)
-    }
-}
+//// Features/Home/Data/Repositories/HomeRepository.swift
+//class HomeRepository: HomeRepositoryProtocol {
+//    private let dataSource: OpenSeaDataSourceProtocol
+//    
+//    init(dataSource: OpenSeaDataSourceProtocol = OpenSeaRemoteDataSource()) {
+//        self.dataSource = dataSource
+//    }
+//    
+//    func getCollections() async throws -> [NFTCollection] {  // Change to concrete type
+//        let dtos = try await dataSource.fetchCollections()
+//        return dtos.compactMap { $0.toDomain() }
+//    }
+//    
+//    func getNFTs(for collectionSlug: String) async throws -> [NFT] {
+//        let dtos = try await dataSource.fetchNFTs(collectionSlug: collectionSlug)
+//        return dtos.compactMap { $0.toDomain() }
+//    }
+//}

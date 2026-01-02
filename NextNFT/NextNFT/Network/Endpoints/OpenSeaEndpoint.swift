@@ -14,8 +14,8 @@ enum OpenSeaEndpoint {
 }
 
 extension OpenSeaEndpoint: Endpoint {
-    var parameters: [String : Any]? {
-        <#code#>
+    var parameters: [String: Any]? {
+        return nil  // Using queryItems for GET requests
     }
     
     var path: String {

@@ -7,6 +7,8 @@
 
 import Foundation
 // Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
+// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
+// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
 class GetCollectionsUseCase {
     private let repository: HomeRepositoryProtocol
     
@@ -14,8 +16,8 @@ class GetCollectionsUseCase {
         self.repository = repository
     }
     
-    func execute() async throws -> [NFTCollection] {
-        return try await repository.getCollections()
+    func execute() async throws -> [NFTCollection] {  // Change to concrete type
+        return try await repository.getCollections() as? [NFTCollection] ?? []
     }
 }
 

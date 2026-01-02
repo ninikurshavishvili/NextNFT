@@ -11,6 +11,15 @@ protocol OpenSeaDataSourceProtocol {
     func fetchNFTs(collectionSlug: String, limit: Int) async throws -> [NFTDTO]
 }
 
+extension OpenSeaDataSourceProtocol {
+    func fetchCollections(chain: String = "ethereum", limit: Int = 10) async throws -> [CollectionDTO] {
+        try await fetchCollections(chain: chain, limit: limit)
+    }
+    
+    func fetchNFTs(collectionSlug: String, limit: Int = 10) async throws -> [NFTDTO] {
+        try await fetchNFTs(collectionSlug: collectionSlug, limit: limit)
+    }
+}
 // Network/DataSources/OpenSeaRemoteDataSource.swift
 class OpenSeaRemoteDataSource: OpenSeaDataSourceProtocol {
     private let networkService: NetworkServiceProtocol
@@ -19,14 +28,14 @@ class OpenSeaRemoteDataSource: OpenSeaDataSourceProtocol {
         self.networkService = networkService
     }
     
-    func fetchCollections(chain: String = "ethereum", limit: Int = 10) async throws -> [CollectionDTO] {
-        let endpoint = OpenSeaEndpoint(type: .getCollections(chain: chain, limit: limit))
+    func fetchCollections(chain: String, limit: Int) async throws -> [CollectionDTO] {
+        let endpoint = OpenSeaEndpoint.collections(chain: chain, limit: limit)
         let response: CollectionsResponseDTO = try await networkService.request(endpoint)
         return response.collections
     }
     
-    func fetchNFTs(collectionSlug: String, limit: Int = 10) async throws -> [NFTDTO] {
-        let endpoint = OpenSeaEndpoint(type: .getNFTs(collectionSlug: collectionSlug, limit: limit))
+    func fetchNFTs(collectionSlug: String, limit: Int) async throws -> [NFTDTO] {
+        let endpoint = OpenSeaEndpoint.nfts(collectionSlug: collectionSlug, limit: limit)
         let response: NFTResponseDTO = try await networkService.request(endpoint)
         return response.nfts
     }

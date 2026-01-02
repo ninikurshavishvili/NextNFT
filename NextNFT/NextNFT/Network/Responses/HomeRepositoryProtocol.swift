@@ -7,7 +7,7 @@
 
 
 // Features/Home/Domain/Repositories/HomeRepositoryProtocol.swift
-protocol HomeRepositoryProtocol {
-    func getCollections() async throws -> [Collection]
-    func getNFTs(for collectionSlug: String) async throws -> [NFT]
-}
+//protocol HomeRepositoryProtocol {
+//    func getCollections() async throws -> [Collection]
+//    func getNFTs(for collectionSlug: String) async throws -> [NFT]
+//}
