@@ -6,7 +6,6 @@
 //
 
 
-// Network/Models/Responses/CollectionsResponseDTO.swift
 struct CollectionsResponseDTO: Codable {
     let collections: [CollectionDTO]
     

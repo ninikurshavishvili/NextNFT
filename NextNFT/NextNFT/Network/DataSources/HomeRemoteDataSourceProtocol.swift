@@ -39,4 +39,17 @@ class OpenSeaRemoteDataSource: HomeRemoteDataSourceProtocol, SearchRemoteDataSou
         let response: NFTResponseDTO = try await networkService.request(endpoint)
         return response.nfts
     }
+    
+    // MARK: - Search Methods
+    func searchCollections(query: String, limit: Int) async throws -> [CollectionDTO] {
+        let endpoint = OpenSeaEndpoint.searchCollections(query: query, limit: limit)
+        let response: CollectionsResponseDTO = try await networkService.request(endpoint)
+        return response.collections
+    }
+    
+    func searchNFTs(query: String, limit: Int) async throws -> [NFTDTO] {
+        let endpoint = OpenSeaEndpoint.searchNFTs(query: query, limit: limit)
+        let response: NFTResponseDTO = try await networkService.request(endpoint)
+        return response.nfts
+    }
 }

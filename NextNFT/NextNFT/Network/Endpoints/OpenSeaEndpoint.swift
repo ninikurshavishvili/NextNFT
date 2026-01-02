@@ -11,6 +11,8 @@ import Foundation
 enum OpenSeaEndpoint {
     case collections(chain: String = "ethereum", limit: Int = 10)
     case nfts(collectionSlug: String, limit: Int = 10)
+    case searchCollections(query: String, limit: Int = 10)  // Add this
+    case searchNFTs(query: String, limit: Int = 10)         // Add this
 }
 
 extension OpenSeaEndpoint: Endpoint {
@@ -24,6 +26,10 @@ extension OpenSeaEndpoint: Endpoint {
             return "/api/v2/collections"
         case .nfts(let slug, _):
             return "/api/v2/collection/\(slug)/nfts"
+        case .searchCollections:  // Add this
+            return "/api/v2/collections"
+        case .searchNFTs:         // Add this
+            return "/api/v2/chain/ethereum/nfts"  // Note: This might need adjustment based on OpenSea API
         }
     }
     
@@ -42,10 +48,19 @@ extension OpenSeaEndpoint: Endpoint {
             return [
                 URLQueryItem(name: "limit", value: "\(limit)")
             ]
+        case .searchCollections(let query, let limit):  // Add this
+            return [
+                URLQueryItem(name: "search", value: query),
+                URLQueryItem(name: "limit", value: "\(limit)")
+            ]
+        case .searchNFTs(let query, let limit):         // Add this
+            return [
+                URLQueryItem(name: "search", value: query),
+                URLQueryItem(name: "limit", value: "\(limit)")
+            ]
         }
     }
     
-    // Use your API base URL
     var baseURL: String {
         return "https://api.opensea.io"
     }
