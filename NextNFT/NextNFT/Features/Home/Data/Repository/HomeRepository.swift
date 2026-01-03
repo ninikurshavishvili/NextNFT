@@ -7,7 +7,6 @@
 
 
 
-// Features/Home/Data/Repositories/HomeRepository.swift
 protocol HomeRepositoryProtocol {
     func getCollections() async throws -> [NFTCollection]
     func getNFTs(for collectionSlug: String) async throws -> [NFT]
