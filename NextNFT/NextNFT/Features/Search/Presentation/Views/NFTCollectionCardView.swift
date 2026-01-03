@@ -14,14 +14,14 @@ struct NFTCollectionCardView: View {
         ZStack(alignment: .bottom) {
 
             RoundedRectangle(cornerRadius: 22)
-                .fill(collection.gradient)
+                .fill(AppColors.mainPurple)
 
             VStack(alignment: .leading, spacing: 6) {
                 Text(collection.name)
                     .font(.headline)
                     .foregroundColor(.white)
 
-                Text("Floor price \(collection.floorPrice) ETH")
+                Text("Floor price \(collection.id) ETH")
                     .font(.caption)
                     .foregroundColor(.white.opacity(0.7))
 

@@ -15,8 +15,14 @@ struct SearchTopSearchSection: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(MockData.topCollections) { collection in
-                        NFTCollectionCardView(collection: collection)
+                    ForEach(0..<5) { _ in
+                        Image("image")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                            .clipShape(Capsule())
+                            .overlay(Capsule().stroke(Color.gray, lineWidth: 1))
+                            .shadow(radius: 5)
                     }
                 }
             }

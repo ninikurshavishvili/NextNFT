@@ -15,9 +15,10 @@ struct SearchRecentCollectionsSection: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(MockData.collections) { collection in
-                        NFTCollectionCardView(collection: collection)
-                    }
+                    Text("NEED TO FIX THIS PART")
+//                    ForEach() { collection in
+//                        NFTCollectionCardView(collection: collection)
+//                    }
                 }
             }
         }
