@@ -7,39 +7,36 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
-    @ObservedObject var viewModel: CollectionsViewModel
+
+    @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
-        VStack {
-            ScrollView {
-                HomeHeaderView()
-                NFTItemListView()
-                
-                TrendingView(collections: viewModel.collections)
+        ScrollView {
+            HomeHeaderView()
+            NFTItemListView()
+            
+            TrendingView(collections: viewModel.collections)
 
-                if viewModel.isLoading {
-                    ProgressView("Loading collections...")
-                        .foregroundStyle(.white)
-                        .padding()
-                } else if let error = viewModel.errorMessage {
-                    Text("Error: \(error)")
-                        .foregroundStyle(.red)
-                        .padding()
-                }
+            if viewModel.isLoading {
+                ProgressView("Loading collections...")
+                    .foregroundStyle(.white)
+                    .padding()
+            } else if let error = viewModel.errorMessage {
+                Text("Error: \(error)")
+                    .foregroundStyle(.red)
+                    .padding()
             }
         }
         .background(AppColors.darkBackground)
-        .onAppear {
+        .task {
+            // ✅ async-safe, correct lifecycle
             if viewModel.collections.isEmpty {
-                    viewModel.fetchCollections()
-                }
+                await viewModel.load()
+            }
         }
     }
 }
 
-
-#Preview {
-    HomeView(viewModel: CollectionsViewModel())
-}
 

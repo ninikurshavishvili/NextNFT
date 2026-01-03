@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CollectionListView: View {
-    @StateObject private var viewModel = NFTViewModel()
-    var collectionSlug: String
+    let collectionSlug: String
+    @StateObject private var viewModel = CollectionNFTsViewModel()
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -23,13 +23,13 @@ struct CollectionListView: View {
         .padding(.vertical, 2)
         .task {
             if viewModel.nfts.isEmpty {
-                 viewModel.fetchNFTs(for: collectionSlug)
+                await viewModel.load(collectionSlug: collectionSlug)
             }
         }
     }
 }
-
-
 #Preview {
     CollectionListView(collectionSlug: "azuki")
+        .background(AppColors.darkBackground)
 }
+
