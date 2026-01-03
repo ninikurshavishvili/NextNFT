@@ -6,26 +6,7 @@
 //
 
 
-//TODO: fix 1
-//class HomeRepository: HomeRepositoryProtocol {
-//    private let dataSource: OpenSeaDataSourceProtocol
-//    
-//    init(dataSource: OpenSeaDataSourceProtocol = OpenSeaRemoteDataSource()) {
-//        self.dataSource = dataSource
-//    }
-//    
-//    func getCollections() async throws -> [Collection] {
-//        let dtos = try await dataSource.fetchCollections()
-//        return dtos.compactMap { $0.toDomain() }
-//    }
-//    
-//    func getNFTs(for collectionSlug: String) async throws -> [NFT] {
-//        let dtos = try await dataSource.fetchNFTs(collectionSlug: collectionSlug)
-//        return dtos.compactMap { $0.toDomain() }
-//    }
-//}
 
-// Features/Home/Data/Repositories/HomeRepository.swift
 protocol HomeRepositoryProtocol {
     func getCollections() async throws -> [NFTCollection]
     func getNFTs(for collectionSlug: String) async throws -> [NFT]
@@ -33,9 +14,9 @@ protocol HomeRepositoryProtocol {
 
 final class HomeRepository: HomeRepositoryProtocol {
 
-    private let dataSource: OpenSeaDataSourceProtocol
+    private let dataSource: HomeRemoteDataSourceProtocol
 
-    init(dataSource: OpenSeaDataSourceProtocol = OpenSeaRemoteDataSource()) {
+    init(dataSource: HomeRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
         self.dataSource = dataSource
     }
 

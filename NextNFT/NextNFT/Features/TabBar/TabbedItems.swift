@@ -9,7 +9,7 @@ import SwiftUI
 
 enum TabbedItems: Int, CaseIterable {
     case home = 0
-    case search
+    case search = 1
     case drops
     case profile
     
@@ -87,8 +87,7 @@ struct MainTabView: View {
                 case .home:
                     HomeView(viewModel: CollectionsViewModel())
                 case .search:
-                    Text("Search Page")
-                        .foregroundColor(.white)
+                    SearchPageView()
                 case .drops:
                     Text("Drops Page")
                         .foregroundColor(.white)
