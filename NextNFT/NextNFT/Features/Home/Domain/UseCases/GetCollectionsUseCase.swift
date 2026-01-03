@@ -16,8 +16,8 @@ class GetCollectionsUseCase {
         self.repository = repository
     }
     
-    func execute() async throws -> [NFTCollection] {  // Change to concrete type
-        return try await repository.getCollections() as? [NFTCollection] ?? []
+    func execute() async throws -> [NFTCollection] {
+        try await repository.getCollections()
     }
 }
 
