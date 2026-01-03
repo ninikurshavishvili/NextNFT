@@ -32,6 +32,26 @@
 		1488C12F2E24063F005FD00C /* NextNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1493DAF12F097F9400F49071 /* Exceptions for "NextNFT" folder in "NextNFT" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Features/Search/Presentation/Views/SearchBarView.swift,
+			);
+			target = 1488C12E2E24063F005FD00C /* NextNFT */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		1493DAF22F097F9400F49071 /* Exceptions for "NextNFT" folder in "Copy Bundle Resources" phase from "NextNFT" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1488C12D2E24063F005FD00C /* Resources */;
+			membershipExceptions = (
+				Features/Search/Presentation/Views/SearchBarView.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		141169572F08341600E70061 /* NextNFTTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -40,6 +60,10 @@
 		};
 		1488C1312E24063F005FD00C /* NextNFT */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1493DAF12F097F9400F49071 /* Exceptions for "NextNFT" folder in "NextNFT" target */,
+				1493DAF22F097F9400F49071 /* Exceptions for "NextNFT" folder in "Copy Bundle Resources" phase from "NextNFT" target */,
+			);
 			path = NextNFT;
 			sourceTree = "<group>";
 		};

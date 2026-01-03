@@ -19,3 +19,5 @@ extension SearchRemoteDataSourceProtocol {
         try await searchNFTs(query: query, limit: limit)
     }
 }
+
+
