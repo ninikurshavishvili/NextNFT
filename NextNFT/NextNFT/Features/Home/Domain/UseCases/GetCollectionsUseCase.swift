@@ -5,6 +5,9 @@
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
+
+//TODO: - need to filter NFTs
+
 import Foundation
 // Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
 // Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
