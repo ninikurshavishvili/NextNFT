@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// Features/Home/Domain/UseCases/GetNFTsUseCase.swift
+
 final class GetNFTsUseCase {
     private let repository: HomeRepositoryProtocol
 
