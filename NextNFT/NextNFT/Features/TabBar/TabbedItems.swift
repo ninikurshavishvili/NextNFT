@@ -85,7 +85,7 @@ struct MainTabView: View {
             Group {
                 switch selectedTab {
                 case .home:
-                    HomeView(viewModel: CollectionsViewModel())
+                    HomeView()
                 case .search:
                     SearchPageView()
                 case .drops:

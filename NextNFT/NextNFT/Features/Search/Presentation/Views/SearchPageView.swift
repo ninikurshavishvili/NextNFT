@@ -31,7 +31,6 @@ struct SearchPageView: View {
                     SearchRecentCollectionsSection()
                     SearchTopSearchSection()
                 } else {
-//                    SearchResultsSection(viewModel: viewModel)
                 }
             }
             .padding(.horizontal)

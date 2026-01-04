@@ -9,7 +9,7 @@ import SwiftUI
 
 @available(iOS 26.0, *)
 struct ContentView: View {
-    @StateObject private var viewModel = CollectionsViewModel()
+    @StateObject private var viewModel = CollectionNFTsViewModel()
     
     var body: some View {
         NavigationView {

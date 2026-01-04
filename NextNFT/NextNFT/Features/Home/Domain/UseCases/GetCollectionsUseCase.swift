@@ -5,10 +5,12 @@
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
+
+//TODO: - need to filter NFTs
+//1
+
 import Foundation
-// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
-// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
-// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
+
 class GetCollectionsUseCase {
     private let repository: HomeRepositoryProtocol
     
@@ -16,8 +18,8 @@ class GetCollectionsUseCase {
         self.repository = repository
     }
     
-    func execute() async throws -> [NFTCollection] {  // Change to concrete type
-        return try await repository.getCollections() as? [NFTCollection] ?? []
+    func execute() async throws -> [NFTCollection] {
+        try await repository.getCollections()
     }
 }
 

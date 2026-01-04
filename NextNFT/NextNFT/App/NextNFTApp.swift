@@ -22,17 +22,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct NextNFTApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
-    @StateObject private var collectionViewModel = CollectionsViewModel()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(collectionViewModel)   // inject VM if ContentView needs it
-                .onAppear {
-                    print(collectionViewModel.collections)
-                }
         }
     }
 }
+
 
