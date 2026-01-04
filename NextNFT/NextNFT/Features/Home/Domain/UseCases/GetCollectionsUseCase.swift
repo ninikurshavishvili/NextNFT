@@ -10,9 +10,7 @@
 //1
 
 import Foundation
-// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
-// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
-// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
+
 class GetCollectionsUseCase {
     private let repository: HomeRepositoryProtocol
     
