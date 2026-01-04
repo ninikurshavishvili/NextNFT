@@ -20,22 +20,22 @@ class GetCollectionsUseCase {
     }
     
     func execute() async throws -> [NFTCollection] {
-        let collections = try await repository.getCollections()
-        
-        // JUST KEEP EVERYTHING for now, but sort them
-        return collections.sorted { $0.name < $1.name }
+        let collections: [NFTCollection] = try await repository.getCollections()
+
+        return collections
+            .filter { collection in
+                let hasImage = !(collection.imageURL?.isEmpty ?? true)
+                let hasBanner = !(collection.bannerImageURL?.isEmpty ?? true)
+                let hasDescription = !(collection.description?.isEmpty ?? true)
+
+                return hasImage && hasBanner && hasDescription
+            }
+
+            .prefix(12)
+            .map { $0 }
     }
+
+
 }
 
-// Features/Home/Domain/UseCases/GetNFTsUseCase.swift
-class GetNFTsUseCase {
-    private let repository: HomeRepositoryProtocol
-    
-    init(repository: HomeRepositoryProtocol = HomeRepository()) {
-        self.repository = repository
-    }
-    
-    func execute(for collectionSlug: String) async throws -> [NFT] {
-        return try await repository.getNFTs(for: collectionSlug)
-    }
-}
+
