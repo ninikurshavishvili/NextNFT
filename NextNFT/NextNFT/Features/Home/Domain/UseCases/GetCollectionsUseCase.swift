@@ -11,6 +11,7 @@
 
 import Foundation
 
+// Features/Home/Domain/UseCases/GetCollectionsUseCase.swift
 class GetCollectionsUseCase {
     private let repository: HomeRepositoryProtocol
     
@@ -19,7 +20,10 @@ class GetCollectionsUseCase {
     }
     
     func execute() async throws -> [NFTCollection] {
-        try await repository.getCollections()
+        let collections = try await repository.getCollections()
+        
+        // JUST KEEP EVERYTHING for now, but sort them
+        return collections.sorted { $0.name < $1.name }
     }
 }
 
