@@ -24,15 +24,17 @@ struct SearchHeaderView: View {
 
             HStack() {
                 Image(systemName: "diamond.fill")
-//                    .padding(2)
+                    .padding()
                     .background(.white)
-                    .clipShape(RoundedCorner(radius: 30))
+                    .clipShape(RoundedCorner(radius: 16))
                 Text(balance)
                     .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal)
             }
-            .padding(10)
+
             .background(Color(.systemGray5).opacity(0.15))
-            .cornerRadius(14)
+            .cornerRadius(16)
         }
         .font(.title2.bold())
     }
