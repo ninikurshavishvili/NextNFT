@@ -36,7 +36,7 @@ struct SearchPageView: View {
             .padding(.horizontal)
             .padding(.bottom, 32)
         }
-        .background(Color.black.ignoresSafeArea())
+        .background(AppColors.darkBackground.ignoresSafeArea())
     }
 }
 
@@ -63,7 +63,11 @@ struct SearchBarView: View {
                 .foregroundColor(.white)
         }
         .padding()
-        .background(Color(.systemGray5).opacity(0.15))
+        .background(AppColors.lightGrey)
         .cornerRadius(16)
     }
+}
+
+#Preview {
+    SearchPageView()
 }

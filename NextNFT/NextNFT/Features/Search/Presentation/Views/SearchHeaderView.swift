@@ -12,17 +12,19 @@ struct SearchHeaderView: View {
 
     var body: some View {
         HStack {
-            VStack {
-                Text("Explore ")
-                    .foregroundColor(.white)
-                + Text("NFT ")
-                    .foregroundColor(.mainPurple)
-                + Text("Collections ")
-                    .foregroundColor(.white)
-                + Text("or Creators")
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Explore ")
+                        .foregroundColor(.white)
+                    Text("NFT ")
+                        .foregroundColor(.mainPurple)
+                    Text("Collections ")
+                        .foregroundColor(.white)
+                }
+                Text("or Creators")
                     .foregroundColor(.white)
             }
-            .font(.system(.title2, design: .serif, weight: .bold))
+            .font(.system(.title3, design: .serif, weight: .bold))
 
 
             Spacer()
@@ -32,18 +34,18 @@ struct SearchHeaderView: View {
                     .resizable()
                     .frame(width: 16, height: 26)
                     .foregroundStyle(AppColors.darkBackground)
-                    .padding()
+                    .padding(6)
                     .background(.white)
-                    .clipShape(RoundedCorner(radius: 16))
+                    .clipShape(RoundedCorner(radius: 12))
                 Text(balance)
                     .fontWeight(.semibold)
                     .foregroundStyle(.white)
             }
 
             .background(Color(.systemGray5).opacity(0.15))
-            .cornerRadius(16)
+            .cornerRadius(12)
         }
-        .font(.title2.bold())
+        .font(.title3.bold())
     }
 }
 
