@@ -24,7 +24,7 @@ struct SearchHeaderView: View {
                 Text("or Creators")
                     .foregroundColor(.white)
             }
-            .font(.system(.title3, design: .serif, weight: .bold))
+            .font(.system(.callout, design: .serif, weight: .bold))
 
 
             Spacer()
@@ -34,7 +34,7 @@ struct SearchHeaderView: View {
                     .resizable()
                     .frame(width: 16, height: 26)
                     .foregroundStyle(AppColors.darkBackground)
-                    .padding(6)
+                    .padding( )
                     .background(.white)
                     .clipShape(RoundedCorner(radius: 12))
                 Text(balance)
