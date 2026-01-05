@@ -33,3 +33,7 @@ func sectionHeader(_ title: String) -> some View {
             .foregroundColor(.gray)
     }
 }
+
+#Preview {
+    ActionButton(title: "mm", icon: "heart")
+}

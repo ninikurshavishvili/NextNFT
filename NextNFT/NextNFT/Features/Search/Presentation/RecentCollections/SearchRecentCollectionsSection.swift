@@ -16,8 +16,7 @@ struct SearchRecentCollectionsSection: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     Text("NEED TO FIX THIS PART")
-//                    ForEach() { collection in
-//                        NFTCollectionCardView(collection: collection)
+//                    ForEach() {
 //                    }
                 }
             }
