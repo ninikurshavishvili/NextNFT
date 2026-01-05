@@ -15,14 +15,18 @@ struct SearchHeaderView: View {
             Text("Explore ")
                 .foregroundColor(.white)
             + Text("NFT")
-                .foregroundColor(.blue)
+                .foregroundColor(.mainPurple)
             + Text(" Collections\nor Creators")
                 .foregroundColor(.white)
+                .font(.system(.title2, design: .serif, weight: .bold))
 
             Spacer()
 
-            HStack(spacing: 8) {
+            HStack() {
                 Image(systemName: "diamond.fill")
+//                    .padding(2)
+                    .background(.white)
+                    .clipShape(RoundedCorner(radius: 30))
                 Text(balance)
                     .fontWeight(.semibold)
             }
@@ -32,4 +36,9 @@ struct SearchHeaderView: View {
         }
         .font(.title2.bold())
     }
+}
+
+#Preview {
+    SearchHeaderView(balance: "43.22")
+        .background(AppColors.darkBackground)
 }
