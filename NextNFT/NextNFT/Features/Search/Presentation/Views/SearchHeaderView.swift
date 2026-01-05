@@ -23,7 +23,10 @@ struct SearchHeaderView: View {
             Spacer()
 
             HStack() {
-                Image(systemName: "diamond.fill")
+                Image("etherium")
+                    .resizable()
+                    .frame(width: 16, height: 26)
+                    .foregroundStyle(AppColors.darkBackground)
                     .padding()
                     .background(.white)
                     .clipShape(RoundedCorner(radius: 16))
