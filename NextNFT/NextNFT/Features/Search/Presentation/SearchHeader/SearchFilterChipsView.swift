@@ -17,6 +17,10 @@ struct SearchFilterChipsView: View {
             chip("Trending", .nfts)
             chip("Top Art", .collections)
         }
+            .padding(4)
+            .background(AppColors.lightGrey.opacity(0.3))
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .padding(.horizontal)
     }
 
     func chip(_ title: String, _ type: SearchType) -> some View {
@@ -35,3 +39,4 @@ struct SearchFilterChipsView: View {
         }
     }
 }
+

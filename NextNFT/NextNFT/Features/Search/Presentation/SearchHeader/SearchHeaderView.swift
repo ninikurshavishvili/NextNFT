@@ -34,7 +34,7 @@ struct SearchHeaderView: View {
                     .resizable()
                     .frame(width: 16, height: 26)
                     .foregroundStyle(AppColors.darkBackground)
-                    .padding( )
+                    .padding()
                     .background(.white)
                     .clipShape(RoundedCorner(radius: 12))
                 Text(balance)
