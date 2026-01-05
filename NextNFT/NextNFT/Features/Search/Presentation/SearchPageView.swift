@@ -55,7 +55,7 @@ struct SearchBarView: View {
             if !text.isEmpty {
                 Button(action: onClear) {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(AppColors.lightGrey.opacity(0.3))
                 }
             }
 
