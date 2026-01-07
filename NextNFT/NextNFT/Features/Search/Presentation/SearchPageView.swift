@@ -27,9 +27,12 @@ struct SearchPageView: View {
                 )
 
                 if viewModel.searchText.isEmpty {
-                    SearchRecentCollectionsSection()
+                    SearchRecentCollectionsSection(
+                        collections: viewModel.collections
+                    )
                     SearchTopSearchSection()
-                } else {
+                }
+                else {
                 }
             }
             .padding(.horizontal)
@@ -38,6 +41,7 @@ struct SearchPageView: View {
         .background(AppColors.darkBackground.ignoresSafeArea())
     }
 }
+
 
 
 #Preview {
