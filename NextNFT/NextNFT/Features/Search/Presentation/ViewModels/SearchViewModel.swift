@@ -14,6 +14,8 @@ final class SearchViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var collections: [NFTCollection] = []
     @Published var nfts: [NFT] = []
+    @Published var recentCollections: [NFTCollection] = []
+
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var searchType: SearchType = .collections
@@ -33,6 +35,7 @@ final class SearchViewModel: ObservableObject {
         self.searchNFTsUseCase = searchNFTsUseCase
         
         setupSearchDebouncing()
+        loadRecentCollections()
     }
     
     // MARK: - Public Methods
@@ -102,6 +105,24 @@ final class SearchViewModel: ObservableObject {
         collections = []
         nfts = []
     }
+    private func loadRecentCollections() {
+        // TEMP: mock data (later replace with cache / API)
+        recentCollections = [
+            NFTCollection(
+                collection: "impostors-genesis",
+                name: "Impostors Genesis",
+                description: nil,
+                imageURL: "https://picsum.photos/400",
+                bannerImageURL: nil,
+                owner: nil,
+                category: nil,
+                openseaURL: nil,
+                totalSupply: nil,
+                createdDate: nil
+            )
+        ]
+    }
+
 }
 
 // MARK: - Search Type
