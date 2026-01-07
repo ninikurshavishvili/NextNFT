@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//MARK: - fix Recent Collection Section
 struct SearchRecentCollectionsSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
