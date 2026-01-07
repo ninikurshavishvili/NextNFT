@@ -14,6 +14,7 @@
 		149D5ED62E5CBBCE00F1730F /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 149D5ED52E5CBBCE00F1730F /* FirebaseAppCheck */; };
 		14A84A882F0E70BE008D79C4 /* RecentCollectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A84A872F0E70BC008D79C4 /* RecentCollectionCardView.swift */; };
 		14A84A8A2F0E7253008D79C4 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A84A892F0E7252008D79C4 /* SearchBarView.swift */; };
+		14A84A8C2F0EB2E1008D79C4 /* FetchRecentCollectionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A84A8B2F0EB2D9008D79C4 /* FetchRecentCollectionsUseCase.swift */; };
 		14BA7DE42E610055009B013D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 14BA7DE32E610055009B013D /* FirebaseCore */; };
 		14C0FCBE2E61E97000F0CBE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 14C0FCBD2E61E97000F0CBE7 /* FirebaseDatabase */; };
 		14C0FCC12E61EDA800F0CBE7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 14C0FCC02E61EDA800F0CBE7 /* Algorithms */; };
@@ -88,6 +89,7 @@
 		1488C12F2E24063F005FD00C /* NextNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A84A872F0E70BC008D79C4 /* RecentCollectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCollectionCardView.swift; sourceTree = "<group>"; };
 		14A84A892F0E7252008D79C4 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		14A84A8B2F0EB2D9008D79C4 /* FetchRecentCollectionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentCollectionsUseCase.swift; sourceTree = "<group>"; };
 		14FC0C5D2F0C595A0096D380 /* NextNFTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextNFTApp.swift; sourceTree = "<group>"; };
 		14FC0C602F0C595A0096D380 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		14FC0C612F0C595A0096D380 /* CustomButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonModifier.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		14FC0C8C2F0C595A0096D380 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				14A84A8B2F0EB2D9008D79C4 /* FetchRecentCollectionsUseCase.swift */,
 				14FC0C8A2F0C595A0096D380 /* SearchCollectionsUseCase.swift */,
 				14FC0C8B2F0C595A0096D380 /* SearchNFTsUseCase.swift */,
 			);
@@ -754,6 +757,7 @@
 				14A84A882F0E70BE008D79C4 /* RecentCollectionCardView.swift in Sources */,
 				14FC0CDF2F0C595A0096D380 /* RoundedCorner.swift in Sources */,
 				14FC0CE02F0C595A0096D380 /* TabbedItems.swift in Sources */,
+				14A84A8C2F0EB2E1008D79C4 /* FetchRecentCollectionsUseCase.swift in Sources */,
 				14FC0CE12F0C595A0096D380 /* Endpoint.swift in Sources */,
 				14FC0CE22F0C595A0096D380 /* HTTPMethod.swift in Sources */,
 				14FC0CE32F0C595A0096D380 /* NetworkService.swift in Sources */,
