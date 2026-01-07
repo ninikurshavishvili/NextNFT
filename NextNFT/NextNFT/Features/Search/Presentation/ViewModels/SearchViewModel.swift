@@ -29,13 +29,18 @@ final class SearchViewModel: ObservableObject {
     // MARK: - Initialization
     init(
         searchCollectionsUseCase: SearchCollectionsUseCase = SearchCollectionsUseCase(),
-        searchNFTsUseCase: SearchNFTsUseCase = SearchNFTsUseCase()
+        searchNFTsUseCase: SearchNFTsUseCase = SearchNFTsUseCase(),
+        fetchRecentCollectionsUseCase: FetchRecentCollectionsUseCase = FetchRecentCollectionsUseCase()
     ) {
         self.searchCollectionsUseCase = searchCollectionsUseCase
         self.searchNFTsUseCase = searchNFTsUseCase
-        
+        self.fetchRecentCollectionsUseCase = fetchRecentCollectionsUseCase
+
         setupSearchDebouncing()
-        loadRecentCollections()
+
+        Task {
+            await loadRecentCollections()
+        }
     }
     
     // MARK: - Public Methods
