@@ -24,3 +24,6 @@ struct SearchRecentCollectionsSection: View {
     }
 }
 
+#Preview {
+    SearchRecentCollectionsSection()
+}
