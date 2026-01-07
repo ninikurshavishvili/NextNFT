@@ -28,10 +28,11 @@ struct SearchPageView: View {
 
                 if viewModel.searchText.isEmpty {
                     SearchRecentCollectionsSection(
-                        collections: viewModel.collections
+                        collections: viewModel.recentCollections
                     )
                     SearchTopSearchSection()
                 }
+
                 else {
                 }
             }
