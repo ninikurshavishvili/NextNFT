@@ -11,3 +11,14 @@ protocol SearchRepositoryProtocol {
 }
 
 
+// SearchRepositoryProtocol.swift
+//protocol SearchRepositoryProtocol {
+//    func searchCollections(query: String) async throws -> [NFTCollection]
+//    func searchNFTs(query: String) async throws -> [NFT]
+//}
+
+// SearchCollectionsUseCase.swift
+
+
+// SearchViewModel.swift
+// Uses SearchCollectionsUseCase for search results
