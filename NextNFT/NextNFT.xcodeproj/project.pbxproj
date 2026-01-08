@@ -72,6 +72,7 @@
 		14FC0CEF2F0C595A0096D380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14FC0CB42F0C595A0096D380 /* Assets.xcassets */; };
 		14FC0CF02F0C595A0096D380 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC0CB52F0C595A0096D380 /* Storyboard.storyboard */; };
 		14FC0CF12F0C595A0096D380 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14FC0CBA2F0C595A0096D380 /* GoogleService-Info.plist */; };
+		14FD13A22F0FAE05003A7C8D /* FetchRecentCollectionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		14FC0CB52F0C595A0096D380 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		14FC0CB92F0C595A0096D380 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		14FC0CBA2F0C595A0096D380 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentCollectionsUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -388,6 +390,7 @@
 		14FC0C8C2F0C595A0096D380 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */,
 				14A84A8B2F0EB2D9008D79C4 /* SearchRecentCollectionsUseCase.swift */,
 				14FC0C8A2F0C595A0096D380 /* SearchCollectionsUseCase.swift */,
 				14FC0C8B2F0C595A0096D380 /* SearchNFTsUseCase.swift */,
@@ -771,6 +774,7 @@
 				14FC0CEB2F0C595A0096D380 /* CollectionsResponseDTO.swift in Sources */,
 				14FC0CEC2F0C595A0096D380 /* NFTResponseDTO.swift in Sources */,
 				14FC0CED2F0C595A0096D380 /* NetworkManager.swift in Sources */,
+				14FD13A22F0FAE05003A7C8D /* FetchRecentCollectionsUseCase.swift in Sources */,
 				14FC0CEE2F0C595A0096D380 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
