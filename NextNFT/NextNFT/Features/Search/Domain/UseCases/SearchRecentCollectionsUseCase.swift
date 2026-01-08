@@ -27,3 +27,17 @@ final class SearchRecentCollectionsUseCase {
         try await repository.searchCollections(query: "")
     }
 }
+
+// Features/Search/Domain/UseCases/FetchRecentCollectionsUseCase.swift
+final class FetchRecentCollectionsUseCase {
+    private let repository: HomeRepositoryProtocol  // Uses HomeRepository to get collections
+
+    init(repository: HomeRepositoryProtocol = HomeRepository()) {
+        self.repository = repository
+    }
+
+    func execute() async throws -> [NFTCollection] {
+        // This gets recent collections from the Home repository
+        return try await repository.getCollections()
+    }
+}
