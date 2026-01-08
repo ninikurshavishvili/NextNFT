@@ -15,14 +15,17 @@ final class SearchViewModel: ObservableObject {
     @Published var collections: [NFTCollection] = []
     @Published var nfts: [NFT] = []
     @Published var recentCollections: [NFTCollection] = []
-
+    
     @Published var isLoading = false
+    @Published var isLoadingRecent = false
     @Published var errorMessage: String?
+    @Published var recentErrorMessage: String?
     @Published var searchType: SearchType = .collections
     
     // MARK: - Private Properties
     private let searchCollectionsUseCase: SearchCollectionsUseCase
     private let searchNFTsUseCase: SearchNFTsUseCase
+    private let fetchRecentCollectionsUseCase: FetchRecentCollectionsUseCase
     private var searchTask: Task<Void, Never>?
     private var cancellables = Set<AnyCancellable>()
     
@@ -35,9 +38,9 @@ final class SearchViewModel: ObservableObject {
         self.searchCollectionsUseCase = searchCollectionsUseCase
         self.searchNFTsUseCase = searchNFTsUseCase
         self.fetchRecentCollectionsUseCase = fetchRecentCollectionsUseCase
-
+        
         setupSearchDebouncing()
-
+        
         Task {
             await loadRecentCollections()
         }
@@ -47,6 +50,7 @@ final class SearchViewModel: ObservableObject {
     func performSearch() async {
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             clearResults()
+            // Don't reload recent collections here - they're already loaded on init
             return
         }
         
@@ -81,6 +85,10 @@ final class SearchViewModel: ObservableObject {
         }
     }
     
+    func refreshRecentCollections() async {
+        await loadRecentCollections()
+    }
+    
     // MARK: - Private Methods
     private func setupSearchDebouncing() {
         $searchText
@@ -105,29 +113,91 @@ final class SearchViewModel: ObservableObject {
     }
     
     private func handleError(_ error: Error) {
-        errorMessage = error.localizedDescription
-        print("Search error: \(error)")
+        errorMessage = "Search failed: \(error.localizedDescription)"
         collections = []
         nfts = []
     }
-    private func loadRecentCollections() {
-        // TEMP: mock data (later replace with cache / API)
-        recentCollections = [
+    
+    private func loadRecentCollections() async {
+        isLoadingRecent = true
+        recentErrorMessage = nil
+        
+        do {
+            // Use the FetchRecentCollectionsUseCase to get recent collections
+            recentCollections = try await fetchRecentCollectionsUseCase.execute()
+        } catch {
+            recentErrorMessage = "Failed to load recent collections: \(error.localizedDescription)"
+            // Fallback to mock data for development
+            recentCollections = getMockRecentCollections()
+        }
+        
+        isLoadingRecent = false
+    }
+    
+    private func getMockRecentCollections() -> [NFTCollection] {
+        return [
             NFTCollection(
                 collection: "impostors-genesis",
                 name: "Impostors Genesis",
-                description: nil,
+                description: "A collection of genesis impostors",
                 imageURL: "https://picsum.photos/400",
                 bannerImageURL: nil,
                 owner: nil,
-                category: nil,
+                category: "art",
                 openseaURL: nil,
-                totalSupply: nil,
+                totalSupply: 10000,
+                createdDate: nil
+            ),
+            NFTCollection(
+                collection: "boredapeyachtclub",
+                name: "Bored Ape Yacht Club",
+                description: "10,000 unique Bored Ape NFTs",
+                imageURL: "https://picsum.photos/401",
+                bannerImageURL: nil,
+                owner: nil,
+                category: "pfp",
+                openseaURL: nil,
+                totalSupply: 10000,
+                createdDate: nil
+            ),
+            NFTCollection(
+                collection: "cryptopunks",
+                name: "CryptoPunks",
+                description: "10,000 unique collectible characters",
+                imageURL: "https://picsum.photos/402",
+                bannerImageURL: nil,
+                owner: nil,
+                category: "pfp",
+                openseaURL: nil,
+                totalSupply: 10000,
+                createdDate: nil
+            ),
+            NFTCollection(
+                collection: "doodles-official",
+                name: "Doodles",
+                description: "A community-driven collectibles project",
+                imageURL: "https://picsum.photos/403",
+                bannerImageURL: nil,
+                owner: nil,
+                category: "art",
+                openseaURL: nil,
+                totalSupply: 10000,
+                createdDate: nil
+            ),
+            NFTCollection(
+                collection: "clonex",
+                name: "CLONE X - X TAKASHI MURAKAMI",
+                description: "20,000 next-gen Avatars",
+                imageURL: "https://picsum.photos/404",
+                bannerImageURL: nil,
+                owner: nil,
+                category: "pfp",
+                openseaURL: nil,
+                totalSupply: 20000,
                 createdDate: nil
             )
         ]
     }
-
 }
 
 // MARK: - Search Type
@@ -141,6 +211,15 @@ enum SearchType {
             return "Collections"
         case .nfts:
             return "NFTs"
+        }
+    }
+    
+    var systemImage: String {
+        switch self {
+        case .collections:
+            return "square.grid.2x2"
+        case .nfts:
+            return "photo"
         }
     }
 }
