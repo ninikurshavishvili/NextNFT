@@ -7,8 +7,7 @@
 
 import SwiftUI
 //MARK: - NEED changes
-//test
-//kjjj
+
 
 struct SearchFilterChipsView: View {
     let selected: SearchType
