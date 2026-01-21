@@ -8,8 +8,9 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
 ## Preview
 
 <p align="center">
-  <img src="assets/search.png" width="300" />
-  <img src="assets/collections.png" width="300" />
+  <img src="NextNFT/NextNFT/Assets/Start.png" width="260" />
+  <img src="NextNFT/NextNFT/Assets/Profile(Users Collection).png" width="280" />
+  <img src="NextNFT/NextNFT/Assets/Home.png" width="260" />
 </p>
 
 ---
