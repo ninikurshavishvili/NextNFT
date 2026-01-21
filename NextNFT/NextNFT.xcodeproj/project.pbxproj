@@ -154,6 +154,11 @@
 			path = NextNFTTests;
 			sourceTree = "<group>";
 		};
+		14A672D72F2143CA00B7B599 /* Assets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Assets;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +583,7 @@
 		14FC0CBB2F0C595A0096D380 /* NextNFT */ = {
 			isa = PBXGroup;
 			children = (
+				14A672D72F2143CA00B7B599 /* Assets */,
 				14FC0C5E2F0C595A0096D380 /* App */,
 				14FC0C5F2F0C595A0096D380 /* Core */,
 				14FC0C632F0C595A0096D380 /* Extensions */,
@@ -630,6 +636,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				14A672D72F2143CA00B7B599 /* Assets */,
 			);
 			name = NextNFT;
 			packageProductDependencies = (
