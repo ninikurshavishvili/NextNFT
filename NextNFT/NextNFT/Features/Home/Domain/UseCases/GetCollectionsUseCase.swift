@@ -7,6 +7,7 @@
 
 
 //TODO: - need to filter NFTs
+//TODO: - Fixes: tranding Collection section
 
 import Foundation
 
