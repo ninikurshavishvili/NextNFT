@@ -19,59 +19,94 @@ class GetCollectionsUseCase {
     }
     
     func execute() async throws -> [NFTCollection] {
-        let collections: [NFTCollection] = try await repository.getCollections()
+        let collections = try await repository.getCollections()
         
-        // Filter collections that likely have NFTs based on metadata
-        let promisingCollections = collections
+        // Initial filtering (fast, local only)
+        let promisingCollections = filterPromisingCollections(collections)
+        
+        // Check for NFTs in parallel
+        let collectionsWithNFTs = await checkCollectionsForNFTs(promisingCollections)
+        
+        return Array(collectionsWithNFTs.prefix(10))
+    }
+    
+    private func filterPromisingCollections(_ collections: [NFTCollection]) -> [NFTCollection] {
+        collections
             .filter { collection in
-                // Collections with these traits usually have NFTs
-                let hasImage = !(collection.imageURL?.isEmpty ?? true)
-                let hasDescription = !(collection.description?.isEmpty ?? true)
-                let hasOpenseaURL = !(collection.openseaURL?.isEmpty ?? true)
+                // Basic validation
+                let hasValidImage = (collection.imageURL?.isEmpty == false)
+                let hasValidName = !collection.name.isEmpty
+                let hasValidSlug = !collection.collection.isEmpty
                 
-                // Check for popular collection keywords in name/description
-                let name = collection.name.lowercased()
-                let description = collection.description?.lowercased() ?? ""
+                // Score-based popularity detection
+                let popularityScore = calculatePopularityScore(for: collection)
                 
-                let isPopular = name.contains("ape") ||
-                               name.contains("punk") ||
-                               name.contains("azuki") ||
-                               name.contains("doodle") ||
-                               name.contains("clone") ||
-                               name.contains("penguin") ||
-                               name.contains("cat") ||
-                               name.contains("dog") ||
-                               name.contains("alien") ||
-                               name.contains("goblin") ||
-                               name.contains("god") ||
-                               name.contains("bird") ||
-                               description.contains("nft") ||
-                               description.contains("collection") ||
-                               description.contains("token")
-                
-                return hasImage && hasDescription && hasOpenseaURL && isPopular
+                return hasValidImage && hasValidName && hasValidSlug && popularityScore > 0.3
             }
-            .prefix(20) // Check more initially
+            .sorted { lhs, rhs in
+                // Sort by potential popularity
+                calculatePopularityScore(for: lhs) > calculatePopularityScore(for: rhs)
+            }
+//            .prefix(15) // Limit for parallel checking
+    }
+    
+    private func calculatePopularityScore(for collection: NFTCollection) -> Double {
+        var score: Double = 0
         
-        var collectionsWithNFTs: [NFTCollection] = []
+        // Check name for popular keywords (with weights)
+        let name = collection.name.lowercased()
+        let popularKeywords: [(String, Double)] = [
+            ("ape", 0.8), ("punk", 0.9), ("azuki", 0.7),
+            ("doodle", 0.7), ("cat", 0.3), ("dog", 0.3),
+            ("alien", 0.5), ("god", 0.6), ("bird", 0.3)
+        ]
         
-        for collection in promisingCollections.prefix(8) {
-            do {
-                let nfts = try await repository.getNFTs(for: collection.collection)
-                if nfts.count >= 5 {
-                    collectionsWithNFTs.append(collection)
-                    
-                    if collectionsWithNFTs.count >= 10 {
-                        break
-                    }
-                }
-            } catch {
-                continue
+        for (keyword, weight) in popularKeywords {
+            if name.contains(keyword) {
+                score += weight
             }
         }
         
-        return collectionsWithNFTs
+        // Bonus for having metadata
+        if collection.description?.isEmpty == false { score += 0.2 }
+        if collection.openseaURL?.isEmpty == false { score += 0.2 }
+        if collection.totalSupply ?? 0 > 100 { score += 0.3 }
+        
+        return min(score, 1.0)
+    }
+    
+    private func checkCollectionsForNFTs(_ collections: [NFTCollection]) async -> [NFTCollection] {
+        await withTaskGroup(of: (NFTCollection, Bool).self) { group in
+            var validCollections: [NFTCollection] = []
+            
+            // Start all checks in parallel
+            for collection in collections {
+                group.addTask {
+                    do {
+                        let nfts = try await self.repository.getNFTs(for: collection.collection)
+                        let hasEnoughNFTs = nfts.count >= 3
+                        return (collection, hasEnoughNFTs)
+                    } catch {
+                        return (collection, false)
+                    }
+                }
+            }
+            
+            // Collect results as they complete
+            for await (collection, hasNFTs) in group {
+                if hasNFTs {
+                    validCollections.append(collection)
+                }
+                
+                // Early exit if we have enough
+                if validCollections.count >= 10 {
+                    group.cancelAll()
+                    break
+                }
+            }
+            
+            return validCollections
+        }
     }
 }
-
 
