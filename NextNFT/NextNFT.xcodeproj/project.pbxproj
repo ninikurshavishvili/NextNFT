@@ -74,6 +74,7 @@
 		14FD13A22F0FAE05003A7C8D /* FetchRecentCollectionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */; };
 		177EF9FB2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EF9FC2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
+		177EFA002F28D419002A0FF1 /* CustomNFTCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		14FC0CB92F0C595A0096D380 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentCollectionsUseCase.swift; sourceTree = "<group>"; };
 		177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNFTCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -326,6 +328,7 @@
 		14FC0C7F2F0C595A0096D380 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				177EF9FE2F28D3BC002A0FF1 /* CustomNFT */,
 				14FC0C722F0C595A0096D380 /* HomeHeader */,
 				14FC0C752F0C595A0096D380 /* LatestDrops */,
 				14FC0C7D2F0C595A0096D380 /* TrendingCollection */,
@@ -560,6 +563,14 @@
 			path = NextNFT;
 			sourceTree = "<group>";
 		};
+		177EF9FE2F28D3BC002A0FF1 /* CustomNFT */ = {
+			isa = PBXGroup;
+			children = (
+				177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */,
+			);
+			path = CustomNFT;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -721,6 +732,7 @@
 				14FC0CD52F0C595A0096D380 /* SearchCollectionsUseCase.swift in Sources */,
 				14FC0CD62F0C595A0096D380 /* SearchNFTsUseCase.swift in Sources */,
 				14FC0CD72F0C595A0096D380 /* SearchRecentCollectionsSection.swift in Sources */,
+				177EFA002F28D419002A0FF1 /* CustomNFTCardView.swift in Sources */,
 				14FC0CD82F0C595A0096D380 /* SearchFilterChipsView.swift in Sources */,
 				14FC0CD92F0C595A0096D380 /* SearchHeaderView.swift in Sources */,
 				14FC0CDA2F0C595A0096D380 /* ActionButton.swift in Sources */,
