@@ -8,9 +8,22 @@
 import SwiftUI
 
 struct CustomNFTCardView: View {
+    
     var body: some View {
-        ZStack {
-            
+        VStack {
+            Image("image")
+                .resizable()
+                .scaledToFit()
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+                .padding()
+
+            Text("Custom NFT")
+                .font(.title)
         }
     }
+}
+
+#Preview {
+    CustomNFTCardView()
 }
