@@ -65,7 +65,6 @@ struct CustomNFTCardView: View {
                         
                     }
                 }
-                
             }
         }
     }
