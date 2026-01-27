@@ -25,10 +25,12 @@ struct CustomNFTCardView: View {
                     .foregroundStyle(Color(.systemGray2))
                 Text("""
                     Released on June 9, 2017 by Larva Labs. This is the original ERC-20 token now tradable via a modern ERC-721 wrapper.
+                                        2017 by Larva Labs. This is the original ERC-20 token now tradable via a modern ERC-721 wrapper.2017 by Larva Labs. This is the original ERC-20 token now tradable via a modern ERC-721 wrapper.
                     """)
                 .font(.footnote .bold())
                 .foregroundStyle(.lightGrey)
                 .padding(.horizontal)
+                .lineLimit(3)
                 
                 Spacer()
                 
@@ -43,11 +45,13 @@ struct CustomNFTCardView: View {
                             .font(.headline)
                             .padding(.horizontal)
                             .foregroundStyle(Color(.systemGray2))
-                        VStack {
-                            Divider()
-                                .background(Color.white.opacity(0.2))
-                        }
+                        
                     }
+                    
+                    Rectangle()
+                        .fill(Color.black.opacity(0.2))
+                        .frame(width: 1, height: 32)
+
                 }
                 
             }
