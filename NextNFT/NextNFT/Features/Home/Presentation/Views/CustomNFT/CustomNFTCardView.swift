@@ -30,6 +30,26 @@ struct CustomNFTCardView: View {
                 .foregroundStyle(.lightGrey)
                 .padding(.horizontal)
                 
+                Spacer()
+                
+                HStack {
+                    VStack(alignment : .leading) {
+                        Text("Volume")
+                            .padding(.horizontal)
+                            .font(Font.caption.bold())
+                            .foregroundStyle(.darkGrey)
+                        
+                        Text("45.5K POL")
+                            .font(.headline)
+                            .padding(.horizontal)
+                            .foregroundStyle(Color(.systemGray2))
+                        VStack {
+                            Divider()
+                                .background(Color.white.opacity(0.2))
+                        }
+                    }
+                }
+                
             }
         }
     }
