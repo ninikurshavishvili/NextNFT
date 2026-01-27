@@ -51,7 +51,19 @@ struct CustomNFTCardView: View {
                     Rectangle()
                         .fill(Color.black.opacity(0.2))
                         .frame(width: 1, height: 32)
-
+                    
+                    VStack(alignment : .leading) {
+                        Text("floor")
+                            .padding(.horizontal)
+                            .font(Font.caption.bold())
+                            .foregroundStyle(.darkGrey)
+                        
+                        Text("--")
+                            .font(.headline)
+                            .padding(.horizontal)
+                            .foregroundStyle(Color(.systemGray2))
+                        
+                    }
                 }
                 
             }
