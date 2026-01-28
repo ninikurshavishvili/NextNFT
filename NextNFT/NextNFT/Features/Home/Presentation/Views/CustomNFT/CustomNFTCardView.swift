@@ -67,6 +67,9 @@ struct CustomNFTCardView: View {
                 }
             }
         }
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: .black.opacity(0.4), radius: 10, x: 0, y: 6)
+        .padding()
     }
 }
 
