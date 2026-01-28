@@ -10,9 +10,11 @@ import SwiftUI
 struct CustomNFTListView: View {
     var body : some View {
         
-        ScrollView {
-            ForEach(1...100, id: \.self) { i in
-                CustomNFTCardView()
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack {
+                ForEach(1...100, id: \.self) {_ in 
+                    CustomNFTCardView()
+                }
             }
         }
         .frame(width: 400, height: 200)
