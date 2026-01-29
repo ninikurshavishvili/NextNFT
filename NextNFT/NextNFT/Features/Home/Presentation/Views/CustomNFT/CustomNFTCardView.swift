@@ -33,8 +33,9 @@ Released on June 9, 2017 by Larva Labs. This is the original ERC-20 token now tr
                     .foregroundStyle(.lightGrey)
                     .lineLimit(3)
 
-                Spacer(minLength: 12)
+                Spacer(minLength: 60)
 
+                
                 HStack {
 
                     VStack(alignment: .leading, spacing: 4) {
@@ -69,7 +70,7 @@ Released on June 9, 2017 by Larva Labs. This is the original ERC-20 token now tr
             .padding(16)
             .background(AppColors.mainPurple)
         }
-        .frame(width: 260, height: 380)
+        .frame(width: 300, height: 500)
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .shadow(color: .black.opacity(0.4), radius: 10, x: 0, y: 6)
     }
