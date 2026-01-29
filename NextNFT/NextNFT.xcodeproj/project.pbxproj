@@ -75,7 +75,7 @@
 		177EF9FB2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EF9FC2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EFA002F28D419002A0FF1 /* CustomNFTCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */; };
-		17AFE13D2F2A4CC30015483D /* CustomNFTLisrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFE13C2F2A4CB20015483D /* CustomNFTLisrView.swift */; };
+		17AFE13D2F2A4CC30015483D /* NFTCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,7 +150,7 @@
 		14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentCollectionsUseCase.swift; sourceTree = "<group>"; };
 		177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNFTCardView.swift; sourceTree = "<group>"; };
-		17AFE13C2F2A4CB20015483D /* CustomNFTLisrView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNFTLisrView.swift; sourceTree = "<group>"; };
+		17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCarouselView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -568,7 +568,7 @@
 		177EF9FE2F28D3BC002A0FF1 /* CustomNFT */ = {
 			isa = PBXGroup;
 			children = (
-				17AFE13C2F2A4CB20015483D /* CustomNFTLisrView.swift */,
+				17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */,
 				177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */,
 			);
 			path = CustomNFT;
@@ -723,7 +723,7 @@
 				14FC0CC92F0C595A0096D380 /* CollectionCardVIew.swift in Sources */,
 				14FC0CCA2F0C595A0096D380 /* CollectionContainerListView.swift in Sources */,
 				14FC0CCB2F0C595A0096D380 /* CollectionContainerView.swift in Sources */,
-				17AFE13D2F2A4CC30015483D /* CustomNFTLisrView.swift in Sources */,
+				17AFE13D2F2A4CC30015483D /* NFTCarouselView.swift in Sources */,
 				14FC0CCC2F0C595A0096D380 /* CollectionInfoView.swift in Sources */,
 				14FC0CCD2F0C595A0096D380 /* CollectionListView.swift in Sources */,
 				14FC0CCE2F0C595A0096D380 /* CollectionProfileView.swift in Sources */,
