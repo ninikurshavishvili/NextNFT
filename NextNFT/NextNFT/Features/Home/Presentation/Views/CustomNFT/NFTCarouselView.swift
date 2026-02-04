@@ -37,11 +37,9 @@ struct NFTCarouselView: View {
             .font(.title3.weight(.semibold))
             .padding(.horizontal)
 
-            // Horizontal Scroll
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
 
-                    // Repeat cards
                     CustomNFTCardView()
                     CustomNFTCardView()
                     CustomNFTCardView()
