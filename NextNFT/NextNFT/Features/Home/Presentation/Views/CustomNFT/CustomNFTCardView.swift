@@ -17,7 +17,7 @@ struct CustomNFTCardView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(height: 240)
-                .clipped()
+                .cornerRadius(25)
 
             // MARK: - Content
             VStack(alignment: .leading, spacing: 12) {

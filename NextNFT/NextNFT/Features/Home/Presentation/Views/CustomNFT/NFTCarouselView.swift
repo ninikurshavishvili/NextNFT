@@ -54,5 +54,5 @@ struct NFTCarouselView: View {
 
 #Preview {
     NFTCarouselView()
-        .background(.black)
+        .background(.darkBackground)
 }
