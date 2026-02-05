@@ -40,9 +40,7 @@ struct NFTCarouselView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
 
-                    CustomNFTCardView()
-                    CustomNFTCardView()
-                    CustomNFTCardView()
+ 
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 12)

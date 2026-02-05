@@ -72,6 +72,8 @@
 		14FC0CEF2F0C595A0096D380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14FC0CB42F0C595A0096D380 /* Assets.xcassets */; };
 		14FC0CF02F0C595A0096D380 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14FC0CB52F0C595A0096D380 /* Storyboard.storyboard */; };
 		14FD13A22F0FAE05003A7C8D /* FetchRecentCollectionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */; };
+		1761B6A62F34B44A0097CADB /* ImageColorAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761B6A52F34B4430097CADB /* ImageColorAnalyzer.swift */; };
+		1761B6A82F34D11E0097CADB /* NFTCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761B6A72F34D11C0097CADB /* NFTCardViewModel.swift */; };
 		177EF9FB2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EF9FC2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EFA002F28D419002A0FF1 /* CustomNFTCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */; };
@@ -148,6 +150,8 @@
 		14FC0CB52F0C595A0096D380 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		14FC0CB92F0C595A0096D380 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		14FD13A12F0FAE03003A7C8D /* FetchRecentCollectionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentCollectionsUseCase.swift; sourceTree = "<group>"; };
+		1761B6A52F34B4430097CADB /* ImageColorAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorAnalyzer.swift; sourceTree = "<group>"; };
+		1761B6A72F34D11C0097CADB /* NFTCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCardViewModel.swift; sourceTree = "<group>"; };
 		177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNFTCardView.swift; sourceTree = "<group>"; };
 		17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCarouselView.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 		14FC0C622F0C595A0096D380 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1761B6A52F34B4430097CADB /* ImageColorAnalyzer.swift */,
 				14FC0C602F0C595A0096D380 /* AppColors.swift */,
 				14FC0C612F0C595A0096D380 /* CustomButtonModifier.swift */,
 			);
@@ -290,6 +295,7 @@
 		14FC0C702F0C595A0096D380 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				1761B6A72F34D11C0097CADB /* NFTCardViewModel.swift */,
 				14FC0C6E2F0C595A0096D380 /* CollectionNFTsViewModel.swift */,
 				14FC0C6F2F0C595A0096D380 /* HomeViewModel.swift */,
 			);
@@ -733,6 +739,7 @@
 				14FC0CD22F0C595A0096D380 /* SearchRepository.swift in Sources */,
 				14FC0CD32F0C595A0096D380 /* SearchRepositoryProtocol.swift in Sources */,
 				14FC0CD42F0C595A0096D380 /* OpenSeaRemoteDataSource.swift in Sources */,
+				1761B6A82F34D11E0097CADB /* NFTCardViewModel.swift in Sources */,
 				14FC0CD52F0C595A0096D380 /* SearchCollectionsUseCase.swift in Sources */,
 				14FC0CD62F0C595A0096D380 /* SearchNFTsUseCase.swift in Sources */,
 				14FC0CD72F0C595A0096D380 /* SearchRecentCollectionsSection.swift in Sources */,
@@ -741,6 +748,7 @@
 				14FC0CD92F0C595A0096D380 /* SearchHeaderView.swift in Sources */,
 				14FC0CDA2F0C595A0096D380 /* ActionButton.swift in Sources */,
 				14FC0CDB2F0C595A0096D380 /* NFTCollectionCardView.swift in Sources */,
+				1761B6A62F34B44A0097CADB /* ImageColorAnalyzer.swift in Sources */,
 				14FC0CDC2F0C595A0096D380 /* SearchTopSearchSection.swift in Sources */,
 				14FC0CDD2F0C595A0096D380 /* SearchViewModel.swift in Sources */,
 				14FC0CDE2F0C595A0096D380 /* SearchPageView.swift in Sources */,
