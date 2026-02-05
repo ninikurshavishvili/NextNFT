@@ -17,7 +17,7 @@ struct CustomNFTCardView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(height: 240)
-                .clipped()
+                .cornerRadius(8)
 
             // MARK: - Content
             VStack(alignment: .leading, spacing: 12) {
@@ -68,17 +68,15 @@ Released on June 9, 2017 by Larva Labs. This is the original ERC-20 token now tr
                 }
             }
             .padding(16)
-            .background(AppColors.mainPurple)
         }
         .frame(width: 300, height: 500)
-        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-        .shadow(color: .black.opacity(0.4), radius: 10, x: 0, y: 6)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 
 #Preview {
     ZStack {
-        Color.black.ignoresSafeArea()
         CustomNFTCardView()
+            .background(.darkBackground)
     }
 }

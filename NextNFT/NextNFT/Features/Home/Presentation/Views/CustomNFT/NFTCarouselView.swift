@@ -18,7 +18,7 @@ struct NFTCarouselView: View {
                 Text("Create a custom ")
                     .foregroundColor(.white)
                 + Text("NFT")
-                    .foregroundColor(.blue)
+                    .foregroundColor(.mainPurple)
                 + Text(" Marketplace for your community")
                     .foregroundColor(.white)
 
@@ -34,14 +34,12 @@ struct NFTCarouselView: View {
                         .clipShape(Circle())
                 }
             }
-            .font(.title3.weight(.semibold))
+            .font(.system(.title2, design: .serif, weight: .bold))
             .padding(.horizontal)
 
-            // Horizontal Scroll
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
 
-                    // Repeat cards
                     CustomNFTCardView()
                     CustomNFTCardView()
                     CustomNFTCardView()
@@ -56,4 +54,5 @@ struct NFTCarouselView: View {
 
 #Preview {
     NFTCarouselView()
+        .background(.darkBackground)
 }
