@@ -76,7 +76,7 @@ Released on June 9, 2017 by Larva Labs. This is the original ERC-20 token now tr
 
 #Preview {
     ZStack {
-        Color.black.ignoresSafeArea()
         CustomNFTCardView()
+            .background(.darkBackground)
     }
 }
