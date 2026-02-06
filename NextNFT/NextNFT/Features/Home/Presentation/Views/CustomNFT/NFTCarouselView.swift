@@ -13,7 +13,7 @@ struct NFTCarouselView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
 
-            // Header
+            // MARK: - Header
             HStack {
                 Text("Create a custom ")
                     .foregroundColor(.white)
