@@ -51,7 +51,7 @@ struct SearchRecentCollectionsSection: View {
                 collection: "impostors-genesis",
                 name: "Impostors Genesis",
                 description: nil,
-                imageURL: "https://picsum.photos/400",
+                imageURL: "https://proxy-imgs-cache.gametrade.market/cache/e151d3e360959f35ff21b5195aaaebd8-70-828",
                 bannerImageURL: nil,
                 owner: nil,
                 category: nil,

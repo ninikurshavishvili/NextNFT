@@ -9,10 +9,17 @@ import SwiftUI
 
 
 struct NFTCarouselView: View {
-
+    @ObservedObject var viewModel: NFTCarouselViewModel
+    let collectionSlug: String
+    
+    init(viewModel: NFTCarouselViewModel = NFTCarouselViewModel(),
+         collectionSlug: String = "cryptopunks") {
+        self.viewModel = viewModel
+        self.collectionSlug = collectionSlug
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-
             // MARK: - Header
             HStack {
                 Text("Create a custom ")
@@ -21,9 +28,9 @@ struct NFTCarouselView: View {
                     .foregroundColor(.mainPurple)
                 + Text(" Marketplace for your community")
                     .foregroundColor(.white)
-
+                
                 Spacer()
-
+                
                 Button {
                     // action later
                 } label: {
@@ -36,13 +43,39 @@ struct NFTCarouselView: View {
             }
             .font(.system(.title2, design: .serif, weight: .bold))
             .padding(.horizontal)
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 20) {
-                    CustomNFTCardView(imageName: "image")
+            
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .scaleEffect(1.2)
+                        .padding(.vertical, 40)
+                    Spacer()
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 12)
+            } else if let error = viewModel.errorMessage {
+                HStack {
+                    Spacer()
+                    Text("Failed to load NFTs: \(error)")
+                        .foregroundColor(.red)
+                        .padding()
+                    Spacer()
+                }
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(viewModel.nfts) { nft in
+                            CustomNFTCardView(nft: nft)
+                                .transition(.opacity)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 12)
+                }
+            }
+        }
+        .task {
+            if viewModel.nfts.isEmpty {
+                await viewModel.loadNFTs(for: collectionSlug)
             }
         }
     }
