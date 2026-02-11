@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 
-
 final class NFTCarouselViewModel: ObservableObject {
     @Published var nfts: [NFT] = []
     @Published var isLoading = false
@@ -20,6 +19,7 @@ final class NFTCarouselViewModel: ObservableObject {
         self.getNFTsUseCase = getNFTsUseCase
     }
     
+    @MainActor
     func loadNFTs(for collectionSlug: String) async {
         isLoading = true
         errorMessage = nil

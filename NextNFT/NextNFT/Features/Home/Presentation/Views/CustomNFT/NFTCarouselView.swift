@@ -63,10 +63,13 @@ struct NFTCarouselView: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
-                        ForEach(viewModel.nfts) { nft in
-                            CustomNFTCardView(nft: nft)
-                                .transition(.opacity)
-                        }
+
+                        // FIXME: 
+//                        ForEach(viewModel.nfts) {
+//                            
+//                            
+//                            
+//                        }
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 12)
