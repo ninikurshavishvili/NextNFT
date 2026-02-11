@@ -28,15 +28,16 @@ struct HomeView: View {
                     .foregroundStyle(.red)
                     .padding()
             }
+            NFTCarouselView()
         }
         .background(AppColors.darkBackground)
         .task {
-            // ✅ async-safe, correct lifecycle
             if viewModel.collections.isEmpty {
                 await viewModel.load()
             }
         }
+        
+        
     }
 }
-
 
