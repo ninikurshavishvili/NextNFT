@@ -20,6 +20,19 @@ struct CustomNFTCardView: View {
             )
         )
     }
+//    let nft: NFT
+//    let collection: NFTCollection
+//    @StateObject private var viewModel: NFTCardViewModel
+//    
+//    init(nft: NFT, collection: NFTCollection) {
+//        self.nft = nft
+//        self.collection = collection
+//        _viewModel = StateObject(
+//            wrappedValue: NFTCardViewModel(
+//                imageURL: nft.displayImageURL ?? nft.imageURL
+//            )
+//        )
+//    }
     
     var body: some View {
         VStack(spacing: 0) {

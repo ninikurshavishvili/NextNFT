@@ -12,6 +12,7 @@ final class NFTCarouselViewModel: ObservableObject {
     @Published var nfts: [NFT] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var collection: NFTCollection?
     
     private let getNFTsUseCase: GetNFTsUseCase
     
