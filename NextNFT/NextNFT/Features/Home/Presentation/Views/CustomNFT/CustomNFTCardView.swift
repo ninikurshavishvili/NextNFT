@@ -14,7 +14,7 @@ struct CustomNFTCardView: View {
     
     init(imageName: String) {
         self.imageName = imageName
-        _viewModel = StateObject(wrappedValue: NFTCardViewModel(imageName: imageName))
+        _viewModel = StateObject(wrappedValue: NFTCardViewModel(imageURL: imageName))
     }
     
     var body: some View {
