@@ -9,12 +9,15 @@ import SwiftUI
 
 
 struct NFTCarouselView: View {
-    @ObservedObject var viewModel: NFTCarouselViewModel
+    
+    @StateObject private var viewModel: NFTCarouselViewModel
     let collectionSlug: String
     
-    init(viewModel: NFTCarouselViewModel = NFTCarouselViewModel(),
-         collectionSlug: String = "cryptopunks") {
-        self.viewModel = viewModel
+    init(
+        viewModel: NFTCarouselViewModel = NFTCarouselViewModel(),
+        collectionSlug: String = "cryptopunks"
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel)
         self.collectionSlug = collectionSlug
     }
     
@@ -63,13 +66,9 @@ struct NFTCarouselView: View {
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
-
-                        // FIXME: 
-//                        ForEach(viewModel.nfts) {
-//                            
-//                            
-//                            
-//                        }
+                        ForEach(viewModel.nfts) { nft in
+                            CustomNFTCardView(nft: nft)
+                        }
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 12)

@@ -8,42 +8,47 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class NFTCardViewModel: ObservableObject {
+    
     @Published var backgroundColor: Color = AppColors.darkBackground
     @Published var isLoading = false
     
-    private let imageName: String
+    private let imageURL: String?
     
-    init(imageName: String) {
-        self.imageName = imageName
-        extractBackgroundColor()
+    init(imageURL: String?) {
+        self.imageURL = imageURL
+        Task {
+            await extractBackgroundColor()
+        }
     }
     
-    private func extractBackgroundColor() {
-        isLoading = true
-        
-        // In a real app, you might fetch from network
-        // For now, we'll use local images
-        guard let image = UIImage(named: imageName) else {
+    private func extractBackgroundColor() async {
+        guard let imageURL,
+              let url = URL(string: imageURL) else {
             backgroundColor = AppColors.darkBackground
-            isLoading = false
             return
         }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let dominantColor = ImageColorAnalyzer.getDominantColor(from: image) {
-                let darkerColor = ImageColorAnalyzer.darkenColor(dominantColor, by: 0.25) // 25% darker
+        isLoading = true
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            if let uiImage = UIImage(data: data),
+               let dominantColor = ImageColorAnalyzer.getDominantColor(from: uiImage) {
                 
-                DispatchQueue.main.async {
-                    self.backgroundColor = darkerColor
-                    self.isLoading = false
-                }
+                let darker = ImageColorAnalyzer.darkenColor(dominantColor, by: 0.25)
+                backgroundColor = darker
             } else {
-                DispatchQueue.main.async {
-                    self.backgroundColor = AppColors.darkBackground
-                    self.isLoading = false
-                }
+                backgroundColor = AppColors.darkBackground
             }
+            
+        } catch {
+            backgroundColor = AppColors.darkBackground
         }
+        
+        isLoading = false
     }
 }
+
