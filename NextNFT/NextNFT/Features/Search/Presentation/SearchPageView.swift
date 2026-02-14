@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//MARK: - NEW Fixes here
 struct SearchPageView: View {
     @StateObject private var viewModel = SearchViewModel()
 
