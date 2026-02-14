@@ -15,9 +15,14 @@ final class NFTCarouselViewModel: ObservableObject {
     @Published var collection: NFTCollection?
     
     private let getNFTsUseCase: GetNFTsUseCase
+    private let getCollectionsUseCase: GetCollectionsUseCase
     
-    init(getNFTsUseCase: GetNFTsUseCase = GetNFTsUseCase()) {
+    init(
+        getNFTsUseCase: GetNFTsUseCase = GetNFTsUseCase(),
+        getCollectionsUseCase: GetCollectionsUseCase = GetCollectionsUseCase()
+    ) {
         self.getNFTsUseCase = getNFTsUseCase
+        self.getCollectionsUseCase = getCollectionsUseCase
     }
     
     @MainActor
@@ -26,7 +31,16 @@ final class NFTCarouselViewModel: ObservableObject {
         errorMessage = nil
         
         do {
-            nfts = try await getNFTsUseCase.execute(for: collectionSlug)
+            // Load both NFTs and collection details in parallel
+            async let nftsTask = getNFTsUseCase.execute(for: collectionSlug)
+            async let collectionsTask = getCollectionsUseCase.execute()
+            
+            let (fetchedNFTs, allCollections) = try await (nftsTask, collectionsTask)
+            
+            // Find the specific collection
+            self.collection = allCollections.first { $0.collection == collectionSlug }
+            self.nfts = fetchedNFTs
+            
         } catch {
             errorMessage = error.localizedDescription
         }

@@ -13,11 +13,13 @@ final class CollectionNFTsViewModel: ObservableObject {
     @Published var nfts: [NFT] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var NFTcollection: [NFTCollection]
 
     private let getNFTsUseCase: GetNFTsUseCase
 
     init(getNFTsUseCase: GetNFTsUseCase = GetNFTsUseCase()) {
         self.getNFTsUseCase = getNFTsUseCase
+        self.
     }
 
     func load(collectionSlug: String) async {
