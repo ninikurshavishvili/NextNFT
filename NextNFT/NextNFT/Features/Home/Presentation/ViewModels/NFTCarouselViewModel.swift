@@ -41,17 +41,20 @@ final class NFTCarouselViewModel: ObservableObject {
             
             print("✅ Fetched \(fetchedNFTs.count) NFTs")
             
-            // Set collection (create fallback if nil)
+            // IMPORTANT: Set the NFTs first
+            self.nfts = fetchedNFTs
+            
+            // Then handle the collection
             if let fetchedCollection = fetchedCollection {
                 self.collection = fetchedCollection
                 print("✅ Found collection: \(fetchedCollection.name)")
             } else {
-                print("⚠️ Collection not found, creating fallback")
-                // Create a fallback collection with the slug
+                print("⚠️ Collection not found for slug: \(collectionSlug), using fallback")
+                // Create a fallback collection with the slug so cards still show
                 self.collection = NFTCollection(
                     collection: collectionSlug,
                     name: collectionSlug.replacingOccurrences(of: "-", with: " ").capitalized,
-                    description: "Collection description",
+                    description: "Part of the \(collectionSlug.replacingOccurrences(of: "-", with: " ")) collection",
                     imageURL: nil,
                     bannerImageURL: nil,
                     owner: nil,
@@ -62,7 +65,10 @@ final class NFTCarouselViewModel: ObservableObject {
                 )
             }
             
-            self.nfts = fetchedNFTs
+            // Verify we have everything
+            if fetchedNFTs.isEmpty {
+                print("⚠️ No NFTs returned for this collection")
+            }
             
         } catch {
             self.errorMessage = error.localizedDescription
