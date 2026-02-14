@@ -65,7 +65,6 @@ final class NFTCarouselViewModel: ObservableObject {
                 )
             }
             
-            // Verify we have everything
             if fetchedNFTs.isEmpty {
                 print("⚠️ No NFTs returned for this collection")
             }
