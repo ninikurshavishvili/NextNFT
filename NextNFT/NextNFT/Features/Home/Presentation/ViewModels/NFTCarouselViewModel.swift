@@ -30,19 +30,37 @@ final class NFTCarouselViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         
+        print("🔄 Loading NFTs for collection: \(collectionSlug)")
+        
         do {
-            // Load both NFTs and collection details in parallel
+            // Load both NFTs and collections in parallel
             async let nftsTask = getNFTsUseCase.execute(for: collectionSlug)
             async let collectionsTask = getCollectionsUseCase.execute()
             
             let (fetchedNFTs, allCollections) = try await (nftsTask, collectionsTask)
             
+            print("✅ Fetched \(fetchedNFTs.count) NFTs")
+            print("✅ Fetched \(allCollections.count) collections")
+            
             // Find the specific collection
             self.collection = allCollections.first { $0.collection == collectionSlug }
+            
+            if self.collection != nil {
+                print("✅ Found collection: \(self.collection?.name ?? "unknown")")
+            } else {
+                print("❌ Collection not found with slug: \(collectionSlug)")
+                print("Available collections: \(allCollections.map { $0.collection })")
+            }
+            
             self.nfts = fetchedNFTs
             
+            if fetchedNFTs.isEmpty {
+                print("⚠️ No NFTs returned for this collection")
+            }
+            
         } catch {
-            errorMessage = error.localizedDescription
+            self.errorMessage = error.localizedDescription
+            print("❌ Error loading NFTs: \(error)")
         }
         
         isLoading = false
