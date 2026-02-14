@@ -13,27 +13,25 @@ struct SearchPageView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-
                 SearchHeaderView(balance: "42.80")
-
+                
                 SearchBarView(
                     text: $viewModel.searchText,
                     onClear: viewModel.clearSearch
                 )
-
+                
                 SearchFilterChipsView(
                     selected: viewModel.searchType,
                     onSelect: viewModel.selectSearchType
                 )
-
+                
                 if viewModel.searchText.isEmpty {
                     SearchRecentCollectionsSection(
-                        collections: viewModel.recentCollections
+                        collections: viewModel.recentCollections,
+                        isLoading: viewModel.isLoadingRecent
                     )
                     SearchTopSearchSection()
-                }
-
-                else {
+                } else {
                 }
             }
             .padding(.horizontal)
@@ -42,8 +40,6 @@ struct SearchPageView: View {
         .background(AppColors.darkBackground.ignoresSafeArea())
     }
 }
-
-
 
 #Preview {
     SearchPageView()
