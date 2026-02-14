@@ -10,29 +10,18 @@ import SwiftUI
 struct CustomNFTCardView: View {
     
     let nft: NFT
+    let collection: NFTCollection
     @StateObject private var viewModel: NFTCardViewModel
     
-    init(nft: NFT) {
+    init(nft: NFT, collection: NFTCollection) {
         self.nft = nft
+        self.collection = collection
         _viewModel = StateObject(
             wrappedValue: NFTCardViewModel(
                 imageURL: nft.displayImageURL ?? nft.imageURL
             )
         )
     }
-//    let nft: NFT
-//    let collection: NFTCollection
-//    @StateObject private var viewModel: NFTCardViewModel
-//    
-//    init(nft: NFT, collection: NFTCollection) {
-//        self.nft = nft
-//        self.collection = collection
-//        _viewModel = StateObject(
-//            wrappedValue: NFTCardViewModel(
-//                imageURL: nft.displayImageURL ?? nft.imageURL
-//            )
-//        )
-//    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -56,6 +45,10 @@ struct CustomNFTCardView: View {
                 case .failure:
                     Color.gray
                         .frame(height: 240)
+                        .overlay(
+                            Image(systemName: "photo")
+                                .foregroundColor(.white.opacity(0.5))
+                        )
                     
                 @unknown default:
                     EmptyView()
@@ -69,11 +62,14 @@ struct CustomNFTCardView: View {
                 Text(nft.name ?? "Unknown NFT")
                     .font(.headline)
                     .foregroundStyle(Color(.systemGray2))
+                    .lineLimit(1)
                 
-                Text(nft.description ?? "No description available.")
+                // Use collection description instead of NFT description
+                Text(collection.description ?? "No collection description available.")
                     .font(.footnote.bold())
                     .foregroundStyle(AppColors.lightGrey)
                     .lineLimit(3)
+                    .multilineTextAlignment(.leading)
                 
                 Spacer(minLength: 60)
             }
@@ -91,6 +87,9 @@ struct CustomNFTCardView: View {
         .overlay {
             if viewModel.isLoading {
                 ProgressView()
+                    .scaleEffect(1.2)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.2))
             }
         }
         .animation(.easeInOut(duration: 0.3), value: viewModel.backgroundColor)

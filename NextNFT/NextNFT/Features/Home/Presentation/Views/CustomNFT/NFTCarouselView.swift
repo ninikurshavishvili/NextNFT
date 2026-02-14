@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct NFTCarouselView: View {
     
     @StateObject private var viewModel: NFTCarouselViewModel
@@ -19,6 +18,7 @@ struct NFTCarouselView: View {
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.collectionSlug = collectionSlug
+        print("🏗️ NFTCarouselView initialized with slug: \(collectionSlug)")
     }
     
     var body: some View {
@@ -63,11 +63,15 @@ struct NFTCarouselView: View {
                         .padding()
                     Spacer()
                 }
-            } else {
+            } else if let collection = viewModel.collection {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(viewModel.nfts) { nft in
-                            CustomNFTCardView(nft: nft)
+                            // Pass both NFT and Collection to the card
+                            CustomNFTCardView(
+                                nft: nft,
+                                collection: collection
+                            )
                         }
                     }
                     .padding(.horizontal)
@@ -76,8 +80,13 @@ struct NFTCarouselView: View {
             }
         }
         .task {
+            print("🚀 Task started for collection: \(collectionSlug)")
+            print("📊 Current NFTs count: \(viewModel.nfts.count)")
             if viewModel.nfts.isEmpty {
+                print("📥 Loading NFTs for: \(collectionSlug)")
                 await viewModel.loadNFTs(for: collectionSlug)
+            } else {
+                print("✅ Already have \(viewModel.nfts.count) NFTs")
             }
         }
     }
