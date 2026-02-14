@@ -6,20 +6,26 @@
 //
 
 import SwiftUI
-//MARK: - fix Recent Collection Section
 struct SearchRecentCollectionsSection: View {
 
     let collections: [NFTCollection]
-
+    let isLoading: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-
             sectionHeader
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(collections) { collection in
-                        RecentCollectionCardView(collection: collection)
+                    if isLoading {
+                        // Show skeleton loading cards
+                        ForEach(0..<5) { _ in
+                            SkeletonCollectionCardView()
+                        }
+                    } else {
+                        ForEach(collections) { collection in
+                            RecentCollectionCardView(collection: collection)
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -44,22 +50,36 @@ struct SearchRecentCollectionsSection: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
-    SearchRecentCollectionsSection(
-        collections: [
-            NFTCollection(
-                collection: "impostors-genesis",
-                name: "Impostors Genesis",
-                description: nil,
-                imageURL: "https://proxy-imgs-cache.gametrade.market/cache/e151d3e360959f35ff21b5195aaaebd8-70-828",
-                bannerImageURL: nil,
-                owner: nil,
-                category: nil,
-                openseaURL: nil,
-                totalSupply: nil,
-                createdDate: nil
+    ZStack {
+        Color.black.ignoresSafeArea()
+        
+        VStack {
+            // Loading state
+            SearchRecentCollectionsSection(
+                collections: [],
+                isLoading: true
             )
-        ]
-    )
+            
+            // Loaded state
+            SearchRecentCollectionsSection(
+                collections: [
+                    NFTCollection(
+                        collection: "impostors-genesis",
+                        name: "Impostors Genesis",
+                        description: nil,
+                        imageURL: "https://proxy-imgs-cache.gametrade.market/cache/e151d3e360959f35ff21b5195aaaebd8-70-828",
+                        bannerImageURL: nil,
+                        owner: nil,
+                        category: nil,
+                        openseaURL: nil,
+                        totalSupply: nil,
+                        createdDate: nil
+                    )
+                ],
+                isLoading: false
+            )
+        }
+    }
 }
-
