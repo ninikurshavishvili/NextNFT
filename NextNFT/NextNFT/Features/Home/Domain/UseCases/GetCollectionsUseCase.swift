@@ -16,46 +16,50 @@ class GetCollectionsUseCase {
     }
     
     func execute() async throws -> [NFTCollection] {
+        print("📥 GetCollectionsUseCase: Fetching collections")
         let collections = try await repository.getCollections()
+        print("📦 Raw collections count: \(collections.count)")
         
-        // Initial filtering (fast, local only)
+        // Less aggressive filtering - keep more collections
         let promisingCollections = filterPromisingCollections(collections)
+        print("🎯 After basic filter: \(promisingCollections.count) collections")
         
-        // Check for NFTs in parallel
+        // Check for NFTs in parallel (but don't filter out collections without NFTs yet)
         let collectionsWithNFTs = await checkCollectionsForNFTs(promisingCollections)
+        print("✅ Collections with NFTs: \(collectionsWithNFTs.count)")
         
-        return Array(collectionsWithNFTs.prefix(10))
+        // Return up to 20 collections instead of 10
+        return Array(collectionsWithNFTs.prefix(20))
     }
     
     private func filterPromisingCollections(_ collections: [NFTCollection]) -> [NFTCollection] {
         collections
             .filter { collection in
-                // Basic validation
+                // Basic validation only - no popularity score filter
                 let hasValidImage = (collection.imageURL?.isEmpty == false)
                 let hasValidName = !collection.name.isEmpty
                 let hasValidSlug = !collection.collection.isEmpty
                 
-                // Score-based popularity detection
-                let popularityScore = calculatePopularityScore(for: collection)
-                
-                return hasValidImage && hasValidName && hasValidSlug && popularityScore > 0.3
+                // Only filter out collections missing basic requirements
+                return hasValidImage && hasValidName && hasValidSlug
             }
             .sorted { lhs, rhs in
-                // Sort by potential popularity
+                // Sort by potential popularity (but keep all)
                 calculatePopularityScore(for: lhs) > calculatePopularityScore(for: rhs)
             }
-//            .prefix(15) // Limit for parallel checking
     }
     
     private func calculatePopularityScore(for collection: NFTCollection) -> Double {
-        var score: Double = 0
+        var score: Double = 0.1 // Base score for all collections
         
         // Check name for popular keywords (with weights)
         let name = collection.name.lowercased()
         let popularKeywords: [(String, Double)] = [
             ("ape", 0.8), ("punk", 0.9), ("azuki", 0.7),
             ("doodle", 0.7), ("cat", 0.3), ("dog", 0.3),
-            ("alien", 0.5), ("god", 0.6), ("bird", 0.3)
+            ("alien", 0.5), ("god", 0.6), ("bird", 0.3),
+            ("bayc", 0.9), ("cryptopunks", 0.9), ("mfer", 0.6),
+            ("noun", 0.5), ("bean", 0.4), ("milady", 0.6)
         ]
         
         for (keyword, weight) in popularKeywords {
@@ -68,12 +72,13 @@ class GetCollectionsUseCase {
         if collection.description?.isEmpty == false { score += 0.2 }
         if collection.openseaURL?.isEmpty == false { score += 0.2 }
         if collection.totalSupply ?? 0 > 100 { score += 0.3 }
+        if collection.totalSupply ?? 0 > 1000 { score += 0.3 }
         
-        return min(score, 1.0)
+        return min(score, 2.0) // Allow higher scores
     }
     
     private func checkCollectionsForNFTs(_ collections: [NFTCollection]) async -> [NFTCollection] {
-        await withTaskGroup(of: (NFTCollection, Bool).self) { group in
+        await withTaskGroup(of: (NFTCollection, Int).self) { group in
             var validCollections: [NFTCollection] = []
             
             // Start all checks in parallel
@@ -81,22 +86,24 @@ class GetCollectionsUseCase {
                 group.addTask {
                     do {
                         let nfts = try await self.repository.getNFTs(for: collection.collection)
-                        let hasEnoughNFTs = nfts.count >= 3
-                        return (collection, hasEnoughNFTs)
+                        return (collection, nfts.count)
                     } catch {
-                        return (collection, false)
+                        return (collection, 0)
                     }
                 }
             }
             
             // Collect results as they complete
-            for await (collection, hasNFTs) in group {
-                if hasNFTs {
+            for await (collection, nftCount) in group {
+                print("📊 Collection '\(collection.name)' has \(nftCount) NFTs")
+                
+                // Only require at least 1 NFT instead of 3
+                if nftCount >= 1 {
                     validCollections.append(collection)
                 }
                 
-                // Early exit if we have enough
-                if validCollections.count >= 10 {
+                // Early exit if we have enough (increased to 20)
+                if validCollections.count >= 20 {
                     group.cancelAll()
                     break
                 }
