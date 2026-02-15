@@ -33,6 +33,8 @@ struct SearchRecentCollectionsSection: View {
         }
     }
 
+    
+    
     private var sectionHeader: some View {
         HStack {
             Text("Recent Collection")
