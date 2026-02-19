@@ -493,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				1776FD012F471CC400B940E7 /* Drops */,
+				1776FD062F471DA700B940E7 /* Presentation */,
 				14FC0C812F0C595A0096D380 /* Home */,
 				14FC0C9B2F0C595A0096D380 /* Search */,
 				14FC0C9E2F0C595A0096D380 /* TabBar */,
@@ -586,9 +587,32 @@
 		1776FD012F471CC400B940E7 /* Drops */ = {
 			isa = PBXGroup;
 			children = (
-				1776FD022F471CCF00B940E7 /* DropsPageView.swift */,
+				1776FD042F471D9500B940E7 /* Data */,
+				1776FD052F471D9C00B940E7 /* Domain */,
 			);
 			path = Drops;
+			sourceTree = "<group>";
+		};
+		1776FD042F471D9500B940E7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1776FD052F471D9C00B940E7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1776FD062F471DA700B940E7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1776FD022F471CCF00B940E7 /* DropsPageView.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		177EF9FE2F28D3BC002A0FF1 /* CustomNFT */ = {
