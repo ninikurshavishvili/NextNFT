@@ -18,6 +18,11 @@
 The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and focuses on clean separation of concerns, scalability, and real-world production patterns.
 </p>
 
+<p align="center">
+  UI/UX Design crafted independently in Figma  
+  <br/>
+  <a href="https://www.behance.net/gallery/230704837/NextNFT">View Full Case Study</a>
+</p>
 
 
 ---
