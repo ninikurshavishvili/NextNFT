@@ -75,6 +75,7 @@
 		1727DA352F3C999200847473 /* NFTCarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1727DA342F3C998500847473 /* NFTCarouselViewModel.swift */; };
 		1761B6A62F34B44A0097CADB /* ImageColorAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761B6A52F34B4430097CADB /* ImageColorAnalyzer.swift */; };
 		1761B6A82F34D11E0097CADB /* NFTCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761B6A72F34D11C0097CADB /* NFTCardViewModel.swift */; };
+		1776FD032F471CD700B940E7 /* DropsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1776FD022F471CCF00B940E7 /* DropsPageView.swift */; };
 		177EF9FB2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EF9FC2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */; };
 		177EFA002F28D419002A0FF1 /* CustomNFTCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */; };
@@ -156,6 +157,7 @@
 		1727DA342F3C998500847473 /* NFTCarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCarouselViewModel.swift; sourceTree = "<group>"; };
 		1761B6A52F34B4430097CADB /* ImageColorAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageColorAnalyzer.swift; sourceTree = "<group>"; };
 		1761B6A72F34D11C0097CADB /* NFTCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCardViewModel.swift; sourceTree = "<group>"; };
+		1776FD022F471CCF00B940E7 /* DropsPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropsPageView.swift; sourceTree = "<group>"; };
 		177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		177EF9FF2F28D3DD002A0FF1 /* CustomNFTCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNFTCardView.swift; sourceTree = "<group>"; };
 		17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCarouselView.swift; sourceTree = "<group>"; };
@@ -490,6 +492,8 @@
 		14FC0C9F2F0C595A0096D380 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1776FD012F471CC400B940E7 /* Drops */,
+				1776FD062F471DA700B940E7 /* Presentation */,
 				14FC0C812F0C595A0096D380 /* Home */,
 				14FC0C9B2F0C595A0096D380 /* Search */,
 				14FC0C9E2F0C595A0096D380 /* TabBar */,
@@ -578,6 +582,37 @@
 				14FC0CB92F0C595A0096D380 /* ContentView.swift */,
 			);
 			path = NextNFT;
+			sourceTree = "<group>";
+		};
+		1776FD012F471CC400B940E7 /* Drops */ = {
+			isa = PBXGroup;
+			children = (
+				1776FD042F471D9500B940E7 /* Data */,
+				1776FD052F471D9C00B940E7 /* Domain */,
+			);
+			path = Drops;
+			sourceTree = "<group>";
+		};
+		1776FD042F471D9500B940E7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1776FD052F471D9C00B940E7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1776FD062F471DA700B940E7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1776FD022F471CCF00B940E7 /* DropsPageView.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		177EF9FE2F28D3BC002A0FF1 /* CustomNFT */ = {
@@ -730,6 +765,7 @@
 				14FC0CC12F0C595A0096D380 /* NFTModel.swift in Sources */,
 				14FC0CC22F0C595A0096D380 /* GetCollectionsUseCase.swift in Sources */,
 				14FC0CC32F0C595A0096D380 /* GetNFTsUseCase.swift in Sources */,
+				1776FD032F471CD700B940E7 /* DropsPageView.swift in Sources */,
 				14FC0CC42F0C595A0096D380 /* CollectionNFTsViewModel.swift in Sources */,
 				14FC0CC52F0C595A0096D380 /* HomeViewModel.swift in Sources */,
 				1727DA352F3C999200847473 /* NFTCarouselViewModel.swift in Sources */,
