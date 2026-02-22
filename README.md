@@ -24,7 +24,6 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
   <a href="https://www.behance.net/gallery/230704837/NextNFT">View Full Case Study</a>
 </p>
 
-
 ---
 
 ## Preview
