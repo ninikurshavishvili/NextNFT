@@ -63,4 +63,4 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
 
 All NFT data is fetched from the **OpenSea API**:
 
-- Base URL:  
+- Base URL: [OpenSea API Documentation](https://docs.opensea.io/reference/api-overview)
