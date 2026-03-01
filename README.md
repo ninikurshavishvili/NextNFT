@@ -6,7 +6,7 @@
 <h1 align="center">NextNFT</h1>
 
 <p align="center">
-  <b>Discover • Search • Explore NFTs</b>
+  <b>Discover • Search •  Explore NFTs</b>
 </p>
 
 <p align="center">
