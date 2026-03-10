@@ -644,9 +644,33 @@
 		1796978F2F5FEB5A00D1EA3D /* Start */ = {
 			isa = PBXGroup;
 			children = (
-				179697902F5FEB6600D1EA3D /* StartPageView.swift */,
+				179697942F5FEC3E00D1EA3D /* Presentation */,
+				179697932F5FEC3900D1EA3D /* Domain */,
+				179697922F5FEC3300D1EA3D /* Data */,
 			);
 			path = Start;
+			sourceTree = "<group>";
+		};
+		179697922F5FEC3300D1EA3D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		179697932F5FEC3900D1EA3D /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		179697942F5FEC3E00D1EA3D /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				179697902F5FEB6600D1EA3D /* StartPageView.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
