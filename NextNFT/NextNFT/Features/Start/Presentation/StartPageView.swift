@@ -45,6 +45,7 @@ struct StartPageView: View {
                 }
             }
         }
+        .background(AppColors.darkBackground)
     }
 }
 
