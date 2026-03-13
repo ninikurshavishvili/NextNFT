@@ -11,6 +11,7 @@
 
 <p align="center">
   Modern iOS NFT explorer built with SwiftUI, MVVM & Clean Architecture
+  
 </p>
 
 <p align="center">
