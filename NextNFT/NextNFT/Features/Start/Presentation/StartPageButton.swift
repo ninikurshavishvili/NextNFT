@@ -19,3 +19,23 @@ struct StartExperienceButton: View {
         }
     }
 }
+
+struct GoogleButton: View {
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text("G")
+        }
+    }
+}
+
+struct FacebookButton: View {
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text("f")
+        }
+    }
+}
