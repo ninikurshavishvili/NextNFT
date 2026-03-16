@@ -22,7 +22,7 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
 <p align="center">
   UI/UX Design crafted independently in Figma  
   <br/>
-  <a href="https://www.behance.net/gallery/230704837/NextNFT">View Full Case Study</a>
+  <a href="https://www.behance.net/gallery/230704837/NextNFT">View Full Project</a>
 </p>
 
 ---
