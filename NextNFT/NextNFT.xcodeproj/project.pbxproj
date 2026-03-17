@@ -88,6 +88,8 @@
 		17DF3B702F40D2EC0055D9FB /* SkeletonCollectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF3B6F2F40D2EB0055D9FB /* SkeletonCollectionCardView.swift */; };
 		17F322A62F6998F8003610C2 /* NFTImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */; };
 		17F322AB2F699A58003610C2 /* NFTImageActionsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F322AA2F699A57003610C2 /* NFTImageActionsModifier.swift */; };
+		17F322BC2F69D88F003610C2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 17F322BB2F69D88F003610C2 /* Config.xcconfig */; };
+		17F322BD2F69D88F003610C2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 17F322BB2F69D88F003610C2 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +177,7 @@
 		17DF3B6F2F40D2EB0055D9FB /* SkeletonCollectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonCollectionCardView.swift; sourceTree = "<group>"; };
 		17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageDownloadManager.swift; sourceTree = "<group>"; };
 		17F322AA2F699A57003610C2 /* NFTImageActionsModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageActionsModifier.swift; sourceTree = "<group>"; };
+		17F322BB2F69D88F003610C2 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -219,6 +222,7 @@
 		1488C1262E24063F005FD00C = {
 			isa = PBXGroup;
 			children = (
+				17F322BB2F69D88F003610C2 /* Config.xcconfig */,
 				177EF9FA2F28C1A8002A0FF1 /* GoogleService-Info.plist */,
 				14FC0CBB2F0C595A0096D380 /* NextNFT */,
 				141169572F08341600E70061 /* NextNFTTests */,
@@ -810,6 +814,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F322BD2F69D88F003610C2 /* Config.xcconfig in Resources */,
 				177EF9FC2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -820,6 +825,7 @@
 			files = (
 				14FC0CEF2F0C595A0096D380 /* Assets.xcassets in Resources */,
 				14FC0CF02F0C595A0096D380 /* Storyboard.storyboard in Resources */,
+				17F322BC2F69D88F003610C2 /* Config.xcconfig in Resources */,
 				177EF9FB2F28C1A8002A0FF1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
