@@ -1,1 +1,8 @@
 NextNFT/NextNFT/GoogleService-Info.plist
+Config.xcconfig
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+Config.xcconfig
+Config.xcconfig
