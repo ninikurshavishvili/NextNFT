@@ -86,6 +86,8 @@
 		17AFE13D2F2A4CC30015483D /* NFTCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */; };
 		17DF3B6E2F40C5CF0055D9FB /* GetCollectionBySlugUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF3B6D2F40C5CE0055D9FB /* GetCollectionBySlugUseCase.swift */; };
 		17DF3B702F40D2EC0055D9FB /* SkeletonCollectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF3B6F2F40D2EB0055D9FB /* SkeletonCollectionCardView.swift */; };
+		17F322A62F6998F8003610C2 /* NFTImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */; };
+		17F322AB2F699A58003610C2 /* NFTImageActionsModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F322AA2F699A57003610C2 /* NFTImageActionsModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +173,8 @@
 		17AFE13C2F2A4CB20015483D /* NFTCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCarouselView.swift; sourceTree = "<group>"; };
 		17DF3B6D2F40C5CE0055D9FB /* GetCollectionBySlugUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCollectionBySlugUseCase.swift; sourceTree = "<group>"; };
 		17DF3B6F2F40D2EB0055D9FB /* SkeletonCollectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonCollectionCardView.swift; sourceTree = "<group>"; };
+		17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageDownloadManager.swift; sourceTree = "<group>"; };
+		17F322AA2F699A57003610C2 /* NFTImageActionsModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageActionsModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -366,6 +370,7 @@
 		14FC0C802F0C595A0096D380 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				17F322A92F699A4E003610C2 /* Modifiers */,
 				14FC0C702F0C595A0096D380 /* ViewModels */,
 				14FC0C7F2F0C595A0096D380 /* Views */,
 			);
@@ -581,6 +586,7 @@
 		14FC0CBB2F0C595A0096D380 /* NextNFT */ = {
 			isa = PBXGroup;
 			children = (
+				17F322A12F6998B3003610C2 /* Core */,
 				14A672D72F2143CA00B7B599 /* Assets */,
 				14FC0C5E2F0C595A0096D380 /* App */,
 				14FC0C632F0C595A0096D380 /* Extensions */,
@@ -674,6 +680,30 @@
 				179697902F5FEB6600D1EA3D /* StartPageView.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		17F322A12F6998B3003610C2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				17F322A42F6998EC003610C2 /* Download */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		17F322A42F6998EC003610C2 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		17F322A92F699A4E003610C2 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				17F322AA2F699A57003610C2 /* NFTImageActionsModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -820,6 +850,7 @@
 				14FC0CC32F0C595A0096D380 /* GetNFTsUseCase.swift in Sources */,
 				1776FD032F471CD700B940E7 /* DropsPageView.swift in Sources */,
 				14FC0CC42F0C595A0096D380 /* CollectionNFTsViewModel.swift in Sources */,
+				17F322AB2F699A58003610C2 /* NFTImageActionsModifier.swift in Sources */,
 				14FC0CC52F0C595A0096D380 /* HomeViewModel.swift in Sources */,
 				1727DA352F3C999200847473 /* NFTCarouselViewModel.swift in Sources */,
 				14FC0CC62F0C595A0096D380 /* HomeHeaderView.swift in Sources */,
@@ -870,6 +901,7 @@
 				14FC0CE82F0C595A0096D380 /* NFTDTO.swift in Sources */,
 				14FC0CE92F0C595A0096D380 /* EndpointType.swift in Sources */,
 				14FC0CEA2F0C595A0096D380 /* OpenSeaEndpoint.swift in Sources */,
+				17F322A62F6998F8003610C2 /* NFTImageDownloadManager.swift in Sources */,
 				14FC0CEB2F0C595A0096D380 /* CollectionsResponseDTO.swift in Sources */,
 				14FC0CEC2F0C595A0096D380 /* NFTResponseDTO.swift in Sources */,
 				14FC0CED2F0C595A0096D380 /* NetworkManager.swift in Sources */,
