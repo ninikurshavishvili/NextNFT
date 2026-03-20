@@ -41,6 +41,7 @@ struct CustomNFTCardView: View {
                         .scaledToFill()
                         .frame(height: 240)
                         .clipped()
+                        .nftImageActions(for: nft)
                     
                 case .failure:
                     Color.gray
