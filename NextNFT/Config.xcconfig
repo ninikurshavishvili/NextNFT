@@ -1,9 +1,5 @@
-//
-//  Config.xcconfig
-//  NextNFT
-//
-//  Created by Nini Kurshavishvili on 17.03.26.
-//
 
 // Configuration settings file format documentation can be found at:
 // https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+API_KEY = AIzaSyAvMtjNDhtD90vtM7_77QkYHTAVUITMHCE
