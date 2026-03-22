@@ -15,7 +15,7 @@ struct CollectionContainerView: View {
             HStack {
                 CollectionProfileView(
                     imageURL: collection.imageURL,
-                    name: collection.name
+                    name: collection.name,
                 )
                 
                 Spacer()
