@@ -5,43 +5,53 @@
 //  Created by Nini Kurshavishvili on 17.03.26.
 //
 
+import Foundation
 import SwiftUI
 import UIKit
 import Photos
 
 
-// MARK: - Download Manager Protocol
-//protocol NFTImageDownloadManagerProtocol {
-//    func startDownload(nft: NFT, action: DownloadAction) -> String
-//    func cancelDownload(taskID: String)
-//    func getProgress(for taskID: String) -> Double?
-//    func observeTask(_ taskID: String) async -> AsyncStream<DownloadState>
-//}
 
-// MARK: - Download Manager Implementation
 final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
     static let shared = NFTImageDownloadManager()
-    
-    // MARK: - Private Properties
+
+    // MARK: Dependencies
+    private let fileStore: DownloadedFileStoring
+    private let actionHandler: NFTPostDownloadActionHandling
+
+    // MARK: State
     private var activeTasks: [String: DownloadTask] = [:]
     private var continuations: [String: AsyncStream<DownloadState>.Continuation] = [:]
+
+    // MARK: URLSession
     private lazy var urlSession: URLSession = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForResource = 300
         return URLSession(configuration: config, delegate: self, delegateQueue: .main)
     }()
-    
-    // MARK: - Public Methods
+
+    // MARK: Init
+    init(
+        fileStore: DownloadedFileStoring = DownloadedFileStore(),
+        actionHandler: NFTPostDownloadActionHandling = NFTPostDownloadActionHandler()
+    ) {
+        self.fileStore = fileStore
+        self.actionHandler = actionHandler
+        super.init()
+    }
+
+    // MARK: Public API
+
     func startDownload(nft: NFT, action: DownloadAction) -> String {
         let taskID = UUID().uuidString
-        let imageURLString = nft.displayImageURL ?? nft.imageURL ?? ""
-        
-        guard let url = URL(string: imageURLString) else {
+
+        guard let url = makeNFTImageURL(from: nft) else {
             print("Invalid URL for NFT: \(nft.name ?? nft.identifier)")
             return taskID
         }
-        
+
         let downloadTask = urlSession.downloadTask(with: url)
+
         let task = DownloadTask(
             id: taskID,
             nftID: nft.identifier,
@@ -50,126 +60,131 @@ final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
             state: .pending,
             task: downloadTask
         )
-        
+
         activeTasks[taskID] = task
         downloadTask.resume()
-        
         return taskID
     }
-    
+
     func cancelDownload(taskID: String) {
         activeTasks[taskID]?.task?.cancel()
         activeTasks.removeValue(forKey: taskID)
-        continuations[taskID]?.finish()
-        continuations.removeValue(forKey: taskID)
+        finishObservation(for: taskID)
     }
-    
+
     func getProgress(for taskID: String) -> Double? {
-        guard case .downloading(let progress) = activeTasks[taskID]?.state else {
-            return nil
-        }
+        guard case .downloading(let progress) = activeTasks[taskID]?.state else { return nil }
         return progress
     }
-    
+
     func observeTask(_ taskID: String) async -> AsyncStream<DownloadState> {
         AsyncStream { continuation in
             self.continuations[taskID] = continuation
-            
-            // Send current state if exists
-            if let task = activeTasks[taskID] {
+
+            if let task = self.activeTasks[taskID] {
                 continuation.yield(task.state)
             }
-            
+
             continuation.onTermination = { @Sendable _ in
                 self.continuations.removeValue(forKey: taskID)
             }
         }
     }
-    
-    // MARK: - Private Methods
-    private func handleDownloadCompletion(taskID: String, location: URL) {
+
+    // MARK: Private - Helpers
+
+    private func makeNFTImageURL(from nft: NFT) -> URL? {
+        let imageURLString = nft.displayImageURL ?? nft.imageURL ?? ""
+        return URL(string: imageURLString)
+    }
+
+    private func taskID(for urlSessionTask: URLSessionTask) -> String? {
+        activeTasks.first(where: { $0.value.task == urlSessionTask })?.key
+    }
+
+    private func yield(_ state: DownloadState, for taskID: String) {
+        continuations[taskID]?.yield(state)
+    }
+
+    private func finishObservation(for taskID: String) {
+        continuations[taskID]?.finish()
+        continuations.removeValue(forKey: taskID)
+    }
+
+    private func updateProgress(taskID: String, progress: Double) {
         guard var task = activeTasks[taskID] else { return }
-        
-        // Move file to permanent location
-        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let destinationURL = documentsPath.appendingPathComponent("\(task.nftID)_\(Date().timeIntervalSince1970).jpg")
-        
+        task.state = .downloading(progress: progress)
+        activeTasks[taskID] = task
+        yield(.downloading(progress: progress), for: taskID)
+    }
+
+    private func completeDownload(taskID: String, tempLocation: URL) {
+        guard var task = activeTasks[taskID] else { return }
+
         do {
-            try FileManager.default.moveItem(at: location, to: destinationURL)
+            let destinationURL = try fileStore.moveDownloadedTempFile(from: tempLocation, nftID: task.nftID)
+
             task.state = .completed(localURL: destinationURL)
             activeTasks[taskID] = task
-            
-            // Handle the action
-            handleAction(task: task, imageURL: destinationURL)
-            
-            continuations[taskID]?.yield(.completed(localURL: destinationURL))
-            continuations[taskID]?.finish()
-            
+
+            actionHandler.handle(action: task.action, localFileURL: destinationURL)
+
+            yield(.completed(localURL: destinationURL), for: taskID)
+            finishObservation(for: taskID)
         } catch {
             task.state = .failed(error)
             activeTasks[taskID] = task
-            continuations[taskID]?.yield(.failed(error))
-            continuations[taskID]?.finish()
+
+            yield(.failed(error), for: taskID)
+            finishObservation(for: taskID)
         }
     }
-    
-    private func handleAction(task: DownloadTask, imageURL: URL) {
-        guard let image = UIImage(contentsOfFile: imageURL.path) else { return }
-        
-        switch task.action {
-        case .copy:
-            UIPasteboard.general.image = image
-            
-        case .saveToPhotos:
-            requestPhotoLibraryAccess { granted in
-                if granted {
-                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                }
-            }
-        }
-    }
-    
-    private func requestPhotoLibraryAccess(completion: @escaping (Bool) -> Void) {
-        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-            DispatchQueue.main.async {
-                switch status {
-                case .authorized, .limited:
-                    completion(true)
-                default:
-                    completion(false)
-                }
-            }
-        }
+
+    private func failDownload(taskID: String, error: Error) {
+        guard var task = activeTasks[taskID] else { return }
+        task.state = .failed(error)
+        activeTasks[taskID] = task
+
+        yield(.failed(error), for: taskID)
+        finishObservation(for: taskID)
     }
 }
 
 // MARK: - URLSessionDownloadDelegate
 extension NFTImageDownloadManager: URLSessionDownloadDelegate {
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        guard let taskID = activeTasks.first(where: { $0.value.task == downloadTask })?.key,
-              var task = activeTasks[taskID] else { return }
-        
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didWriteData bytesWritten: Int64,
+        totalBytesWritten: Int64,
+        totalBytesExpectedToWrite: Int64
+    ) {
+        guard totalBytesExpectedToWrite > 0,
+              let taskID = taskID(for: downloadTask)
+        else { return }
+
         let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
-        task.state = .downloading(progress: progress)
-        activeTasks[taskID] = task
-        
-        continuations[taskID]?.yield(.downloading(progress: progress))
+        updateProgress(taskID: taskID, progress: progress)
     }
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        guard let taskID = activeTasks.first(where: { $0.value.task == downloadTask })?.key else { return }
-        handleDownloadCompletion(taskID: taskID, location: location)
+
+    func urlSession(
+        _ session: URLSession,
+        downloadTask: URLSessionDownloadTask,
+        didFinishDownloadingTo location: URL
+    ) {
+        guard let taskID = taskID(for: downloadTask) else { return }
+        completeDownload(taskID: taskID, tempLocation: location)
     }
-    
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if let error = error,
-           let taskID = activeTasks.first(where: { $0.value.task == task })?.key,
-           var failedTask = activeTasks[taskID] {
-            
-            failedTask.state = .failed(error)
-            activeTasks[taskID] = failedTask
-            continuations[taskID]?.yield(.failed(error))
-            continuations[taskID]?.finish()
-        }
+
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didCompleteWithError error: Error?
+    ) {
+        guard let error,
+              let taskID = taskID(for: task)
+        else { return }
+
+        failDownload(taskID: taskID, error: error)
     }
 }
