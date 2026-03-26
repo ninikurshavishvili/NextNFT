@@ -9,27 +9,6 @@ import SwiftUI
 import UIKit
 import Photos
 
-// MARK: - Download Models
-enum DownloadAction {
-    case copy
-    case saveToPhotos
-}
-
-enum DownloadState {
-    case pending
-    case downloading(progress: Double)
-    case completed(localURL: URL)
-    case failed(Error)
-}
-
-struct DownloadTask {
-    let id: String
-    let nftID: String
-    let url: URL
-    let action: DownloadAction
-    var state: DownloadState
-    var task: URLSessionDownloadTask?
-}
 
 // MARK: - Download Manager Protocol
 protocol NFTImageDownloadManagerProtocol {
