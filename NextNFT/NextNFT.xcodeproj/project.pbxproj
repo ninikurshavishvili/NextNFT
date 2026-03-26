@@ -87,6 +87,7 @@
 		17C756922F758AE8005ADC12 /* NFTImageDownloadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C756912F758AE6005ADC12 /* NFTImageDownloadModels.swift */; };
 		17C756942F758BBF005ADC12 /* NFTImageDownloadManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C756932F758BBD005ADC12 /* NFTImageDownloadManagerProtocol.swift */; };
 		17C756962F758C96005ADC12 /* DownloadedFileStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C756952F758C93005ADC12 /* DownloadedFileStoring.swift */; };
+		17C756982F758D08005ADC12 /* PhotoLibraryAuthorizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C756972F758D06005ADC12 /* PhotoLibraryAuthorizing.swift */; };
 		17DF3B6E2F40C5CF0055D9FB /* GetCollectionBySlugUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF3B6D2F40C5CE0055D9FB /* GetCollectionBySlugUseCase.swift */; };
 		17DF3B702F40D2EC0055D9FB /* SkeletonCollectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF3B6F2F40D2EB0055D9FB /* SkeletonCollectionCardView.swift */; };
 		17F322A62F6998F8003610C2 /* NFTImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */; };
@@ -179,6 +180,7 @@
 		17C756912F758AE6005ADC12 /* NFTImageDownloadModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageDownloadModels.swift; sourceTree = "<group>"; };
 		17C756932F758BBD005ADC12 /* NFTImageDownloadManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageDownloadManagerProtocol.swift; sourceTree = "<group>"; };
 		17C756952F758C93005ADC12 /* DownloadedFileStoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedFileStoring.swift; sourceTree = "<group>"; };
+		17C756972F758D06005ADC12 /* PhotoLibraryAuthorizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAuthorizing.swift; sourceTree = "<group>"; };
 		17DF3B6D2F40C5CE0055D9FB /* GetCollectionBySlugUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCollectionBySlugUseCase.swift; sourceTree = "<group>"; };
 		17DF3B6F2F40D2EB0055D9FB /* SkeletonCollectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonCollectionCardView.swift; sourceTree = "<group>"; };
 		17F322A52F6998F7003610C2 /* NFTImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTImageDownloadManager.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 		17F322A42F6998EC003610C2 /* Download */ = {
 			isa = PBXGroup;
 			children = (
+				17C756972F758D06005ADC12 /* PhotoLibraryAuthorizing.swift */,
 				17C756952F758C93005ADC12 /* DownloadedFileStoring.swift */,
 				17C756932F758BBD005ADC12 /* NFTImageDownloadManagerProtocol.swift */,
 				17C756912F758AE6005ADC12 /* NFTImageDownloadModels.swift */,
@@ -912,6 +915,7 @@
 				14FC0CE12F0C595A0096D380 /* Endpoint.swift in Sources */,
 				14FC0CE22F0C595A0096D380 /* HTTPMethod.swift in Sources */,
 				14FC0CE32F0C595A0096D380 /* NetworkService.swift in Sources */,
+				17C756982F758D08005ADC12 /* PhotoLibraryAuthorizing.swift in Sources */,
 				14FC0CE42F0C595A0096D380 /* NetworkServiceProtocol.swift in Sources */,
 				14FC0CE52F0C595A0096D380 /* HomeRemoteDataSourceProtocol.swift in Sources */,
 				14FC0CE62F0C595A0096D380 /* RemoteDataSourceProtocol.swift in Sources */,
