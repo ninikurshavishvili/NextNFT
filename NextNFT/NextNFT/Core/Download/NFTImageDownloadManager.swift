@@ -11,12 +11,12 @@ import Photos
 
 
 // MARK: - Download Manager Protocol
-protocol NFTImageDownloadManagerProtocol {
-    func startDownload(nft: NFT, action: DownloadAction) -> String
-    func cancelDownload(taskID: String)
-    func getProgress(for taskID: String) -> Double?
-    func observeTask(_ taskID: String) async -> AsyncStream<DownloadState>
-}
+//protocol NFTImageDownloadManagerProtocol {
+//    func startDownload(nft: NFT, action: DownloadAction) -> String
+//    func cancelDownload(taskID: String)
+//    func getProgress(for taskID: String) -> Double?
+//    func observeTask(_ taskID: String) async -> AsyncStream<DownloadState>
+//}
 
 // MARK: - Download Manager Implementation
 final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
