@@ -17,6 +17,7 @@
 <p align="center">
   NextNFT is a modern iOS application for discovering NFT collections and NFTs using the **OpenSea API**.  
 The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and focuses on clean separation of concerns, scalability, and real-world production patterns....
+  
 </p>
 
 <p align="center">
