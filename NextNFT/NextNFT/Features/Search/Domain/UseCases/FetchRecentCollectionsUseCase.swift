@@ -8,9 +8,9 @@
 import Foundation
 
 final class FetchRecentCollectionsUseCase {
-    private let repository: HomeRepositoryProtocol
+    private let repository: NFTRepositoryProtocol
     
-    init(repository: HomeRepositoryProtocol = HomeRepository()) {
+    init(repository: NFTRepositoryProtocol = NFTRepository()) {
         self.repository = repository
     }
     
@@ -22,7 +22,7 @@ final class FetchRecentCollectionsUseCase {
     
     // Optional: Add a version with parameters if needed
     func execute(chain: String = "ethereum", limit: Int = 10) async throws -> [NFTCollection] {
-        // Note: You might need to update your HomeRepositoryProtocol
+        // Note: You might need to update your NFTRepositoryProtocol
         // to support parameters, or create a different method
         return try await repository.getCollections()
     }

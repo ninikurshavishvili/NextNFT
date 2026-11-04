@@ -1,27 +1,11 @@
 //
-//  OpenSeaDataSourceProtocol.swift
+//  OpenSeaRemoteDataSource.swift
 //  NextNFT
 //
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
-
-protocol HomeRemoteDataSourceProtocol {
-    func fetchCollections(chain: String, limit: Int) async throws -> [CollectionDTO]
-    func fetchNFTs(collectionSlug: String, limit: Int) async throws -> [NFTDTO]
-}
-
-extension HomeRemoteDataSourceProtocol {
-    func fetchCollections(chain: String = "ethereum", limit: Int = 10) async throws -> [CollectionDTO] {
-        try await fetchCollections(chain: chain, limit: limit)
-    }
-    
-    func fetchNFTs(collectionSlug: String, limit: Int = 10) async throws -> [NFTDTO] {
-        try await fetchNFTs(collectionSlug: collectionSlug, limit: limit)
-    }
-}
-// Network/DataSources/OpenSeaRemoteDataSource.swift
-class OpenSeaRemoteDataSource: HomeRemoteDataSourceProtocol, SearchRemoteDataSourceProtocol {
+class OpenSeaRemoteDataSource: NFTRemoteDataSourceProtocol, SearchRemoteDataSourceProtocol {
     private let networkService: NetworkServiceProtocol
     
     init(networkService: NetworkServiceProtocol = NetworkService.shared) {

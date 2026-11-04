@@ -8,9 +8,9 @@
 import Foundation
 
 final class GetNFTsUseCase {
-    private let repository: HomeRepositoryProtocol
+    private let repository: NFTRepositoryProtocol
 
-    init(repository: HomeRepositoryProtocol = HomeRepository()) {
+    init(repository: NFTRepositoryProtocol = NFTRepository()) {
         self.repository = repository
     }
 

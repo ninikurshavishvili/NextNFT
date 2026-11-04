@@ -1,22 +1,15 @@
 //
-//  HomeRepository.swift
+//  NFTRepository.swift
 //  NextNFT
 //
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
+final class NFTRepository: NFTRepositoryProtocol {
 
+    private let dataSource: NFTRemoteDataSourceProtocol
 
-protocol HomeRepositoryProtocol {
-    func getCollections() async throws -> [NFTCollection]
-    func getNFTs(for collectionSlug: String) async throws -> [NFT]
-}
-
-final class HomeRepository: HomeRepositoryProtocol {
-
-    private let dataSource: HomeRemoteDataSourceProtocol
-
-    init(dataSource: HomeRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
+    init(dataSource: NFTRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
         self.dataSource = dataSource
     }
 
@@ -29,5 +22,5 @@ final class HomeRepository: HomeRepositoryProtocol {
         let dtos = try await dataSource.fetchNFTs(collectionSlug: collectionSlug)
         return dtos.map { $0.toDomain() }
     }
-    
+
 }

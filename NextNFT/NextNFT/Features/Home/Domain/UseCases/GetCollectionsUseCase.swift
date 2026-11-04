@@ -10,9 +10,9 @@ import Foundation
 import OSLog
 
 class GetCollectionsUseCase {
-    private let repository: HomeRepositoryProtocol
+    private let repository: NFTRepositoryProtocol
     
-    init(repository: HomeRepositoryProtocol = HomeRepository()) {
+    init(repository: NFTRepositoryProtocol = NFTRepository()) {
         self.repository = repository
     }
     
