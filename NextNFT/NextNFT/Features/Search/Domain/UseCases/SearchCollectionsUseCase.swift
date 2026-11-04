@@ -5,7 +5,7 @@
 //  Created by Nino Kurshavishvili on 02.01.26.
 //
 
-final class SearchCollectionsUseCase {
+final class SearchCollectionsUseCase: Sendable {
     private let repository: SearchRepositoryProtocol
 
     init(repository: SearchRepositoryProtocol) {

@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-final class GetCollectionBySlugUseCase {
+final class GetCollectionBySlugUseCase: Sendable {
     private let repository: NFTRepositoryProtocol
     
     init(repository: NFTRepositoryProtocol) {

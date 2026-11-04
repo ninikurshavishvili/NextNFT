@@ -5,7 +5,7 @@
 //  Created by Nino Kurshavishvili on 02.01.26.
 //
 
-final class SearchNFTsUseCase {
+final class SearchNFTsUseCase: Sendable {
     private let repository: SearchRepositoryProtocol
 
     init(repository: SearchRepositoryProtocol) {

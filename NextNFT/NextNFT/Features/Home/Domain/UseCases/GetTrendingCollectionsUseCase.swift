@@ -9,7 +9,7 @@
 import Foundation
 import OSLog
 
-final class GetTrendingCollectionsUseCase {
+final class GetTrendingCollectionsUseCase: Sendable {
     private let repository: NFTRepositoryProtocol
 
     init(repository: NFTRepositoryProtocol) {

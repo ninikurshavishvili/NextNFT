@@ -7,10 +7,13 @@
 
 import UIKit
 
+/// Main actor: UIPasteboard and the download manager's callbacks both live there.
+@MainActor
 protocol NFTPostDownloadActionHandling {
     func handle(action: DownloadAction, localFileURL: URL)
 }
 
+@MainActor
 final class NFTPostDownloadActionHandler: NFTPostDownloadActionHandling {
     private let authorizer: PhotoLibraryAuthorizing
 
@@ -26,8 +29,8 @@ final class NFTPostDownloadActionHandler: NFTPostDownloadActionHandling {
             UIPasteboard.general.image = image
 
         case .saveToPhotos:
-            authorizer.requestAddOnlyAuthorization { granted in
-                guard granted else { return }
+            Task {
+                guard await authorizer.requestAddOnlyAuthorization() else { return }
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             }
         }

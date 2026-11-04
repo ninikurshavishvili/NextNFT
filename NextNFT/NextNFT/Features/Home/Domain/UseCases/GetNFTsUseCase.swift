@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class GetNFTsUseCase {
+final class GetNFTsUseCase: Sendable {
     private let repository: NFTRepositoryProtocol
 
     init(repository: NFTRepositoryProtocol) {

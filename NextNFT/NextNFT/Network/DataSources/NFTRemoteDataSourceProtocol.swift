@@ -5,7 +5,7 @@
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
-protocol NFTRemoteDataSourceProtocol {
+protocol NFTRemoteDataSourceProtocol: Sendable {
     func fetchCollections(chain: String, limit: Int) async throws -> [CollectionDTO]
     func fetchNFTs(collectionSlug: String, limit: Int) async throws -> [NFTDTO]
 }

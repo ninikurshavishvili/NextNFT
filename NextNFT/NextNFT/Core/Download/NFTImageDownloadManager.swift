@@ -13,6 +13,9 @@ import OSLog
 
 
 
+/// Main actor: all state lives on the main thread, and URLSession delivers
+/// delegate callbacks on the main queue (`delegateQueue: .main`).
+@MainActor
 final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
     // MARK: Dependencies
     private let fileStore: DownloadedFileStoring
@@ -77,17 +80,21 @@ final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
     }
 
     func observeTask(_ taskID: String) async -> AsyncStream<DownloadState> {
-        AsyncStream { continuation in
-            self.continuations[taskID] = continuation
+        let (stream, continuation) = AsyncStream.makeStream(of: DownloadState.self)
+        continuations[taskID] = continuation
 
-            if let task = self.activeTasks[taskID] {
-                continuation.yield(task.state)
-            }
+        if let task = activeTasks[taskID] {
+            continuation.yield(task.state)
+        }
 
-            continuation.onTermination = { @Sendable _ in
+        // Called from whichever thread ends the stream; hop back to the main actor
+        continuation.onTermination = { [weak self] _ in
+            guard let self else { return }
+            Task { @MainActor in
                 self.continuations.removeValue(forKey: taskID)
             }
         }
+        return stream
     }
 
     // MARK: Private - Helpers
@@ -150,40 +157,49 @@ final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
 }
 
 // MARK: - URLSessionDownloadDelegate
+// URLSession calls these on `delegateQueue` (.main), so `assumeIsolated` is
+// safe, and it stays synchronous: the temp file at `location` is deleted as
+// soon as `didFinishDownloadingTo` returns.
 extension NFTImageDownloadManager: URLSessionDownloadDelegate {
-    func urlSession(
+    nonisolated func urlSession(
         _ session: URLSession,
         downloadTask: URLSessionDownloadTask,
         didWriteData bytesWritten: Int64,
         totalBytesWritten: Int64,
         totalBytesExpectedToWrite: Int64
     ) {
-        guard totalBytesExpectedToWrite > 0,
-              let taskID = taskID(for: downloadTask)
-        else { return }
+        MainActor.assumeIsolated {
+            guard totalBytesExpectedToWrite > 0,
+                  let taskID = taskID(for: downloadTask)
+            else { return }
 
-        let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
-        updateProgress(taskID: taskID, progress: progress)
+            let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+            updateProgress(taskID: taskID, progress: progress)
+        }
     }
 
-    func urlSession(
+    nonisolated func urlSession(
         _ session: URLSession,
         downloadTask: URLSessionDownloadTask,
         didFinishDownloadingTo location: URL
     ) {
-        guard let taskID = taskID(for: downloadTask) else { return }
-        completeDownload(taskID: taskID, tempLocation: location)
+        MainActor.assumeIsolated {
+            guard let taskID = taskID(for: downloadTask) else { return }
+            completeDownload(taskID: taskID, tempLocation: location)
+        }
     }
 
-    func urlSession(
+    nonisolated func urlSession(
         _ session: URLSession,
         task: URLSessionTask,
         didCompleteWithError error: Error?
     ) {
-        guard let error,
-              let taskID = taskID(for: task)
-        else { return }
+        MainActor.assumeIsolated {
+            guard let error,
+                  let taskID = taskID(for: task)
+            else { return }
 
-        failDownload(taskID: taskID, error: error)
+            failDownload(taskID: taskID, error: error)
+        }
     }
 }

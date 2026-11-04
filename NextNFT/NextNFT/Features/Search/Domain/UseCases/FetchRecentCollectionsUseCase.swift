@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FetchRecentCollectionsUseCase {
+final class FetchRecentCollectionsUseCase: Sendable {
     private let repository: NFTRepositoryProtocol
     
     init(repository: NFTRepositoryProtocol) {

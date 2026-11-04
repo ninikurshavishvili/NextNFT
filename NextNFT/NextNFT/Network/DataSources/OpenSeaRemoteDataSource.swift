@@ -5,7 +5,7 @@
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
-class OpenSeaRemoteDataSource: NFTRemoteDataSourceProtocol, SearchRemoteDataSourceProtocol {
+final class OpenSeaRemoteDataSource: NFTRemoteDataSourceProtocol, SearchRemoteDataSourceProtocol {
     private let networkService: NetworkServiceProtocol
     
     init(networkService: NetworkServiceProtocol) {

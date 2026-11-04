@@ -7,21 +7,18 @@
 
 import Photos
 
-protocol PhotoLibraryAuthorizing {
-    func requestAddOnlyAuthorization(completion: @escaping (Bool) -> Void)
+protocol PhotoLibraryAuthorizing: Sendable {
+    func requestAddOnlyAuthorization() async -> Bool
 }
 
 final class PhotoLibraryAuthorizer: PhotoLibraryAuthorizing {
-    func requestAddOnlyAuthorization(completion: @escaping (Bool) -> Void) {
-        PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
-            DispatchQueue.main.async {
-                switch status {
-                case .authorized, .limited:
-                    completion(true)
-                default:
-                    completion(false)
-                }
-            }
+    func requestAddOnlyAuthorization() async -> Bool {
+        let status = await PHPhotoLibrary.requestAuthorization(for: .addOnly)
+        switch status {
+        case .authorized, .limited:
+            return true
+        default:
+            return false
         }
     }
 }
