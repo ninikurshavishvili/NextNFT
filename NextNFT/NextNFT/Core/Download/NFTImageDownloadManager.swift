@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 import Photos
+import OSLog
 
 
 
@@ -46,7 +47,7 @@ final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
         let taskID = UUID().uuidString
 
         guard let url = makeNFTImageURL(from: nft) else {
-            print("Invalid URL for NFT: \(nft.name ?? nft.identifier)")
+            Logger.downloads.error("Invalid image URL for NFT: \(nft.name ?? nft.identifier)")
             return taskID
         }
 

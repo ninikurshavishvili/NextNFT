@@ -1,0 +1,14 @@
+// Template for Config.xcconfig, which is gitignored and holds your local secrets.
+//
+//   cp Config.example.xcconfig Config.xcconfig
+//
+// Then fill in the values below. Xcode reads Config.xcconfig as the base
+// configuration of the NextNFT target, and Info.plist exposes both keys
+// to the app at runtime.
+
+// Firebase API key: the API_KEY value from the GoogleService-Info.plist you
+// download from the Firebase console. The committed plist omits it.
+API_KEY =
+
+// OpenSea API key (https://docs.opensea.io/reference/api-keys)
+OPENSEA_API_KEY =

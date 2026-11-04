@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import OSLog
 
 final class NFTCarouselViewModel: ObservableObject {
     @Published var nfts: [NFT] = []
@@ -30,7 +31,7 @@ final class NFTCarouselViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         
-        print("🔄 Loading NFTs for collection: \(collectionSlug)")
+        Logger.home.debug("Loading NFTs for collection: \(collectionSlug)")
         
         do {
             // Load NFTs and collection details in parallel
@@ -39,7 +40,7 @@ final class NFTCarouselViewModel: ObservableObject {
             
             let (fetchedNFTs, fetchedCollection) = try await (nftsTask, collectionTask)
             
-            print("✅ Fetched \(fetchedNFTs.count) NFTs")
+            Logger.home.debug("Fetched \(fetchedNFTs.count) NFTs")
             
             // IMPORTANT: Set the NFTs first
             self.nfts = fetchedNFTs
@@ -47,9 +48,8 @@ final class NFTCarouselViewModel: ObservableObject {
             // Then handle the collection
             if let fetchedCollection = fetchedCollection {
                 self.collection = fetchedCollection
-                print("✅ Found collection: \(fetchedCollection.name)")
             } else {
-                print("⚠️ Collection not found for slug: \(collectionSlug), using fallback")
+                Logger.home.notice("Collection not found for slug: \(collectionSlug), using fallback")
                 // Create a fallback collection with the slug so cards still show
                 self.collection = NFTCollection(
                     collection: collectionSlug,
@@ -65,13 +65,9 @@ final class NFTCarouselViewModel: ObservableObject {
                 )
             }
             
-            if fetchedNFTs.isEmpty {
-                print("⚠️ No NFTs returned for this collection")
-            }
-            
         } catch {
             self.errorMessage = error.localizedDescription
-            print("❌ Error loading NFTs: \(error)")
+            Logger.home.error("Error loading NFTs: \(error.localizedDescription)")
         }
         
         isLoading = false

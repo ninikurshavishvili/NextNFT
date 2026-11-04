@@ -7,28 +7,23 @@
 
 import Foundation
 
-// Network/Endpoints/OpenSeaEndpoint.swift
 enum OpenSeaEndpoint {
     case collections(chain: String = "ethereum", limit: Int = 10)
     case nfts(collectionSlug: String, limit: Int = 10)
-    case searchCollections(query: String, limit: Int = 10)  // Add this
-    case searchNFTs(query: String, limit: Int = 10)         // Add this
+    case searchCollections(query: String, limit: Int = 10)
+    case searchNFTs(query: String, limit: Int = 10)
 }
 
 extension OpenSeaEndpoint: Endpoint {
-    var parameters: [String: Any]? {
-        return nil  // Using queryItems for GET requests
-    }
-    
     var path: String {
         switch self {
         case .collections:
             return "/api/v2/collections"
         case .nfts(let slug, _):
             return "/api/v2/collection/\(slug)/nfts"
-        case .searchCollections:  // Add this
+        case .searchCollections:
             return "/api/v2/collections"
-        case .searchNFTs:         // Add this
+        case .searchNFTs:
             return "/api/v2/chain/ethereum/nfts"  // Note: This might need adjustment based on OpenSea API
         }
     }
@@ -48,12 +43,12 @@ extension OpenSeaEndpoint: Endpoint {
             return [
                 URLQueryItem(name: "limit", value: "\(limit)")
             ]
-        case .searchCollections(let query, let limit):  // Add this
+        case .searchCollections(let query, let limit):
             return [
                 URLQueryItem(name: "search", value: query),
                 URLQueryItem(name: "limit", value: "\(limit)")
             ]
-        case .searchNFTs(let query, let limit):         // Add this
+        case .searchNFTs(let query, let limit):
             return [
                 URLQueryItem(name: "search", value: query),
                 URLQueryItem(name: "limit", value: "\(limit)")
