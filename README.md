@@ -57,13 +57,35 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
 
 ## Tech Stack
 
-- **Language:** Swift
+- **Language:** Swift 6 (strict concurrency checking)
 - **UI:** SwiftUI
-- **Architecture:** MVVM + Clean Architecture
+- **Architecture:** MVVM + Clean Architecture, with a composition root (`AppContainer`)
+- **State:** Observation (`@Observable`) with a shared `ViewState`
 - **Concurrency:** async / await
-- **Reactive:** Combine
 - **Networking:** URLSession
+- **Testing:** Swift Testing
 - **API:** OpenSea API (v2)
+
+---
+
+## Project Structure
+
+```
+NextNFT/NextNFT
+├── App/          Entry point, AppContainer (builds all dependencies), environment values
+├── Core/
+│   ├── Domain/   Shared entities (NFT, NFTCollection) and repository protocols
+│   ├── Data/     Shared repository implementations
+│   ├── Download/ Image download, copy and save-to-Photos
+│   └── Presentation/ ViewState
+├── Features/     Home, Search, Drops, Start, TabBar — each with Domain / Data / Presentation
+├── Network/      Endpoints, DTOs, data sources, NetworkService
+└── Extensions/   Helpers (colors, logging, image color analysis)
+```
+
+The app sources are a synchronized folder in Xcode, so new files are picked up automatically.
+
+Run the tests with **Cmd+U** in Xcode.
 
 ---
 
