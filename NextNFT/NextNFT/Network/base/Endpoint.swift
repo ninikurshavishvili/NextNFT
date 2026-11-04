@@ -5,12 +5,14 @@
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 
+import Foundation
+
 protocol Endpoint {
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var headers: [String: String]? { get }
-    var parameters: [String: Any]? { get }
+    var queryItems: [URLQueryItem]? { get }
 }
 
 extension Endpoint {
@@ -20,8 +22,12 @@ extension Endpoint {
     
     var headers: [String: String]? {
         return [
-            "X-API-KEY": "bcdf9b152b5c46308e0baa9f3711520f",
+            "X-API-KEY": APIConfiguration.openSeaAPIKey,
             "Accept": "application/json"
         ]
+    }
+    
+    var queryItems: [URLQueryItem]? {
+        return nil
     }
 }

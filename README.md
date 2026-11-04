@@ -63,4 +63,20 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
 
 All NFT data is fetched from the **OpenSea API**:
 
-- Base URL:  
+- Base URL: `https://api.opensea.io/api/v2`
+
+---
+
+## Setup
+
+API keys are kept out of git. Before building:
+
+1. Get an API key from [OpenSea](https://docs.opensea.io/reference/api-keys).
+2. Create your local config from the template:
+   ```bash
+   cd NextNFT
+   cp Config.example.xcconfig Config.xcconfig
+   ```
+3. In `Config.xcconfig`, set `OPENSEA_API_KEY`, and set `API_KEY` to the Firebase API key from your `GoogleService-Info.plist`.
+
+`Config.xcconfig` is gitignored. Xcode uses it as the app target's base configuration, and `Info.plist` passes both keys to the app at runtime. If the Firebase key is missing, the app still runs but skips Firebase setup.

@@ -48,19 +48,19 @@ struct StartPageButtons: View {
                 
                 HStack(spacing: 15) {
                     Button("G") {
-                        print("Google tapped")
+                        // Google action
                     }
                     .buttonStyle(.plain)
                     
                     Button("f") {
-                        print("Facebook tapped")
+                        // Facebook action
                     }
                     .buttonStyle(.borderless)
                     
                     Spacer()
                     
                     Button {
-                        print("Start experience tapped")
+                        // Start experience action
                     } label: {
                         HStack {
                             Text("Start experience")
@@ -74,7 +74,7 @@ struct StartPageButtons: View {
                     Text("Already have an account?")
                     
                     Button("Log in") {
-                        print("Login tapped")
+                        // Login action
                     }
                     .buttonStyle(.plain)
                 }

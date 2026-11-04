@@ -35,9 +35,3 @@ struct NFTCollection: Codable, Identifiable {
     }
 }
 
-struct CollectionsResponse: Codable {
-    // NOTE: confirm with the OpenSea response wrapper — if the top-level key is "collections" use this.
-    // If the API returns an array directly, change to `typealias CollectionsResponse = [CollectionModel]`
-    let collections: [NFTCollection]
-}
-

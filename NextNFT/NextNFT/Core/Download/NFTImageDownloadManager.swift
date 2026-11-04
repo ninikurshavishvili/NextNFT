@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import Photos
+import OSLog
 
 // MARK: - Download Models
 enum DownloadAction {
@@ -58,7 +59,7 @@ final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
         let imageURLString = nft.displayImageURL ?? nft.imageURL ?? ""
         
         guard let url = URL(string: imageURLString) else {
-            print("Invalid URL for NFT: \(nft.name ?? nft.identifier)")
+            Logger.downloads.error("Invalid image URL for NFT: \(nft.name ?? nft.identifier)")
             return taskID
         }
         

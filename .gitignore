@@ -6,3 +6,6 @@ build/
 xcuserdata/
 Config.xcconfig
 Config.xcconfig
+
+# Info.plist holds no secrets (only $(OPENSEA_API_KEY)); override global ignore rules
+!NextNFT/Info.plist

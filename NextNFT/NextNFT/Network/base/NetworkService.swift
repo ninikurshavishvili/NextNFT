@@ -5,6 +5,7 @@
 //  Created by Nino Kurshavishvili on 15.12.25.
 //
 import Foundation
+import OSLog
 
 class NetworkService: NetworkServiceProtocol {
     static let shared = NetworkService()
@@ -18,7 +19,12 @@ class NetworkService: NetworkServiceProtocol {
     }()
     
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T {
-        guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
+        guard var components = URLComponents(string: endpoint.baseURL + endpoint.path) else {
+            throw NetworkError.invalidURL
+        }
+        components.queryItems = endpoint.queryItems
+        
+        guard let url = components.url else {
             throw NetworkError.invalidURL
         }
         
@@ -29,11 +35,7 @@ class NetworkService: NetworkServiceProtocol {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-        if let parameters = endpoint.parameters {
-            request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
-        }
-        
-        print("🌐 Request: \(request.httpMethod ?? "GET") \(url.absoluteString)")
+        Logger.network.debug("Request: \(endpoint.method.rawValue) \(url.absoluteString)")
         
         let (data, response) = try await session.data(for: request)
         
@@ -41,7 +43,7 @@ class NetworkService: NetworkServiceProtocol {
             throw NetworkError.requestFailed
         }
         
-        print("📡 Response Status: \(httpResponse.statusCode)")
+        Logger.network.debug("Response status: \(httpResponse.statusCode) for \(url.path)")
         
         switch httpResponse.statusCode {
         case 200...299:
@@ -59,7 +61,7 @@ class NetworkService: NetworkServiceProtocol {
             let decoded = try decoder.decode(T.self, from: data)
             return decoded
         } catch {
-            print("❌ Decoding error: \(error)")
+            Logger.network.error("Decoding \(String(describing: T.self)) failed: \(String(describing: error))")
             throw NetworkError.decodingFailed
         }
     }

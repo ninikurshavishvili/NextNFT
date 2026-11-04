@@ -7,6 +7,7 @@
 
 
 import Foundation
+import OSLog
 
 class GetCollectionsUseCase {
     private let repository: HomeRepositoryProtocol
@@ -16,17 +17,16 @@ class GetCollectionsUseCase {
     }
     
     func execute() async throws -> [NFTCollection] {
-        print("📥 GetCollectionsUseCase: Fetching collections")
         let collections = try await repository.getCollections()
-        print("📦 Raw collections count: \(collections.count)")
+        Logger.home.debug("Raw collections count: \(collections.count)")
         
         // Less aggressive filtering - keep more collections
         let promisingCollections = filterPromisingCollections(collections)
-        print("🎯 After basic filter: \(promisingCollections.count) collections")
+        Logger.home.debug("After basic filter: \(promisingCollections.count) collections")
         
         // Check for NFTs in parallel (but don't filter out collections without NFTs yet)
         let collectionsWithNFTs = await checkCollectionsForNFTs(promisingCollections)
-        print("✅ Collections with NFTs: \(collectionsWithNFTs.count)")
+        Logger.home.debug("Collections with NFTs: \(collectionsWithNFTs.count)")
         
         // Return up to 20 collections instead of 10
         return Array(collectionsWithNFTs.prefix(20))
@@ -95,7 +95,7 @@ class GetCollectionsUseCase {
             
             // Collect results as they complete
             for await (collection, nftCount) in group {
-                print("📊 Collection '\(collection.name)' has \(nftCount) NFTs")
+                Logger.home.debug("Collection '\(collection.name)' has \(nftCount) NFTs")
                 
                 // Only require at least 1 NFT instead of 3
                 if nftCount >= 1 {

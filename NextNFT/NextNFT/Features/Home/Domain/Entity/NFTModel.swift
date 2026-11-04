@@ -43,8 +43,3 @@ struct NFT: Codable, Identifiable {
     }
 }
 
-struct NFTResponse: Codable {
-    let nfts: [NFT]
-    let next: String?
-}
-
