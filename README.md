@@ -1,4 +1,5 @@
 
+
 <p align="center">
   <img src="NextNFT/NextNFT/Assets/icon.png" alt="NextNFT Moodboard" width="100" />
 </p>
@@ -11,17 +12,24 @@
 
 <p align="center">
   Modern iOS NFT explorer built with SwiftUI, MVVM & Clean Architecture
+  
+
+
+
+
+
 </p>
 
 <p align="center">
   NextNFT is a modern iOS application for discovering NFT collections and NFTs using the **OpenSea API**.  
-The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and focuses on clean separation of concerns, scalability, and real-world production patterns.
+The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and focuses on clean separation of concerns, scalability, and real-world production patterns....
+  
 </p>
 
 <p align="center">
   UI/UX Design crafted independently in Figma  
   <br/>
-  <a href="https://www.behance.net/gallery/230704837/NextNFT">View Full Case Study</a>
+  <a href="https://www.behance.net/gallery/230704837/NextNFT">View Full Project</a>
 </p>
 
 ---
@@ -64,6 +72,7 @@ The app is built with **SwiftUI**, follows **MVVM + Clean Architecture**, and fo
 All NFT data is fetched from the **OpenSea API**:
 
 - Base URL: `https://api.opensea.io/api/v2`
+- Docs: [OpenSea API Documentation](https://docs.opensea.io/reference/api-overview)
 
 ---
 
