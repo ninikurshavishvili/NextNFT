@@ -10,20 +10,12 @@ import Foundation
 final class FetchRecentCollectionsUseCase {
     private let repository: NFTRepositoryProtocol
     
-    init(repository: NFTRepositoryProtocol = NFTRepository()) {
+    init(repository: NFTRepositoryProtocol) {
         self.repository = repository
     }
     
     func execute() async throws -> [NFTCollection] {
-        // This gets recent collections from the Home repository
-        // The repository will use its default parameters (chain: "ethereum", limit: 10)
-        return try await repository.getCollections()
-    }
-    
-    // Optional: Add a version with parameters if needed
-    func execute(chain: String = "ethereum", limit: Int = 10) async throws -> [NFTCollection] {
-        // Note: You might need to update your NFTRepositoryProtocol
-        // to support parameters, or create a different method
+        // Recent Ethereum collections from the shared NFT repository
         return try await repository.getCollections()
     }
 }

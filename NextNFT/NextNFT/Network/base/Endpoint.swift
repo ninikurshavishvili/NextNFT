@@ -30,4 +30,23 @@ extension Endpoint {
     var queryItems: [URLQueryItem]? {
         return nil
     }
+
+    /// The full request: base URL, path, query items, method and headers.
+    func makeURLRequest() throws -> URLRequest {
+        guard var components = URLComponents(string: baseURL + path) else {
+            throw NetworkError.invalidURL
+        }
+        components.queryItems = queryItems
+
+        guard let url = components.url else {
+            throw NetworkError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        headers?.forEach { key, value in
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        return request
+    }
 }

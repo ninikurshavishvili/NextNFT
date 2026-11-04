@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CollectionContainerView: View {
     let collection: NFTCollection
+    let nfts: [NFT]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,7 +40,7 @@ struct CollectionContainerView: View {
             .padding(.horizontal)
             
             //COLLECTION LIST VIEW HERE
-                CollectionListView(collectionSlug: collection.collection)
+                CollectionListView(nfts: nfts)
                 .padding(.horizontal)
                 .padding(.bottom)
         }
@@ -70,7 +71,7 @@ struct CollectionContainerView: View {
         createdDate: "2025-10-25"
     )
     
-    CollectionContainerView(collection: sampleCollection)
+    CollectionContainerView(collection: sampleCollection, nfts: [])
         .background(AppColors.darkBackground)
 }
 

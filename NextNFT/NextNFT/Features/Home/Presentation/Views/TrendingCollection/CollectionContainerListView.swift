@@ -9,13 +9,13 @@ import SwiftUI
 
 
 struct CollectionContainerListView: View {
-    let collections: [NFTCollection]
+    let collections: [TrendingCollection]
     
     var body: some View {
         VStack(spacing: 20) {
             // create one container per collection
-            ForEach(collections.prefix(3)) { collection in
-                CollectionContainerView(collection: collection)
+            ForEach(collections.prefix(3)) { trending in
+                CollectionContainerView(collection: trending.collection, nfts: trending.nfts)
             }
 
             Button {

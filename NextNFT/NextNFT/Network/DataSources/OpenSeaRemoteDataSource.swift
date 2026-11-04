@@ -8,7 +8,7 @@
 class OpenSeaRemoteDataSource: NFTRemoteDataSourceProtocol, SearchRemoteDataSourceProtocol {
     private let networkService: NetworkServiceProtocol
     
-    init(networkService: NetworkServiceProtocol = NetworkService.shared) {
+    init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
     

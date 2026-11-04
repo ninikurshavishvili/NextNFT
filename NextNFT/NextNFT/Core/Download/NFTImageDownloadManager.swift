@@ -14,8 +14,6 @@ import OSLog
 
 
 final class NFTImageDownloadManager: NSObject, NFTImageDownloadManagerProtocol {
-    static let shared = NFTImageDownloadManager()
-
     // MARK: Dependencies
     private let fileStore: DownloadedFileStoring
     private let actionHandler: NFTPostDownloadActionHandling

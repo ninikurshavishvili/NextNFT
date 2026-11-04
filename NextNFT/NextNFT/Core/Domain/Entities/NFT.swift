@@ -25,3 +25,17 @@ struct NFT: Identifiable, Hashable, Sendable {
     let isDisabled: Bool?
     let isNsfw: Bool?
 }
+
+extension NFT {
+    /// Has what a card needs: an image and a name, and isn't disabled on OpenSea.
+    var isDisplayable: Bool {
+        let hasImage =
+            !(displayImageURL?.isEmpty ?? true) ||
+            !(imageURL?.isEmpty ?? true)
+
+        let hasName = !(name?.isEmpty ?? true)
+        let isValid = !(isDisabled ?? false)
+
+        return hasImage && hasName && isValid
+    }
+}

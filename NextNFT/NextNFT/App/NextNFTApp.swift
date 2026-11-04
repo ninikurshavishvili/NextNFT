@@ -43,9 +43,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct NextNFTApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
+    /// Built once for the app's lifetime.
+    private let container = AppContainer()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(container: container)
         }
     }
 }

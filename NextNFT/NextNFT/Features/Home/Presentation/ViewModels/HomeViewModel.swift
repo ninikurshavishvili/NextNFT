@@ -6,29 +6,35 @@
 //
 
 import Foundation
+import Observation
 
 @MainActor
-final class HomeViewModel: ObservableObject {
-    @Published var collections: [NFTCollection] = []
-    @Published var isLoading = false
-    @Published var errorMessage: String?
+@Observable
+final class HomeViewModel {
+    private(set) var trendingState: ViewState<[TrendingCollection]> = .idle
 
-    private let getCollectionsUseCase: GetCollectionsUseCase
+    private let getTrendingCollectionsUseCase: GetTrendingCollectionsUseCase
 
-    init(getCollectionsUseCase: GetCollectionsUseCase = GetCollectionsUseCase()) {
-        self.getCollectionsUseCase = getCollectionsUseCase
+    init(getTrendingCollectionsUseCase: GetTrendingCollectionsUseCase) {
+        self.getTrendingCollectionsUseCase = getTrendingCollectionsUseCase
+    }
+
+    /// Loads on first appearance, and again after a failure or cancellation.
+    func loadIfNeeded() async {
+        guard trendingState.needsLoad else { return }
+        await load()
     }
 
     func load() async {
-        isLoading = true
-        errorMessage = nil
+        trendingState = .loading
 
         do {
-            collections = try await getCollectionsUseCase.execute()
+            let collections = try await getTrendingCollectionsUseCase.execute()
+            trendingState = collections.isEmpty ? .empty : .loaded(collections)
+        } catch where error.isCancellation {
+            trendingState = .idle
         } catch {
-            errorMessage = error.localizedDescription
+            trendingState = .failed(message: error.localizedDescription)
         }
-
-        isLoading = false
     }
 }

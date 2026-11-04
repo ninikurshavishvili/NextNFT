@@ -15,7 +15,7 @@ struct NFTImageActionsModifier: ViewModifier {
     @State private var showSuccess = false
     @State private var showError = false
     
-    private let downloadManager = NFTImageDownloadManager.shared
+    @Environment(\.imageDownloadManager) private var downloadManager
     
     func body(content: Content) -> some View {
         content
@@ -53,7 +53,7 @@ struct NFTImageActionsModifier: ViewModifier {
                 Text("Failed to download image")
             }
             .task(id: downloadTaskID) {
-                guard let taskID = downloadTaskID else { return }
+                guard let taskID = downloadTaskID, let downloadManager else { return }
                 
                 showProgress = true
                 
@@ -80,7 +80,7 @@ struct NFTImageActionsModifier: ViewModifier {
     }
     
     private func startDownload(action: DownloadAction) {
-        downloadTaskID = downloadManager.startDownload(nft: nft, action: action)
+        downloadTaskID = downloadManager?.startDownload(nft: nft, action: action)
     }
 }
 

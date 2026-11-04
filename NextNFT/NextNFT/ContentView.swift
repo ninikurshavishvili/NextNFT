@@ -9,12 +9,11 @@ import SwiftUI
 
 @available(iOS 26.0, *)
 struct ContentView: View {
-    @StateObject private var viewModel = CollectionNFTsViewModel()
-    
+    let container: AppContainer
+
     var body: some View {
-        NavigationView {
-            MainTabView()
-        }
+        MainTabView(container: container)
+            .environment(\.imageDownloadManager, container.imageDownloadManager)
     }
 }
 
@@ -23,7 +22,7 @@ struct ContentView: View {
 
 #Preview {
     if #available(iOS 26.0, *) {
-        ContentView()
+        ContentView(container: AppContainer())
     } else {
         // Fallback on earlier versions
     }

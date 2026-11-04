@@ -9,7 +9,7 @@ final class NFTRepository: NFTRepositoryProtocol {
 
     private let dataSource: NFTRemoteDataSourceProtocol
 
-    init(dataSource: NFTRemoteDataSourceProtocol = OpenSeaRemoteDataSource()) {
+    init(dataSource: NFTRemoteDataSourceProtocol) {
         self.dataSource = dataSource
     }
 

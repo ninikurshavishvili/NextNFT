@@ -8,7 +8,7 @@
 final class SearchCollectionsUseCase {
     private let repository: SearchRepositoryProtocol
 
-    init(repository: SearchRepositoryProtocol = SearchRepository()) {
+    init(repository: SearchRepositoryProtocol) {
         self.repository = repository
     }
 

@@ -11,7 +11,7 @@ import OSLog
 final class GetCollectionBySlugUseCase {
     private let repository: NFTRepositoryProtocol
     
-    init(repository: NFTRepositoryProtocol = NFTRepository()) {
+    init(repository: NFTRepositoryProtocol) {
         self.repository = repository
     }
     

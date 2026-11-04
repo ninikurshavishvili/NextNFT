@@ -8,28 +8,23 @@
 import SwiftUI
 
 struct CollectionListView: View {
-    let collectionSlug: String
-    @StateObject private var viewModel = CollectionNFTsViewModel()
+    /// Loaded with the collection by `GetTrendingCollectionsUseCase`.
+    let nfts: [NFT]
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(viewModel.nfts, id: \.identifier) { nft in
+                ForEach(nfts) { nft in
                     CollectionCardView(nft: nft)
                 }
             }
             .padding(.horizontal)
         }
         .padding(.vertical, 2)
-        .task {
-            if viewModel.nfts.isEmpty {
-                await viewModel.load(collectionSlug: collectionSlug)
-            }
-        }
     }
 }
 #Preview {
-    CollectionListView(collectionSlug: "azuki")
+    CollectionListView(nfts: [])
         .background(AppColors.darkBackground)
 }
 
