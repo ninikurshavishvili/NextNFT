@@ -8,7 +8,7 @@
 import Foundation
 import Network
 
-protocol NetworkServiceProtocol {
+protocol NetworkServiceProtocol: Sendable {
     func request<T: Decodable>(_ endpoint: Endpoint) async throws -> T
 }
 

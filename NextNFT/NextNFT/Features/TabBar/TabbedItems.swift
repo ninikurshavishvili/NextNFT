@@ -79,25 +79,46 @@ struct CustomTabBarView: View {
 @available(iOS 26.0, *)
 struct MainTabView: View {
     @State private var selectedTab: TabbedItems = .home
+    // Owned here, so a tab keeps its data when you switch away and back
+    @State private var homeViewModel: HomeViewModel
+    @State private var carouselViewModel: NFTCarouselViewModel
+    @State private var searchViewModel: SearchViewModel
+    
+    init(container: AppContainer) {
+        _homeViewModel = State(initialValue: container.makeHomeViewModel())
+        _carouselViewModel = State(initialValue: container.makeNFTCarouselViewModel())
+        _searchViewModel = State(initialValue: container.makeSearchViewModel())
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Group {
-                switch selectedTab {
-                case .home:
-                    HomeView()
-                case .search:
-                    SearchPageView()
-                case .drops:
-                    Text("Drops Page")
-                        .foregroundColor(.white)
-                case .profile:
-                    Text("Profile Page")
-                        .foregroundColor(.white)
+            // TabView keeps visited tabs alive; a `switch` rebuilt the screen,
+            // and refetched its data, on every tab change. The system tab bar
+            // is hidden in favour of CustomTabBarView.
+            TabView(selection: $selectedTab) {
+                Tab(TabbedItems.home.title, systemImage: TabbedItems.home.icon, value: .home) {
+                    tabRoot {
+                        HomeView(viewModel: homeViewModel, carouselViewModel: carouselViewModel)
+                    }
+                }
+                Tab(TabbedItems.search.title, systemImage: TabbedItems.search.icon, value: .search) {
+                    tabRoot {
+                        SearchPageView(viewModel: searchViewModel)
+                    }
+                }
+                Tab(TabbedItems.drops.title, systemImage: TabbedItems.drops.icon, value: .drops) {
+                    tabRoot {
+                        Text("Drops Page")
+                            .foregroundColor(.white)
+                    }
+                }
+                Tab(TabbedItems.profile.title, systemImage: TabbedItems.profile.icon, value: .profile) {
+                    tabRoot {
+                        Text("Profile Page")
+                            .foregroundColor(.white)
+                    }
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(AppColors.darkBackground)
             
             CustomTabBarView(selectedTab: $selectedTab)
                 .frame(width: 360, height: 65)
@@ -105,14 +126,23 @@ struct MainTabView: View {
         }
         .ignoresSafeArea(edges: .bottom)
     }
+    
+    /// Each tab gets its own navigation stack, ready for detail screens.
+    private func tabRoot(@ViewBuilder content: () -> some View) -> some View {
+        NavigationStack {
+            content()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(AppColors.darkBackground)
+        }
+        .toolbarVisibility(.hidden, for: .tabBar)
+    }
 }
 
 
 #Preview {
     if #available(iOS 26.0, *) {
-        MainTabView()
+        MainTabView(container: AppContainer())
     } else {
         // Fallback on earlier versions
     }
 }
-

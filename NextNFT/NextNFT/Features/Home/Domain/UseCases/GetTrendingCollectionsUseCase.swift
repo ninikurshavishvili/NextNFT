@@ -1,5 +1,5 @@
 //
-//  GetCollectionsUseCase.swift
+//  GetTrendingCollectionsUseCase.swift
 //  NextNFT
 //
 //  Created by Nino Kurshavishvili on 15.12.25.
@@ -9,14 +9,14 @@
 import Foundation
 import OSLog
 
-class GetCollectionsUseCase {
-    private let repository: HomeRepositoryProtocol
-    
-    init(repository: HomeRepositoryProtocol = HomeRepository()) {
+final class GetTrendingCollectionsUseCase: Sendable {
+    private let repository: NFTRepositoryProtocol
+
+    init(repository: NFTRepositoryProtocol) {
         self.repository = repository
     }
-    
-    func execute() async throws -> [NFTCollection] {
+
+    func execute() async throws -> [TrendingCollection] {
         let collections = try await repository.getCollections()
         Logger.home.debug("Raw collections count: \(collections.count)")
         
@@ -24,12 +24,15 @@ class GetCollectionsUseCase {
         let promisingCollections = filterPromisingCollections(collections)
         Logger.home.debug("After basic filter: \(promisingCollections.count) collections")
         
-        // Check for NFTs in parallel (but don't filter out collections without NFTs yet)
-        let collectionsWithNFTs = await checkCollectionsForNFTs(promisingCollections)
-        Logger.home.debug("Collections with NFTs: \(collectionsWithNFTs.count)")
-        
+        // Load each collection's NFTs in parallel; collections without any are dropped
+        let trendingCollections = await loadNFTPreviews(for: promisingCollections)
+        Logger.home.debug("Collections with NFTs: \(trendingCollections.count)")
+
+        // Failed NFT requests count as "no NFTs", so surface cancellation to the caller
+        try Task.checkCancellation()
+
         // Return up to 20 collections instead of 10
-        return Array(collectionsWithNFTs.prefix(20))
+        return Array(trendingCollections.prefix(20))
     }
     
     private func filterPromisingCollections(_ collections: [NFTCollection]) -> [NFTCollection] {
@@ -77,39 +80,29 @@ class GetCollectionsUseCase {
         return min(score, 2.0) // Allow higher scores
     }
     
-    private func checkCollectionsForNFTs(_ collections: [NFTCollection]) async -> [NFTCollection] {
-        await withTaskGroup(of: (NFTCollection, Int).self) { group in
-            var validCollections: [NFTCollection] = []
-            
-            // Start all checks in parallel
+    /// Fetches every collection's NFTs in parallel and keeps the collections
+    /// that have displayable NFTs, in their original (popularity) order.
+    /// The NFTs are returned too, so the Trending rows don't fetch them again.
+    private func loadNFTPreviews(for collections: [NFTCollection]) async -> [TrendingCollection] {
+        let nftsBySlug = await withTaskGroup(of: (String, [NFT]).self) { group in
             for collection in collections {
                 group.addTask {
-                    do {
-                        let nfts = try await self.repository.getNFTs(for: collection.collection)
-                        return (collection, nfts.count)
-                    } catch {
-                        return (collection, 0)
-                    }
+                    let nfts = (try? await self.repository.getNFTs(for: collection.collection)) ?? []
+                    return (collection.collection, nfts.filter(\.isDisplayable))
                 }
             }
-            
-            // Collect results as they complete
-            for await (collection, nftCount) in group {
-                Logger.home.debug("Collection '\(collection.name)' has \(nftCount) NFTs")
-                
-                // Only require at least 1 NFT instead of 3
-                if nftCount >= 1 {
-                    validCollections.append(collection)
-                }
-                
-                // Early exit if we have enough (increased to 20)
-                if validCollections.count >= 20 {
-                    group.cancelAll()
-                    break
-                }
+
+            var results: [String: [NFT]] = [:]
+            for await (slug, nfts) in group {
+                Logger.home.debug("Collection '\(slug)' has \(nfts.count) NFTs")
+                results[slug] = nfts
             }
-            
-            return validCollections
+            return results
+        }
+
+        return collections.compactMap { collection in
+            guard let nfts = nftsBySlug[collection.collection], !nfts.isEmpty else { return nil }
+            return TrendingCollection(collection: collection, nfts: nfts)
         }
     }
 }

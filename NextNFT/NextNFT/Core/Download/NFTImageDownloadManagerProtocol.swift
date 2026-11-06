@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol NFTImageDownloadManagerProtocol {
+@MainActor
+protocol NFTImageDownloadManagerProtocol: AnyObject, Sendable {
     func startDownload(nft: NFT, action: DownloadAction) -> String
     func cancelDownload(taskID: String)
     func getProgress(for taskID: String) -> Double?

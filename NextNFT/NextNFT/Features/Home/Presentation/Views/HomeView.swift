@@ -10,34 +10,44 @@ import SwiftUI
 
 struct HomeView: View {
 
-    @StateObject private var viewModel = HomeViewModel()
+    let viewModel: HomeViewModel
+    let carouselViewModel: NFTCarouselViewModel
 
     var body: some View {
         ScrollView {
             HomeHeaderView()
             NFTItemListView()
-            
-            TrendingView(collections: viewModel.collections)
 
-            if viewModel.isLoading {
+            TrendingView(collections: viewModel.trendingState.value ?? [])
+
+            switch viewModel.trendingState {
+            case .idle, .loading:
                 ProgressView("Loading collections...")
                     .foregroundStyle(.white)
                     .padding()
-            } else if let error = viewModel.errorMessage {
-                Text("Error: \(error)")
+            case .failed(let message):
+                Text("Error: \(message)")
                     .foregroundStyle(.red)
                     .padding()
+            case .loaded, .empty:
+                EmptyView()
             }
-            NFTCarouselView()
+            NFTCarouselView(viewModel: carouselViewModel)
         }
         .background(AppColors.darkBackground)
         .task {
-            if viewModel.collections.isEmpty {
-                await viewModel.load()
-            }
+            await viewModel.loadIfNeeded()
         }
-        
-        
+
+
     }
+}
+
+#Preview {
+    let container = AppContainer()
+    HomeView(
+        viewModel: container.makeHomeViewModel(),
+        carouselViewModel: container.makeNFTCarouselViewModel()
+    )
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchPageView: View {
-    @StateObject private var viewModel = SearchViewModel()
+    @Bindable var viewModel: SearchViewModel
 
     var body: some View {
         ScrollView {
@@ -26,10 +26,7 @@ struct SearchPageView: View {
                 )
                 
                 if viewModel.searchText.isEmpty {
-                    SearchRecentCollectionsSection(
-                        collections: viewModel.recentCollections,
-                        isLoading: viewModel.isLoadingRecent
-                    )
+                    SearchRecentCollectionsSection(state: viewModel.recentState)
                     SearchTopSearchSection()
                 } else {
                 }
@@ -38,9 +35,12 @@ struct SearchPageView: View {
             .padding(.bottom, 32)
         }
         .background(AppColors.darkBackground.ignoresSafeArea())
+        .task {
+            await viewModel.loadRecentCollectionsIfNeeded()
+        }
     }
 }
 
 #Preview {
-    SearchPageView()
+    SearchPageView(viewModel: AppContainer().makeSearchViewModel())
 }

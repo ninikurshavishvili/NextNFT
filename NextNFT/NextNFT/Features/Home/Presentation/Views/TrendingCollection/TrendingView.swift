@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TrendingView: View {
-    let collections: [NFTCollection]
+    let collections: [TrendingCollection]
 
     @State private var selectedTab = "Collections"
     @State private var selectedIconIndex = 3

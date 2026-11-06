@@ -5,7 +5,7 @@
 //  Created by Nino Kurshavishvili on 02.01.26.
 //
 
-protocol SearchRemoteDataSourceProtocol {
+protocol SearchRemoteDataSourceProtocol: Sendable {
     func searchCollections(query: String, limit: Int) async throws -> [CollectionDTO]
     func searchNFTs(query: String, limit: Int) async throws -> [NFTDTO]
 }

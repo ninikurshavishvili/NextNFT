@@ -6,197 +6,120 @@
 //
 
 import Foundation
-import Combine
+import Observation
 
 @MainActor
-final class SearchViewModel: ObservableObject {
-    // MARK: - Published Properties
-    @Published var searchText = ""
-    @Published var collections: [NFTCollection] = []
-    @Published var nfts: [NFT] = []
-    @Published var recentCollections: [NFTCollection] = []
-    
-    @Published var isLoading = false
-    @Published var isLoadingRecent = false
-    @Published var errorMessage: String?
-    @Published var recentErrorMessage: String?
-    @Published var searchType: SearchType = .collections
-    
+@Observable
+final class SearchViewModel {
+    struct Results: Equatable {
+        var collections: [NFTCollection] = []
+        var nfts: [NFT] = []
+    }
+
+    // MARK: - State
+    var searchText = "" {
+        didSet {
+            guard searchText != oldValue else { return }
+            scheduleSearch()
+        }
+    }
+    private(set) var searchType: SearchType = .collections
+    private(set) var resultsState: ViewState<Results> = .idle
+    private(set) var recentState: ViewState<[NFTCollection]> = .idle
+
     // MARK: - Private Properties
     private let searchCollectionsUseCase: SearchCollectionsUseCase
     private let searchNFTsUseCase: SearchNFTsUseCase
     private let fetchRecentCollectionsUseCase: FetchRecentCollectionsUseCase
+    /// How long typing has to pause before a search request goes out.
+    private let debounce: Duration
     private var searchTask: Task<Void, Never>?
-    private var cancellables = Set<AnyCancellable>()
-    
+
     // MARK: - Initialization
     init(
-        searchCollectionsUseCase: SearchCollectionsUseCase = SearchCollectionsUseCase(),
-        searchNFTsUseCase: SearchNFTsUseCase = SearchNFTsUseCase(),
-        fetchRecentCollectionsUseCase: FetchRecentCollectionsUseCase = FetchRecentCollectionsUseCase()
+        searchCollectionsUseCase: SearchCollectionsUseCase,
+        searchNFTsUseCase: SearchNFTsUseCase,
+        fetchRecentCollectionsUseCase: FetchRecentCollectionsUseCase,
+        debounce: Duration = .milliseconds(500)
     ) {
         self.searchCollectionsUseCase = searchCollectionsUseCase
         self.searchNFTsUseCase = searchNFTsUseCase
         self.fetchRecentCollectionsUseCase = fetchRecentCollectionsUseCase
-        
-        setupSearchDebouncing()
-        
-        Task {
-            await loadRecentCollections()
-        }
+        self.debounce = debounce
     }
-    
+
     // MARK: - Public Methods
-    func performSearch() async {
-        guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            clearResults()
-            // Don't reload recent collections here - they're already loaded on init
-            return
-        }
-        
-        isLoading = true
-        errorMessage = nil
-        
-        do {
-            switch searchType {
-            case .collections:
-                collections = try await searchCollectionsUseCase.execute(query: searchText)
-                nfts = []
-            case .nfts:
-                nfts = try await searchNFTsUseCase.execute(query: searchText)
-                collections = []
-            }
-        } catch {
-            handleError(error)
-        }
-        
-        isLoading = false
+    func loadRecentCollectionsIfNeeded() async {
+        guard recentState.needsLoad else { return }
+        await loadRecentCollections()
     }
-    
-    func clearSearch() {
-        searchText = ""
-        clearResults()
-    }
-    
-    func selectSearchType(_ type: SearchType) {
-        searchType = type
-        Task {
-            await performSearch()
-        }
-    }
-    
+
     func refreshRecentCollections() async {
         await loadRecentCollections()
     }
-    
-    // MARK: - Private Methods
-    private func setupSearchDebouncing() {
-        $searchText
-            .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.triggerSearch()
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func triggerSearch() {
-        searchTask?.cancel()
-        searchTask = Task {
-            await performSearch()
+
+    func performSearch() async {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else {
+            resultsState = .idle
+            return
         }
-    }
-    
-    private func clearResults() {
-        collections = []
-        nfts = []
-        errorMessage = nil
-    }
-    
-    private func handleError(_ error: Error) {
-        errorMessage = "Search failed: \(error.localizedDescription)"
-        collections = []
-        nfts = []
-    }
-    
-    private func loadRecentCollections() async {
-        isLoadingRecent = true
-        recentErrorMessage = nil
-        
+
+        resultsState = .loading
+
         do {
-            // Use the FetchRecentCollectionsUseCase to get recent collections
-            recentCollections = try await fetchRecentCollectionsUseCase.execute()
+            var results = Results()
+            switch searchType {
+            case .collections:
+                results.collections = try await searchCollectionsUseCase.execute(query: query)
+            case .nfts:
+                results.nfts = try await searchNFTsUseCase.execute(query: query)
+            }
+            // A newer search may have started while this one was in flight
+            try Task.checkCancellation()
+
+            let isEmpty = results.collections.isEmpty && results.nfts.isEmpty
+            resultsState = isEmpty ? .empty : .loaded(results)
+        } catch where error.isCancellation {
+            // Replaced by a newer search, which owns the state now
         } catch {
-            recentErrorMessage = "Failed to load recent collections: \(error.localizedDescription)"
-            // Fallback to mock data for development
-            recentCollections = getMockRecentCollections()
+            resultsState = .failed(message: "Search failed: \(error.localizedDescription)")
         }
-        
-        isLoadingRecent = false
     }
-    
-    private func getMockRecentCollections() -> [NFTCollection] {
-        return [
-            NFTCollection(
-                collection: "impostors-genesis",
-                name: "Impostors Genesis",
-                description: "A collection of genesis impostors",
-                imageURL: "https://picsum.photos/400",
-                bannerImageURL: nil,
-                owner: nil,
-                category: "art",
-                openseaURL: nil,
-                totalSupply: 10000,
-                createdDate: nil
-            ),
-            NFTCollection(
-                collection: "boredapeyachtclub",
-                name: "Bored Ape Yacht Club",
-                description: "10,000 unique Bored Ape NFTs",
-                imageURL: "https://picsum.photos/401",
-                bannerImageURL: nil,
-                owner: nil,
-                category: "pfp",
-                openseaURL: nil,
-                totalSupply: 10000,
-                createdDate: nil
-            ),
-            NFTCollection(
-                collection: "cryptopunks",
-                name: "CryptoPunks",
-                description: "10,000 unique collectible characters",
-                imageURL: "https://picsum.photos/402",
-                bannerImageURL: nil,
-                owner: nil,
-                category: "pfp",
-                openseaURL: nil,
-                totalSupply: 10000,
-                createdDate: nil
-            ),
-            NFTCollection(
-                collection: "doodles-official",
-                name: "Doodles",
-                description: "A community-driven collectibles project",
-                imageURL: "https://picsum.photos/403",
-                bannerImageURL: nil,
-                owner: nil,
-                category: "art",
-                openseaURL: nil,
-                totalSupply: 10000,
-                createdDate: nil
-            ),
-            NFTCollection(
-                collection: "clonex",
-                name: "CLONE X - X TAKASHI MURAKAMI",
-                description: "20,000 next-gen Avatars",
-                imageURL: "https://picsum.photos/404",
-                bannerImageURL: nil,
-                owner: nil,
-                category: "pfp",
-                openseaURL: nil,
-                totalSupply: 20000,
-                createdDate: nil
-            )
-        ]
+
+    func clearSearch() {
+        searchText = ""
+        searchTask?.cancel()
+        resultsState = .idle
+    }
+
+    func selectSearchType(_ type: SearchType) {
+        searchType = type
+        searchTask?.cancel()
+        searchTask = Task { await performSearch() }
+    }
+
+    // MARK: - Private Methods
+    private func scheduleSearch() {
+        searchTask?.cancel()
+        searchTask = Task { [weak self, debounce] in
+            try? await Task.sleep(for: debounce)
+            guard !Task.isCancelled else { return }
+            await self?.performSearch()
+        }
+    }
+
+    private func loadRecentCollections() async {
+        recentState = .loading
+
+        do {
+            let collections = try await fetchRecentCollectionsUseCase.execute()
+            recentState = collections.isEmpty ? .empty : .loaded(collections)
+        } catch where error.isCancellation {
+            recentState = .idle
+        } catch {
+            recentState = .failed(message: "Failed to load recent collections: \(error.localizedDescription)")
+        }
     }
 }
 
@@ -204,7 +127,7 @@ final class SearchViewModel: ObservableObject {
 enum SearchType {
     case collections
     case nfts
-    
+
     var title: String {
         switch self {
         case .collections:
@@ -213,7 +136,7 @@ enum SearchType {
             return "NFTs"
         }
     }
-    
+
     var systemImage: String {
         switch self {
         case .collections:

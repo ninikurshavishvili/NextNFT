@@ -11,13 +11,13 @@ struct CustomNFTCardView: View {
     
     let nft: NFT
     let collection: NFTCollection
-    @StateObject private var viewModel: NFTCardViewModel
-    
+    @State private var viewModel: NFTCardViewModel
+
     init(nft: NFT, collection: NFTCollection) {
         self.nft = nft
         self.collection = collection
-        _viewModel = StateObject(
-            wrappedValue: NFTCardViewModel(
+        _viewModel = State(
+            initialValue: NFTCardViewModel(
                 imageURL: nft.displayImageURL ?? nft.imageURL
             )
         )
@@ -94,6 +94,9 @@ struct CustomNFTCardView: View {
             }
         }
         .animation(.easeInOut(duration: 0.3), value: viewModel.backgroundColor)
+        .task {
+            await viewModel.loadBackgroundColor()
+        }
     }
 }
 

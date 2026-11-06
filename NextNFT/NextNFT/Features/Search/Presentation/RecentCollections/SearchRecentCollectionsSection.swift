@@ -8,29 +8,48 @@
 import SwiftUI
 struct SearchRecentCollectionsSection: View {
 
-    let collections: [NFTCollection]
-    let isLoading: Bool
-    
+    let state: ViewState<[NFTCollection]>
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             sectionHeader
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    if isLoading {
-                        // Show skeleton loading cards
-                        ForEach(0..<5) { _ in
-                            SkeletonCollectionCardView()
-                        }
-                    } else {
-                        ForEach(collections) { collection in
-                            RecentCollectionCardView(collection: collection)
-                        }
+            switch state {
+            case .idle, .loading:
+                cardsRow {
+                    // Show skeleton loading cards
+                    ForEach(0..<5) { _ in
+                        SkeletonCollectionCardView()
                     }
                 }
-                .padding(.horizontal)
+            case .loaded(let collections):
+                cardsRow {
+                    ForEach(collections) { collection in
+                        RecentCollectionCardView(collection: collection)
+                    }
+                }
+            case .empty:
+                message("No recent collections yet")
+            case .failed(let errorMessage):
+                message(errorMessage)
             }
         }
+    }
+
+    private func cardsRow(@ViewBuilder content: () -> some View) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 16) {
+                content()
+            }
+            .padding(.horizontal)
+        }
+    }
+
+    private func message(_ text: String) -> some View {
+        Text(text)
+            .font(.subheadline)
+            .foregroundStyle(.gray)
+            .padding(.horizontal)
     }
 
     
@@ -59,29 +78,10 @@ struct SearchRecentCollectionsSection: View {
         
         VStack {
             // Loading state
-            SearchRecentCollectionsSection(
-                collections: [],
-                isLoading: true
-            )
-            
+            SearchRecentCollectionsSection(state: .loading)
+
             // Loaded state
-            SearchRecentCollectionsSection(
-                collections: [
-                    NFTCollection(
-                        collection: "impostors-genesis",
-                        name: "Impostors Genesis",
-                        description: nil,
-                        imageURL: "https://proxy-imgs-cache.gametrade.market/cache/e151d3e360959f35ff21b5195aaaebd8-70-828",
-                        bannerImageURL: nil,
-                        owner: nil,
-                        category: nil,
-                        openseaURL: nil,
-                        totalSupply: nil,
-                        createdDate: nil
-                    )
-                ],
-                isLoading: false
-            )
+            SearchRecentCollectionsSection(state: .loaded(NFTCollection.previewSamples))
         }
     }
 }
